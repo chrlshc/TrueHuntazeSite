@@ -101,7 +101,7 @@ export const webhookHandlers: WebhookHandlers = {
   'invoice.payment_failed': async (event) => {
     const invoice = event.data.object as Stripe.Invoice;
     const attemptCount = invoice.attempt_count || 1;
-    const notificationType = PAYMENT_RETRY_CONFIG.notificationSchedule[attemptCount];
+    const notificationType = (PAYMENT_RETRY_CONFIG.notificationSchedule as any)[attemptCount];
     
     if (notificationType) {
       await sendPaymentNotification(

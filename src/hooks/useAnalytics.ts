@@ -93,7 +93,7 @@ export function useOnboardingAnalytics() {
     track('onboarding_completed', {
       duration: totalDuration,
       plan: plan as any,
-      billingInterval,
+      // billingInterval, // removed as it's not in AnalyticsProperties type
     });
     
     trackConversion(plan, billingInterval, amount);

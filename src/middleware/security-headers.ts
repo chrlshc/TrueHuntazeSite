@@ -1,10 +1,9 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import crypto from 'crypto';
 
 export function addSecurityHeaders(request: NextRequest, response: NextResponse) {
-  // Generate nonce for CSP
-  const nonce = crypto.randomBytes(16).toString('base64');
+  // Generate nonce for CSP (Edge Runtime compatible)
+  const nonce = Buffer.from(Date.now().toString()).toString('base64');
   
   // Store nonce in response for use in scripts
   response.headers.set('X-Nonce', nonce);

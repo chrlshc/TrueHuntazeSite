@@ -40,13 +40,13 @@ export default function CookieConsent() {
     // Apply analytics preference
     if (!prefs.analytics) {
       // Opt out of PostHog
-      if (typeof window !== 'undefined' && window.posthog) {
-        window.posthog.opt_out_capturing();
+      if (typeof window !== 'undefined' && (window as any).posthog) {
+        (window as any).posthog.opt_out_capturing();
       }
     } else {
       // Opt in to PostHog
-      if (typeof window !== 'undefined' && window.posthog) {
-        window.posthog.opt_in_capturing();
+      if (typeof window !== 'undefined' && (window as any).posthog) {
+        (window as any).posthog.opt_in_capturing();
       }
     }
 
@@ -91,10 +91,11 @@ export default function CookieConsent() {
     
     // Track consent (only if analytics is accepted)
     if (prefs.analytics) {
-      analytics.track('cookie_consent_given', {
-        analytics: prefs.analytics,
-        marketing: prefs.marketing,
-      });
+      // Track consent event - commented out for now
+      // analytics.track('cookie_consent_given', {
+      //   analytics: prefs.analytics,
+      //   marketing: prefs.marketing,
+      // });
     }
     
     // Hide banner

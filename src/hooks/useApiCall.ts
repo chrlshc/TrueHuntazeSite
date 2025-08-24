@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
-import { AppError, createError, getErrorCodeFromStatus, shouldRetry, getRetryDelay } from '@/lib/errors';
+import { createError, getErrorCodeFromStatus, shouldRetry, getRetryDelay } from '@/lib/errors';
+import type { AppError } from '@/lib/errors';
 
 interface UseApiCallOptions {
   maxRetries?: number;
@@ -56,8 +57,8 @@ export function useApiCall<T = any>(options: UseApiCallOptions = {}) {
         return result;
 
       } catch (err) {
-        if (err instanceof AppError) {
-          lastError = err;
+        if (err && typeof err === 'object' && 'code' in err) {
+          lastError = err as AppError;
         } else if (err instanceof Error) {
           lastError = createError(
             'NETWORK_ERROR',

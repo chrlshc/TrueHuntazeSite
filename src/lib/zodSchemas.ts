@@ -5,8 +5,8 @@ export const onlyFansConnectionSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
   password: z.string().min(8, 'Password must be at least 8 characters'),
   twoFactorCode: z.string().optional(),
-  acceptCompliance: z.literal(true, {
-    errorMap: () => ({ message: 'You must accept the compliance terms' }),
+  acceptCompliance: z.literal(true).refine((val) => val === true, {
+    message: 'You must accept the compliance terms',
   }),
 });
 
@@ -28,8 +28,8 @@ export const paymentSetupSchema = z.object({
   plan: z.enum(['pro', 'growth', 'scale', 'enterprise']),
   billingInterval: z.enum(['monthly', 'yearly']),
   promoCode: z.string().optional(),
-  acceptTerms: z.literal(true, {
-    errorMap: () => ({ message: 'You must accept the terms and conditions' }),
+  acceptTerms: z.literal(true).refine((val) => val === true, {
+    message: 'You must accept the terms and conditions',
   }),
 });
 

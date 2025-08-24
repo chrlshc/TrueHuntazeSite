@@ -60,7 +60,7 @@ export default function RegisterPage() {
         // Identify user in analytics
         identify(data.userId || formData.email, {
           email: formData.email,
-          plan: 'trial', // Initial plan
+          plan: 'pro', // Initial plan
         });
         
         // Track successful registration

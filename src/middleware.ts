@@ -42,7 +42,7 @@ export async function middleware(request: NextRequest) {
   
   // Apply rate limiting to API routes
   if (pathname.startsWith('/api/')) {
-    const ip = request.ip || request.headers.get('x-forwarded-for') || 'unknown';
+    const ip = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown';
     const identifier = `${ip}:${pathname}`;
     
     // Different limits for different endpoints
