@@ -1,0 +1,620 @@
+/* Shopify + Linear Hybrid Design System v2
+   Enhanced with technical improvements for production
+   Architecture: Systematic @layer hierarchy with fallbacks */
+
+/* ===========================
+   Feature Detection & Fallbacks
+   =========================== */
+@supports not at-rule(@layer) {
+  /* Fallback for browsers without @layer support */
+  body .button.button { /* Higher specificity fallback */ }
+}
+
+/* ===========================
+   CSS Layers - Systematic Architecture
+   =========================== */
+@supports at-rule(@layer) {
+  @layer reset, tokens, themes, patterns, layouts, components, utilities, overrides;
+}
+
+/* ===========================
+   1. Reset Layer
+   =========================== */
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Remove will-change performance killer */
+  * {
+    will-change: auto;
+  }
+}
+
+/* ===========================
+   2. Tokens Layer - Unified Design Tokens
+   =========================== */
+@layer tokens {
+  @layer polaris, linear, unified;
+  
+  @layer unified {
+    :root {
+      /* Typography - Shopify Polaris Scale */
+      --font-family-sans: 'Inter', 'InterFallback', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, sans-serif;
+      
+      /* Polaris-aligned font sizes */
+      --font-size-275: 0.6875rem;  /* 11px */
+      --font-size-300: 0.75rem;    /* 12px */
+      --font-size-325: 0.8125rem;  /* 13px */
+      --font-size-350: 0.875rem;   /* 14px */
+      --font-size-400: 1rem;       /* 16px */
+      --font-size-500: 1.25rem;    /* 20px */
+      --font-size-750: 1.875rem;   /* 30px */
+      --font-size-1000: 2.5rem;    /* 40px */
+      
+      /* Polaris font weights for Inter */
+      --font-weight-regular: 450;
+      --font-weight-medium: 550;
+      --font-weight-semibold: 650;
+      --font-weight-bold: 700;
+      
+      /* Linear's 3-value theme system with OKLCH for blues */
+      --theme-base-l: 98;
+      --theme-accent-hue: 254;
+      --theme-contrast: 1.2;
+      
+      /* Linear performance tokens */
+      --timing-fast: 150ms;
+      --timing-standard: 300ms;
+      --timing-slow: 600ms;
+      --easing-entrance: cubic-bezier(0.16, 1, 0.3, 1);
+      --easing-standard: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --easing-exit: cubic-bezier(0.34, 1.56, 0.64, 1);
+      
+      /* Spacing - 4px grid system */
+      --space-050: 0.125rem;  /* 2px */
+      --space-100: 0.25rem;   /* 4px */
+      --space-200: 0.5rem;    /* 8px */
+      --space-300: 0.75rem;   /* 12px */
+      --space-400: 1rem;      /* 16px */
+      --space-500: 1.25rem;   /* 20px */
+      --space-600: 1.5rem;    /* 24px */
+      --space-800: 2rem;      /* 32px */
+      --space-1000: 2.5rem;   /* 40px */
+      --space-1200: 3rem;     /* 48px */
+      
+      /* Border radius */
+      --radius-050: 2px;
+      --radius-100: 4px;
+      --radius-200: 8px;
+      --radius-300: 12px;
+      --radius-400: 16px;
+      --radius-full: 9999px;
+    }
+  }
+}
+
+/* ===========================
+   3. Themes Layer - Color System
+   =========================== */
+@layer themes {
+  :root {
+    /* sRGB fallbacks for all LCH colors */
+    --color-bg-primary-fallback: #fafafa;
+    --color-bg-secondary-fallback: #f0f0f0;
+    --color-accent-fallback: #5454ff;
+    --color-text-primary-fallback: #1a1a1a;
+    --color-text-secondary-fallback: #666666;
+    
+    /* LCH colors with sRGB fallbacks */
+    --color-bg-primary: var(--color-bg-primary-fallback);
+    --color-bg-primary: lch(var(--theme-base-l) 0 0);
+    
+    --color-bg-secondary: var(--color-bg-secondary-fallback);
+    --color-bg-secondary: lch(calc(var(--theme-base-l) - 3) 2 0);
+    
+    /* Use OKLCH for blue hues to avoid shift */
+    --color-accent: var(--color-accent-fallback);
+    --color-accent: oklch(0.55 0.2 var(--theme-accent-hue));
+    
+    --color-text-primary: var(--color-text-primary-fallback);
+    --color-text-primary: lch(calc(var(--theme-base-l) - 78) 0 0);
+    
+    --color-text-secondary: var(--color-text-secondary-fallback);
+    --color-text-secondary: lch(calc(var(--theme-base-l) - 58) 0 0);
+    
+    /* Surface colors */
+    --color-surface-elevated: #ffffff;
+    --color-surface-elevated: lch(calc(var(--theme-base-l) + 1) 0 0);
+    
+    /* Borders with subtle blue tint */
+    --color-border-subtle: #e5e5e5;
+    --color-border-subtle: lch(92 3 230);
+    
+    --color-border-medium: #cccccc;
+    --color-border-medium: lch(85 4 230);
+    
+    /* Semantic colors with fallbacks */
+    --color-success: #00aa88;
+    --color-success: lch(60 60 142);
+    
+    --color-warning: #ffaa00;
+    --color-warning: lch(70 60 85);
+    
+    --color-error: #ff5555;
+    --color-error: lch(60 70 25);
+    
+    --color-info: #4488ff;
+    --color-info: oklch(0.6 0.15 var(--theme-accent-hue));
+    
+    /* Shadow system - rgba for performance */
+    --shadow-100: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-200: 0 2px 4px rgba(0, 0, 0, 0.06);
+    --shadow-300: 0 4px 8px rgba(0, 0, 0, 0.08);
+    --shadow-400: 0 8px 16px rgba(0, 0, 0, 0.10);
+    --shadow-500: 0 20px 40px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* P3 color gamut support */
+  @media (color-gamut: p3) {
+    :root {
+      --color-accent: oklch(0.55 0.25 var(--theme-accent-hue));
+    }
+  }
+  
+  /* High contrast mode */
+  @media (prefers-contrast: high) {
+    :root {
+      --color-text-primary: lch(10 0 0);
+      --color-bg-primary: lch(100 0 0);
+      --color-border-subtle: lch(20 0 0);
+      --color-border-medium: lch(10 0 0);
+    }
+  }
+  
+  /* Dark theme */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --theme-base-l: 10;
+      --color-text-primary-fallback: #e5e5e5;
+      --color-text-secondary-fallback: #999999;
+      --color-bg-primary-fallback: #0a0a0a;
+      --color-bg-secondary-fallback: #141414;
+    }
+  }
+}
+
+/* ===========================
+   4. Typography Layer
+   =========================== */
+@layer patterns {
+  /* Optimized Inter font loading */
+  @font-face {
+    font-family: 'Inter';
+    font-display: swap;
+    src: url('/fonts/inter-variable.woff2') format('woff2');
+    font-weight: 100 900;
+    ascent-override: 90.20%;
+    descent-override: 22.48%;
+    size-adjust: 107.40%;
+  }
+  
+  /* Metric-matched fallback for zero layout shift */
+  @font-face {
+    font-family: 'InterFallback';
+    src: local('Arial');
+    ascent-override: 90.20%;
+    descent-override: 22.48%;
+    line-gap-override: 0.00%;
+    size-adjust: 107.40%;
+  }
+  
+  /* Base typography */
+  body {
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-350);
+    font-weight: var(--font-weight-regular);
+    line-height: 1.5;
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-kerning: normal;
+  }
+  
+  /* Heading hierarchy */
+  h1, .h1 {
+    font-size: var(--font-size-1000);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  
+  h2, .h2 {
+    font-size: var(--font-size-750);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+  
+  h3, .h3 {
+    font-size: var(--font-size-500);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.3;
+  }
+  
+  h4, .h4 {
+    font-size: var(--font-size-400);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.4;
+  }
+  
+  /* Body text styles */
+  p {
+    margin-bottom: var(--space-400);
+  }
+  
+  .text-lead {
+    font-size: var(--font-size-400);
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+  }
+  
+  .text-body {
+    font-size: var(--font-size-350);
+    line-height: 1.5;
+  }
+  
+  .text-caption {
+    font-size: var(--font-size-300);
+    line-height: 1.4;
+    color: var(--color-text-secondary);
+  }
+}
+
+/* ===========================
+   5. Layouts Layer
+   =========================== */
+@layer layouts {
+  /* Container system */
+  .container {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: var(--space-400);
+  }
+  
+  @media (min-width: 768px) {
+    .container {
+      padding-inline: var(--space-600);
+    }
+  }
+  
+  /* Grid system with fallback */
+  .grid {
+    display: grid;
+    gap: var(--space-400);
+  }
+  
+  @supports (display: grid) {
+    .grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+    .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+    
+    .grid-auto {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+  }
+  
+  /* Flexbox fallback for older browsers */
+  @supports not (display: grid) {
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      margin: calc(var(--space-400) * -0.5);
+    }
+    
+    .grid > * {
+      flex: 1 1 280px;
+      margin: calc(var(--space-400) * 0.5);
+    }
+  }
+}
+
+/* ===========================
+   6. Components Layer
+   =========================== */
+@layer components {
+  /* Button component with touch target sizing */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-200);
+    min-height: 44px; /* WCAG 2.1 AAA */
+    padding: var(--space-300) var(--space-400);
+    font-family: inherit;
+    font-size: var(--font-size-350);
+    font-weight: var(--font-weight-medium);
+    line-height: 1;
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-secondary);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-200);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all var(--timing-fast) var(--easing-standard);
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Optimized hover with transform */
+  .btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--color-bg-primary);
+    opacity: 0;
+    transition: opacity var(--timing-fast) var(--easing-standard);
+  }
+  
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-200);
+  }
+  
+  .btn:hover::before {
+    opacity: 0.1;
+  }
+  
+  .btn:active {
+    transform: scale(0.98) translateY(0);
+    transition-duration: 50ms;
+  }
+  
+  /* Primary button variant */
+  .btn-primary {
+    color: white;
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+  
+  .btn-primary::before {
+    background: black;
+  }
+  
+  /* Card component */
+  .card {
+    background-color: var(--color-surface-elevated);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-200);
+    padding: var(--space-600);
+    transition: all var(--timing-standard) var(--easing-standard);
+  }
+  
+  .card-interactive:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-300);
+  }
+  
+  /* Skeleton loader with reduced motion support */
+  .skeleton {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--color-bg-secondary);
+    border-radius: var(--radius-100);
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .skeleton::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        var(--color-bg-primary),
+        transparent
+      );
+      transform: translateX(-100%);
+      animation: shimmer 1.5s infinite;
+    }
+  }
+  
+  @keyframes shimmer {
+    to { transform: translateX(100%); }
+  }
+  
+  /* Focus indicators - WCAG compliant */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  
+  @media (prefers-contrast: high) {
+    :focus-visible {
+      outline-width: 3px;
+    }
+  }
+}
+
+/* ===========================
+   7. Animations Layer
+   =========================== */
+@layer utilities {
+  /* GPU-optimized animations */
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px) translateZ(0);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) translateZ(0);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-20px) translateZ(0);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0) translateZ(0);
+    }
+  }
+  
+  /* Animation utilities */
+  .animate-fadeUp {
+    animation: fadeUp var(--timing-slow) var(--easing-entrance) both;
+  }
+  
+  .animate-fadeIn {
+    animation: fadeIn var(--timing-standard) ease-out both;
+  }
+  
+  .animate-slideIn {
+    animation: slideIn var(--timing-standard) var(--easing-entrance) both;
+  }
+  
+  /* Stagger delays */
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  
+  /* Hover lift effect */
+  .hover-lift {
+    transition: transform var(--timing-standard) var(--easing-standard),
+                box-shadow var(--timing-standard) var(--easing-standard);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-300);
+  }
+  
+  /* Selective will-change */
+  .will-animate:hover {
+    will-change: transform;
+  }
+  
+  .will-animate:not(:hover) {
+    will-change: auto;
+  }
+  
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    
+    .skeleton::after {
+      animation: none;
+    }
+    
+    .hover-lift:hover {
+      transform: none;
+    }
+  }
+}
+
+/* ===========================
+   8. Overrides Layer
+   =========================== */
+@layer overrides {
+  /* Emergency overrides go here if needed */
+}
+
+/* ===========================
+   Utility Classes
+   =========================== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Text utilities */
+.text-primary { color: var(--color-text-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-accent { color: var(--color-accent); }
+.text-success { color: var(--color-success); }
+.text-error { color: var(--color-error); }
+
+/* Background utilities */
+.bg-primary { background-color: var(--color-bg-primary); }
+.bg-secondary { background-color: var(--color-bg-secondary); }
+.bg-elevated { background-color: var(--color-surface-elevated); }
+
+/* Spacing utilities */
+.p-0 { padding: 0; }
+.p-1 { padding: var(--space-100); }
+.p-2 { padding: var(--space-200); }
+.p-3 { padding: var(--space-300); }
+.p-4 { padding: var(--space-400); }
+.p-5 { padding: var(--space-500); }
+.p-6 { padding: var(--space-600); }
+
+/* Margin utilities */
+.m-0 { margin: 0; }
+.m-1 { margin: var(--space-100); }
+.m-2 { margin: var(--space-200); }
+.m-3 { margin: var(--space-300); }
+.m-4 { margin: var(--space-400); }
+.m-5 { margin: var(--space-500); }
+.m-6 { margin: var(--space-600); }
+
+/* Display utilities */
+.flex { display: flex; }
+.inline-flex { display: inline-flex; }
+.grid { display: grid; }
+.hidden { display: none; }
+
+/* Flexbox utilities */
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-1 { gap: var(--space-100); }
+.gap-2 { gap: var(--space-200); }
+.gap-3 { gap: var(--space-300); }
+.gap-4 { gap: var(--space-400); }
+
+/* Border radius utilities */
+.rounded-none { border-radius: 0; }
+.rounded-sm { border-radius: var(--radius-100); }
+.rounded { border-radius: var(--radius-200); }
+.rounded-lg { border-radius: var(--radius-300); }
+.rounded-full { border-radius: var(--radius-full); }
+
+/* Shadow utilities */
+.shadow-none { box-shadow: none; }
+.shadow-sm { box-shadow: var(--shadow-100); }
+.shadow { box-shadow: var(--shadow-200); }
+.shadow-md { box-shadow: var(--shadow-300); }
+.shadow-lg { box-shadow: var(--shadow-400); }
+.shadow-xl { box-shadow: var(--shadow-500); }

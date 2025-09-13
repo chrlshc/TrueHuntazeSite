@@ -1,0 +1,114 @@
+/* Inter Font - Optimized Loading with Fallbacks
+   Includes metric-matched fallback to prevent layout shift */
+
+/* Variable font for modern browsers */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/inter-variable.woff2') format('woff2-variations'),
+       url('/fonts/inter-variable.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, 
+                 U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, 
+                 U+2212, U+2215, U+FEFF, U+FFFD;
+  /* Metrics override for consistent rendering */
+  ascent-override: 90.20%;
+  descent-override: 22.48%;
+  line-gap-override: 0.00%;
+  size-adjust: 107.40%;
+}
+
+/* Metric-matched fallback font for zero layout shift */
+@font-face {
+  font-family: 'InterFallback';
+  src: local('Arial');
+  ascent-override: 90.20%;
+  descent-override: 22.48%;
+  line-gap-override: 0.00%;
+  size-adjust: 107.40%;
+}
+
+/* Static font fallbacks for browsers without variable font support */
+@supports not (font-variation-settings: normal) {
+  /* Regular - Polaris weight 450 */
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 450;
+    font-display: swap;
+    src: url('/fonts/Inter-Regular.woff2') format('woff2'),
+         url('/fonts/Inter-Regular.woff') format('woff');
+  }
+  
+  /* Medium - Polaris weight 550 */
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 550;
+    font-display: swap;
+    src: url('/fonts/Inter-Medium.woff2') format('woff2'),
+         url('/fonts/Inter-Medium.woff') format('woff');
+  }
+  
+  /* Semibold - Polaris weight 650 */
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 650;
+    font-display: swap;
+    src: url('/fonts/Inter-SemiBold.woff2') format('woff2'),
+         url('/fonts/Inter-SemiBold.woff') format('woff');
+  }
+  
+  /* Bold - Polaris weight 700 */
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/Inter-Bold.woff2') format('woff2'),
+         url('/fonts/Inter-Bold.woff') format('woff');
+  }
+}
+
+/* Font feature settings for optimal rendering */
+.inter-font {
+  font-family: 'Inter', 'InterFallback', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, sans-serif;
+  /* Enable advanced font features */
+  font-feature-settings: 
+    'kern' 1,     /* Kerning */
+    'liga' 1,     /* Standard ligatures */
+    'calt' 1,     /* Contextual alternates */
+    'cv01' 1,     /* Character variant 1 */
+    'cv02' 1,     /* Character variant 2 */
+    'cv03' 1,     /* Character variant 3 */
+    'cv04' 1,     /* Character variant 4 */
+    'cv05' 1,     /* Character variant 5 */
+    'cv06' 1,     /* Character variant 6 */
+    'cv07' 1,     /* Character variant 7 */
+    'cv08' 1,     /* Character variant 8 */
+    'cv09' 1,     /* Character variant 9 */
+    'cv10' 1,     /* Character variant 10 */
+    'cv11' 1,     /* Character variant 11 */
+    'ss01' 1,     /* Stylistic set 1 - Simplified forms */
+    'ss02' 1,     /* Stylistic set 2 - Disambiguation */
+    'zero' 1,     /* Slashed zero */
+    'case' 1;     /* Case-sensitive forms */
+}
+
+/* Variable font weight utility classes */
+@supports (font-variation-settings: normal) {
+  .font-weight-100 { font-weight: 100; }
+  .font-weight-200 { font-weight: 200; }
+  .font-weight-300 { font-weight: 300; }
+  .font-weight-400 { font-weight: 400; }
+  .font-weight-450 { font-weight: 450; } /* Polaris regular */
+  .font-weight-500 { font-weight: 500; }
+  .font-weight-550 { font-weight: 550; } /* Polaris medium */
+  .font-weight-600 { font-weight: 600; }
+  .font-weight-650 { font-weight: 650; } /* Polaris semibold */
+  .font-weight-700 { font-weight: 700; } /* Polaris bold */
+  .font-weight-800 { font-weight: 800; }
+  .font-weight-900 { font-weight: 900; }
+}
