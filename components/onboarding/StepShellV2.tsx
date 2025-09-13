@@ -38,10 +38,10 @@ export function StepShellV2({
   const hasRightRail = !!rightRail;
 
   return (
-    <div className="min-h-dvh flex flex-col bg-gradient-to-b from-background via-background to-background">
+    <div className="min-h-dvh flex flex-col">
       <main className="flex-1">
         {/* Inline header (no separate black bar), placed at the very top */}
-        <div className={cn("mx-auto w-full px-4 pt-3", hasRightRail ? "max-w-screen-2xl" : "max-w-3xl") }>
+        <div className={cn("mx-auto w-full px-4 pt-0", hasRightRail ? "max-w-screen-2xl" : "max-w-3xl") }>
           <div className="flex items-center gap-3">
             <div className="text-xs text-muted-foreground">Step {step} of {total}</div>
             <div className="hidden md:flex items-center gap-2 flex-1">
