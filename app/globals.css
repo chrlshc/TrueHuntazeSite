@@ -21,16 +21,16 @@ html {
 
 /* Polaris-like base tokens */
 :root{
-  --bg-page:#F6F6F7;
-  --bg-surface:#FFFFFF;
-  --bg-surface-dark:#202223;
+  --bg-page:#F6F6F7; /* page très pâle */
+  --bg-surface:#FFFFFF; /* cartes blanches */
+  --bg-surface-dark:#202223; /* cartes dark */
   --ink:#111213;
   --ink-subdued:#6D7175;
   --border:#E1E3E5;
   --border-dark:#3A3B3D;
-  --accent:#2C6ECB;
+  --accent:#2C6ECB; /* indigo Shopify-like */
 }
-html{ font-size:14px; }
+html{ font-size:14px; } /* body 14px comme Polaris */
 
 /* Optimized rendering */
 body {

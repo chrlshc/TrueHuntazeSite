@@ -20,7 +20,7 @@ export default function TopList() {
               <div className="font-medium">{it.title}</div>
               <div className="text-xs text-zinc-500">CTR {it.ctr}%</div>
             </div>
-            <div className="text-sm font-semibold">${'{'}it.revenue.toLocaleString(){'}'}</div>
+            <div className="text-sm font-semibold">${it.revenue.toLocaleString()}</div>
           </div>
         ))}
       </CardContent>

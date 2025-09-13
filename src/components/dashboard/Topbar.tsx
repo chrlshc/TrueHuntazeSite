@@ -24,7 +24,7 @@ export default function Topbar({
   }
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-40 flex h-16 items-center justify-between border-b border-[#E1E3E5] bg-[#FFFFFF]/95 px-3 backdrop-blur-md dark:border-[#3A3B3D] dark:bg-[#202223]/80">
+    <div className="fixed top-0 left-0 right-0 z-40 flex h-14 items-center justify-between border-b border-[#E1E3E5] bg-[#FFFFFF]/95 px-3 backdrop-blur-md dark:border-[#3A3B3D] dark:bg-[#202223]/80">
       <div className="flex items-center gap-2">
         <button
           className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-md hover:bg-[#F6F6F7] dark:hover:bg-[#2C2D2F]"

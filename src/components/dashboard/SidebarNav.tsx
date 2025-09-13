@@ -17,7 +17,7 @@ const nav = [
       { href: '/messages', label: 'Messages', icon: MessageSquare },
       { href: '/campaigns', label: 'Campaigns', icon: Megaphone },
       { href: '/fans', label: 'Fans', icon: Users },
-      { href: '/marketing', label: 'Marketing', icon: Megaphone },
+      { href: '/marketing/overview', label: 'Marketing', icon: Megaphone },
     ],
   },
   {
@@ -34,7 +34,7 @@ export default function SidebarNav() {
   const pathname = usePathname();
   return (
     <aside className="hidden lg:flex h-screen w-[240px] flex-col border-r border-[#E1E3E5] bg-[#FFFFFF] dark:border-[#3A3B3D] dark:bg-[#202223]">
-      <div className="h-16 px-4 flex items-center font-semibold tracking-tight">Huntaze</div>
+      <div className="h-14 px-4 flex items-center font-semibold tracking-tight">Huntaze</div>
       <nav className="flex-1 space-y-4 px-3 pb-6">
         {nav.map((group) => (
           <div key={group.heading}>
@@ -50,7 +50,7 @@ export default function SidebarNav() {
                       href={href}
                       aria-current={active ? 'page' : undefined}
                       className={cn(
-                        'relative flex items-center gap-2 rounded-md px-3 py-2 text-sm transition',
+                        'relative flex items-center gap-2 rounded-md px-3 py-2.5 text-sm transition',
                         active
                           ? 'bg-[#EEF1F5] text-[#111213] dark:bg-[#2C2D2F] dark:text-[#E3E3E3]'
                           : 'text-[#2C2D2F] hover:bg-[#F6F6F7] dark:text-[#C5C6C8] dark:hover:bg-[#2C2D2F]',
