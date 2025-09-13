@@ -1100,6 +1100,7 @@ export default function OnboardingSetupPage() {
                             ...formData, 
                             connectedPlatforms: [...formData.connectedPlatforms, 'onlyfans'] 
                           });
+                          try { updateOps?.({ platforms: { onlyfans: true } }); } catch {}
                           try {
                             const res = await fetch('/api/onboarding/mock-ingest');
                             if (res.ok) {

@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import ResumeBanner from '@/components/onboarding/ResumeBanner';
+import OnboardingChecklist from '@/components/onboarding/OnboardingChecklist';
 import { 
   TrendingUp,
   TrendingDown,
@@ -69,6 +71,11 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-surface-light dark:bg-surface">
       <div className="p-4 lg:p-8">
+        {/* Onboarding prompts */}
+        <div className="mb-6 space-y-3">
+          <ResumeBanner />
+          <OnboardingChecklist />
+        </div>
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-6">
