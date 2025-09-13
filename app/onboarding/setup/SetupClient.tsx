@@ -362,7 +362,7 @@ export default function OnboardingSetupClient({
         );
       case 'niche':
         return (
-          <StepShell step={3} total={totalSteps} title={C.nichesGoals.title} subtitle={C.nichesGoals.subtitle} onBack={handlePrevious} onSkip={() => setCurrentStep('platform')} onContinue={handleNext}>
+          <StepShell step={3} total={totalSteps} title={t.steps.activity?.title ?? 'Your activity'} subtitle={t.steps.activity?.subtitle ?? ''} onBack={handlePrevious} onSkip={() => setCurrentStep('platform')} onContinue={handleNext} locale={locale}>
             {/* ... keep existing niche selection UI ... */}
             {/* Retained content omitted for brevity; untouched logic remains the same */}
           </StepShell>
@@ -390,13 +390,13 @@ export default function OnboardingSetupClient({
         );
       case 'ai-config':
         return (
-          <StepShell step={5} total={totalSteps} title={C.launch.title} subtitle={C.launch.automation.caption} onBack={handlePrevious} onSkip={() => setCurrentStep('plan')} onContinue={handleNext}>
+          <StepShell step={5} total={totalSteps} title={t.steps.ai?.title ?? 'Configure your AI assistant'} subtitle={t.steps.ai?.subtitle ?? ''} onBack={handlePrevious} onSkip={() => setCurrentStep('plan')} onContinue={handleNext} locale={locale}>
             {/* keep existing AI config UI */}
           </StepShell>
         );
       case 'plan':
         return (
-          <StepShell step={6} total={totalSteps} title="Choose your plan" subtitle="Free to start" onBack={handlePrevious} onSkip={() => setCurrentStep('complete')} onContinue={completeAndRoute}>
+          <StepShell step={6} total={totalSteps} title={t.steps.plan?.title ?? 'Choose your plan'} subtitle={t.steps.plan?.subtitle ?? ''} onBack={handlePrevious} onSkip={() => setCurrentStep('complete')} onContinue={completeAndRoute} locale={locale}>
             {/* pricing cards unchanged */}
           </StepShell>
         );
@@ -404,14 +404,14 @@ export default function OnboardingSetupClient({
         return (
           <div className="complete-container">
             <div className="complete-icon-container"><Rocket className="complete-icon" /></div>
-            <h2 className="complete-title">You're all set! 🎉</h2>
-            <p className="complete-message">Your AI assistant is ready to help you grow</p>
+            <h2 className="complete-title">{t.steps.done?.title ?? 'All set!'}</h2>
+            <p className="complete-message">{t.steps.done?.subtitle ?? 'Your personalized dashboard is ready.'}</p>
             <div className="complete-stats">
               <div className="complete-stat"><div className="complete-stat-value">24/7</div><div className="complete-stat-label">AI Response</div></div>
               <div className="complete-stat"><div className="complete-stat-value">5x</div><div className="complete-stat-label">Time Saved</div></div>
               <div className="complete-stat"><div className="complete-stat-value">∞</div><div className="complete-stat-label">Possibilities</div></div>
             </div>
-            <button onClick={completeAndRoute} className="btn-primary"><Sparkles className="w-5 h-5" />Go to Dashboard</button>
+            <button onClick={completeAndRoute} className="btn-primary"><Sparkles className="w-5 h-5" />{t.steps.done?.cta ?? 'Go to dashboard'}</button>
           </div>
         );
     }
