@@ -64,11 +64,18 @@
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 1.5rem;
-  color: #111213;
+  color: #111213 !important;
 }
 
 .dark .hero-title {
-  color: #E3E3E3;
+  color: #E3E3E3 !important;
+}
+
+.hero-title .text-gradient {
+  background: linear-gradient(135deg, #2C6ECB 0%, #5E6AD2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 @media (min-width: 768px) {

@@ -33,7 +33,7 @@ const nav = [
 export default function SidebarNav() {
   const pathname = usePathname();
   return (
-    <aside className="hidden lg:flex h-screen w-[240px] flex-col border-r border-border bg-surface">
+    <aside className="hidden lg:flex sticky top-0 h-screen w-[240px] flex-col border-r border-border bg-surface">
       <div className="h-14 px-4 flex items-center font-semibold tracking-tight text-ink">Huntaze</div>
       <nav className="flex-1 space-y-4 px-3 pb-6">
         {nav.map((group) => (

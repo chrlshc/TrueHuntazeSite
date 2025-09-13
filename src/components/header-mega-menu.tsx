@@ -1,8 +1,11 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
+import MegaMenu from '@/components/layout/MegaMenu'
+import MobileMegaMenu from '@/components/layout/MobileMegaMenu'
 import { 
   ChevronDown, Zap, Users, BarChart, Shield, Globe, 
   MessageSquare, Calendar, TrendingUp, Award, Sparkles,
@@ -11,34 +14,8 @@ import {
   Lock, GitBranch, HelpCircle, BookOpen, Megaphone, Mail
 } from 'lucide-react'
 
-interface MegaMenuItem {
-  label: string
-  href: string
-  description?: string
-  icon?: React.ReactNode
-  badge?: string
-}
-
-interface MegaMenuSection {
-  title: string
-  items: MegaMenuItem[]
-}
-
-interface NavigationItem {
-  label: string
-  href?: string
-  megaMenu?: {
-    sections: MegaMenuSection[]
-    featured?: {
-      title: string
-      description: string
-      href: string
-      image?: string
-    }
-  }
-}
-
-const navigation: NavigationItem[] = [
+// Export navigation data for mobile menu
+export const navigation = [
   {
     label: 'Products',
     megaMenu: {
@@ -181,72 +158,6 @@ const navigation: NavigationItem[] = [
         href: '/case-studies/sarah',
         image: '/images/success-story.png'
       }
-    }
-  },
-  {
-    label: 'Features',
-    megaMenu: {
-      sections: [
-        {
-          title: 'Core Features',
-          items: [
-            { 
-              label: 'AI Chat Assistant', 
-              href: '/features/ai-chat', 
-              description: 'Personalized conversations at scale',
-              icon: <MessageSquare className="w-4 h-4" />
-            },
-            { 
-              label: 'Analytics Dashboard', 
-              href: '/features/analytics', 
-              description: 'Real-time insights and metrics',
-              icon: <BarChart className="w-4 h-4" />
-            },
-            { 
-              label: 'Content Scheduler', 
-              href: '/features/scheduler', 
-              description: 'Plan and automate posts',
-              icon: <Calendar className="w-4 h-4" />
-            },
-            { 
-              label: 'Fan CRM', 
-              href: '/features/crm', 
-              description: 'Manage relationships efficiently',
-              icon: <Users className="w-4 h-4" />
-            }
-          ]
-        },
-        {
-          title: 'Advanced Tools',
-          items: [
-            { 
-              label: 'A/B Testing', 
-              href: '/features/ab-testing', 
-              description: 'Optimize your messaging',
-              icon: <Target className="w-4 h-4" />
-            },
-            { 
-              label: 'Automation Flows', 
-              href: '/features/automation', 
-              description: 'Set up complex workflows',
-              icon: <Zap className="w-4 h-4" />
-            },
-            { 
-              label: 'Team Collaboration', 
-              href: '/features/teams', 
-              description: 'Work together seamlessly',
-              icon: <Users className="w-4 h-4" />
-            },
-            { 
-              label: 'API Access', 
-              href: '/features/api', 
-              description: 'Build custom integrations',
-              icon: <Rocket className="w-4 h-4" />,
-              badge: 'Beta'
-            }
-          ]
-        }
-      ]
     }
   },
   {
@@ -416,156 +327,74 @@ const navigation: NavigationItem[] = [
   }
 ]
 
-export default function MegaMenu() {
-  const [activeMenu, setActiveMenu] = useState<string | null>(null)
-  const [menuPosition, setMenuPosition] = useState({ left: 0, width: 0 })
-  const menuRef = useRef<HTMLDivElement>(null)
+export default function HeaderMegaMenu() {
+  const pathname = usePathname()
+  const [isScrolled, setIsScrolled] = useState(false)
 
+  // Hide on app pages
+  const isApp = !!pathname && [
+    '/dashboard',
+    '/onboarding',
+    '/messages',
+    '/analytics',
+    '/settings'
+  ].some(p => pathname.startsWith(p))
+
+  // Detect scroll for sticky behavior
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setActiveMenu(null)
-      }
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10)
     }
 
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const handleMouseEnter = (label: string, event: React.MouseEvent<HTMLLIElement>) => {
-    const rect = event.currentTarget.getBoundingClientRect()
-    setMenuPosition({
-      left: rect.left,
-      width: rect.width
-    })
-    setActiveMenu(label)
-  }
+  if (isApp) return null
 
   return (
-    <nav ref={menuRef} className="relative z-50">
-      <ul className="flex items-center space-x-1">
-        {navigation.map((item) => (
-          <li
-            key={item.label}
-            className="relative"
-            onMouseEnter={(e) => item.megaMenu && handleMouseEnter(item.label, e)}
-            onMouseLeave={() => setActiveMenu(null)}
-          >
-            {item.href ? (
+    <header className={`fixed inset-x-0 top-0 z-[1000] transition-all duration-300 ${
+      isScrolled 
+        ? 'bg-[#0A0A0B]/95 backdrop-blur-2xl border-b border-[#1E1E20]' 
+        : 'bg-[#0A0A0B] border-b border-[#1E1E20]'
+    }`}>
+      <nav className="max-w-[1400px] mx-auto px-6 sm:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <div className="flex items-center gap-8">
+            <Link href="/" className="flex items-center">
+              <span className="text-xl font-bold text-white">Huntaze</span>
+            </Link>
+
+            {/* Desktop Navigation */}
+            <div className="hidden lg:block">
+              <MegaMenu />
+            </div>
+          </div>
+
+          {/* Right Side Actions */}
+          <div className="flex items-center gap-4">
+            {/* Desktop CTAs */}
+            <div className="hidden lg:flex items-center gap-4">
               <Link
-                href={item.href}
-                className="flex items-center gap-1 px-4 py-2 text-[#EEEFF1] hover:text-[#5E6AD2] transition-colors duration-200 font-medium"
+                href="/auth"
+                className="text-[#EEEFF1] hover:text-[#5E6AD2] transition-colors font-medium"
               >
-                {item.label}
+                Sign In
               </Link>
-            ) : (
-              <button className="flex items-center gap-1 px-4 py-2 text-[#EEEFF1] hover:text-[#5E6AD2] transition-colors duration-200 font-medium">
-                {item.label}
-                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${
-                  activeMenu === item.label ? 'rotate-180' : ''
-                }`} />
-              </button>
-            )}
+              <Link
+                href="/onboarding"
+                className="px-4 py-2 bg-[#5E6AD2] hover:bg-[#4C5BC0] text-white rounded-lg transition-colors font-medium"
+              >
+                Get Started
+              </Link>
+            </div>
 
-            <AnimatePresence>
-              {activeMenu === item.label && item.megaMenu && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.15 }}
-                  className="absolute top-full left-0 mt-2"
-                  style={{ 
-                    width: 'max-content',
-                    maxWidth: '1200px',
-                    transform: 'translateX(-50%)',
-                    left: '50%'
-                  }}
-                >
-                  <div className="bg-[#0A0A0B]/95 backdrop-blur-2xl border border-[#1E1E20] rounded-2xl p-8 shadow-2xl"
-                    style={{
-                      boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
-                    }}>
-                    <div className="grid grid-cols-3 gap-8">
-                      {/* Menu Sections */}
-                      <div className={`${item.megaMenu.featured ? 'col-span-2' : 'col-span-3'} grid ${item.megaMenu.sections.length > 2 ? 'grid-cols-3' : 'grid-cols-2'} gap-8`}>
-                        {item.megaMenu.sections.map((section, idx) => (
-                          <div key={section.title}>
-                            <h3 className="text-xs font-semibold text-[#9CA3AF] uppercase tracking-wider mb-4">
-                              {section.title}
-                            </h3>
-                            <ul className="space-y-3">
-                              {section.items.map((menuItem) => (
-                                <motion.li 
-                                  key={menuItem.label}
-                                  initial={{ opacity: 0, x: -20 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: idx * 0.05 + section.items.indexOf(menuItem) * 0.03 }}
-                                >
-                                  <Link
-                                    href={menuItem.href}
-                                    className="group flex items-start gap-3 p-2 -m-2 rounded-lg hover:bg-[#1A1A1C] transition-all duration-200 hover:scale-[1.02]"
-                                  >
-                                    {menuItem.icon && (
-                                      <div className="mt-0.5 text-[#9CA3AF] group-hover:text-[#5E6AD2] transition-colors">
-                                        {menuItem.icon}
-                                      </div>
-                                    )}
-                                    <div className="flex-1">
-                                      <div className="flex items-center gap-2">
-                                        <span className="font-medium text-[#EEEFF1] group-hover:text-[#5E6AD2] transition-colors">
-                                          {menuItem.label}
-                                        </span>
-                                        {menuItem.badge && (
-                                          <span className="px-2 py-0.5 text-xs font-medium bg-[#5E6AD2]/20 text-[#5E6AD2] rounded-full">
-                                            {menuItem.badge}
-                                          </span>
-                                        )}
-                                      </div>
-                                      {menuItem.description && (
-                                        <p className="text-sm text-[#9CA3AF] mt-0.5">
-                                          {menuItem.description}
-                                        </p>
-                                      )}
-                                    </div>
-                                  </Link>
-                                </motion.li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Featured Section */}
-                      {item.megaMenu.featured && (
-                        <div className="bg-gradient-to-br from-[#5E6AD2]/10 to-[#5E6AD2]/5 rounded-xl p-6 border border-[#5E6AD2]/20">
-                          <h3 className="text-sm font-semibold text-[#5E6AD2] mb-2">
-                            Featured
-                          </h3>
-                          <h4 className="text-lg font-semibold text-white mb-2">
-                            {item.megaMenu.featured.title}
-                          </h4>
-                          <p className="text-sm text-[#9CA3AF] mb-4">
-                            {item.megaMenu.featured.description}
-                          </p>
-                          <Link
-                            href={item.megaMenu.featured.href}
-                            className="inline-flex items-center gap-2 text-sm font-medium text-[#5E6AD2] hover:text-[#4C5BC0] transition-colors"
-                          >
-                            Learn more
-                            <ArrowRight className="w-4 h-4" />
-                          </Link>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </li>
-        ))}
-      </ul>
-    </nav>
+            {/* Mobile Menu */}
+            <MobileMegaMenu navigation={navigation} />
+          </div>
+        </div>
+      </nav>
+    </header>
   )
 }
-

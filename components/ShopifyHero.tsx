@@ -35,21 +35,6 @@ export default function ShopifyHero() {
               of your business. No agencies, no excessive commissions.
             </p>
 
-            {/* Key Benefits */}
-            <ul className="benefit-list mb-8">
-              <li className="benefit-item">
-                <CheckCircle className="benefit-icon" />
-                <span>Manage 10,000+ fans automatically</span>
-              </li>
-              <li className="benefit-item">
-                <CheckCircle className="benefit-icon" />
-                <span>0% commission (vs 40% agencies charge)</span>
-              </li>
-              <li className="benefit-item">
-                <CheckCircle className="benefit-icon" />
-                <span>GDPR compliant & platform approved</span>
-              </li>
-            </ul>
 
             {/* CTA Buttons */}
             <div className="cta-group">

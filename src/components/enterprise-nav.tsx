@@ -102,11 +102,11 @@ export default function EnterpriseNav() {
   const [contactModalOpen, setContactModalOpen] = useState(false)
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl">
+    <nav className="fixed inset-x-0 top-0 z-50 bg-surface/95 backdrop-blur-xl border-b border-border">
       <div className="mx-auto w-full max-w-screen-2xl px-4">
         <div className="flex items-center h-16 gap-6">
           {/* Logo */}
-          <Link href="/" className="text-xl font-semibold text-gray-900 dark:text-white">
+          <Link href="/" className="text-xl font-semibold text-ink">
             Huntaze
           </Link>
 
@@ -115,7 +115,7 @@ export default function EnterpriseNav() {
             {/* Solutions Dropdown */}
             <div className="relative">
               <button
-                className="flex items-center gap-1 px-3 py-2 text-sm text-neutral-300 hover:text-white transition-colors"
+                className="flex items-center gap-1 px-3 py-2 text-sm text-inkSubdued hover:text-ink transition-colors"
                 onMouseEnter={() => setSolutionsOpen(true)}
                 onMouseLeave={() => setSolutionsOpen(false)}
               >
@@ -129,7 +129,7 @@ export default function EnterpriseNav() {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-full left-0 mt-2 w-[320px] bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700"
+                    className="absolute top-full left-0 mt-2 w-[320px] bg-surface rounded-lg shadow-xl border border-border"
                     onMouseEnter={() => setSolutionsOpen(true)}
                     onMouseLeave={() => setSolutionsOpen(false)}
                   >
@@ -138,15 +138,15 @@ export default function EnterpriseNav() {
                         <Link
                           key={item.href}
                           href={item.href}
-                          className="block px-4 py-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors group"
+                          className="block px-4 py-3 rounded-lg hover:bg-surfaceMuted transition-colors group"
                         >
                           <div className="flex items-start gap-3">
                             <span className="text-2xl mt-0.5">{item.icon}</span>
                             <div>
-                              <div className="font-semibold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400">
+                              <div className="font-semibold text-ink group-hover:text-accent">
                                 {item.title}
                               </div>
-                              <div className="text-sm text-gray-600 dark:text-gray-400">
+                              <div className="text-sm text-inkSubdued">
                                 {item.description}
                               </div>
                             </div>
@@ -162,7 +162,7 @@ export default function EnterpriseNav() {
             {/* Pricing Link */}
             <Link 
               href="/pricing" 
-              className="px-3 py-2 text-sm text-neutral-300 hover:text-white transition-colors"
+              className="px-3 py-2 text-sm text-inkSubdued hover:text-ink transition-colors"
             >
               Pricing
             </Link>
@@ -170,7 +170,7 @@ export default function EnterpriseNav() {
             {/* Resources Dropdown */}
             <div className="relative">
               <button
-                className="flex items-center gap-1 px-3 py-2 text-sm text-neutral-300 hover:text-white transition-colors"
+                className="flex items-center gap-1 px-3 py-2 text-sm text-inkSubdued hover:text-ink transition-colors"
                 onMouseEnter={() => setResourcesOpen(true)}
                 onMouseLeave={() => setResourcesOpen(false)}
               >
@@ -184,7 +184,7 @@ export default function EnterpriseNav() {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-full left-0 mt-2 w-[320px] bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700"
+                    className="absolute top-full left-0 mt-2 w-[320px] bg-surface rounded-lg shadow-xl border border-border"
                     onMouseEnter={() => setResourcesOpen(true)}
                     onMouseLeave={() => setResourcesOpen(false)}
                   >
@@ -193,15 +193,15 @@ export default function EnterpriseNav() {
                         <Link
                           key={item.href}
                           href={item.href}
-                          className="block px-4 py-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors group"
+                          className="block px-4 py-3 rounded-lg hover:bg-surfaceMuted transition-colors group"
                         >
                           <div className="flex items-start gap-3">
                             <span className="text-2xl mt-0.5">{item.icon}</span>
                             <div>
-                              <div className="font-semibold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400">
+                              <div className="font-semibold text-ink group-hover:text-accent">
                                 {item.title}
                               </div>
-                              <div className="text-sm text-gray-600 dark:text-gray-400">
+                              <div className="text-sm text-inkSubdued">
                                 {item.description}
                               </div>
                             </div>
@@ -219,7 +219,7 @@ export default function EnterpriseNav() {
           {/* Sign in - Indépendant */}
           <Link
             href="/auth"
-            className="inline-flex h-9 items-center rounded-lg px-3 text-sm text-neutral-700 dark:text-neutral-200 hover:bg-white/5 hover:text-black dark:hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 dark:focus-visible:ring-white/40 transition-colors"
+            className="inline-flex h-9 items-center rounded-lg px-3 text-sm text-inkSubdued hover:bg-surfaceMuted hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accentRing transition-colors"
           >
             Sign in
           </Link>
@@ -227,7 +227,7 @@ export default function EnterpriseNav() {
           {/* Start for free - Indépendant */}
           <Link
             href="/onboarding/setup/profile"
-            className="inline-flex h-9 items-center rounded-lg bg-black dark:bg-white px-4 text-sm font-medium text-white dark:text-black hover:opacity-90 transition-colors"
+            className="inline-flex h-9 items-center rounded-lg bg-accent px-4 text-sm font-medium text-white hover:bg-accentHover transition-colors"
           >
             Start for free
           </Link>

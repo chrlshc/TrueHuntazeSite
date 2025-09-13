@@ -66,6 +66,7 @@ import CompletionStep from '@/components/onboarding/steps/CompletionStep';
 import ProfileStep from '@/components/onboarding/steps/ProfileStep';
 import PlatformsStep from '@/components/onboarding/steps/PlatformsStep';
 import { getCopy, type Locale } from '@/src/lib/onboarding/copy';
+import { resolveLocale } from '@/src/lib/onboarding/locale';
 
 type Step = 'profile' | 'sell-plan' | 'niche' | 'platform' | 'ai-config' | 'plan' | 'complete';
 
@@ -74,6 +75,7 @@ export default function OnboardingSetupClient({
   showConnectedToast = false,
   forceStep,
   navMode = 'inline',
+  locale: initialLocale,
 }: {
   initialOnlyfansConnected?: boolean;
   showConnectedToast?: boolean;
@@ -448,7 +450,8 @@ export default function OnboardingSetupClient({
         );
     }
   };
-  const t = getCopy((typeof (locale as any) === 'string' ? (locale as any) : 'en'));
+  const locale = (initialLocale ?? resolveLocale(searchParams.get('locale'))) as Locale;
+  const t = getCopy(locale);
   const stepsMeta = [
     { key: 'profile',   label: t.steps.profile?.title ?? 'Profile' },
     { key: 'sell-plan', label: t.steps.plan?.title ?? 'Plan' },

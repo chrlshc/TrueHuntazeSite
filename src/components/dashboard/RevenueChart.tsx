@@ -11,8 +11,8 @@ export default function RevenueChart() {
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
-            <div className="text-sm text-[#6D7175] dark:text-[#A5A7AB]">Net sales over time</div>
-            <div className="text-lg font-semibold text-[#111213] dark:text-[#E3E3E3]">Revenue</div>
+            <div className="text-sm text-inkSubdued">Net sales over time</div>
+            <div className="text-lg font-semibold text-ink">Revenue</div>
           </div>
         </div>
       </CardHeader>
@@ -21,8 +21,8 @@ export default function RevenueChart() {
           <AreaChart data={data} margin={{ left: 8, right: 8, top: 10, bottom: 0 }}>
             <defs>
               <linearGradient id="fillNet" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#2C6ECB" stopOpacity={0.25} />
-                <stop offset="95%" stopColor="#2C6ECB" stopOpacity={0.02} />
+                <stop offset="5%" stopColor="var(--accent)" stopOpacity={0.25} />
+                <stop offset="95%" stopColor="var(--accent)" stopOpacity={0.02} />
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />

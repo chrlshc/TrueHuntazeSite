@@ -14,7 +14,7 @@ export default function DashboardShell({ children }: React.PropsWithChildren) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#F6F6F7] text-[#111213] dark:bg-[#0B0B0D] dark:text-[#E3E3E3]">
+    <div className="min-h-screen bg-page text-ink">
       {/* Overlay mobile */}
       <div
         className={cn(
@@ -26,7 +26,7 @@ export default function DashboardShell({ children }: React.PropsWithChildren) {
       {/* Drawer mobile */}
       <div
         className={cn(
-          'fixed z-50 inset-y-0 left-0 w-[240px] translate-x-[-100%] border-r border-[#E1E3E5] bg-[#FFFFFF] dark:border-[#3A3B3D] dark:bg-[#202223] transition-transform lg:hidden',
+          'fixed z-50 inset-y-0 left-0 w-[240px] translate-x-[-100%] border-r border-border bg-surface transition-transform lg:hidden',
           open && 'translate-x-0',
         )}
       >
@@ -37,8 +37,6 @@ export default function DashboardShell({ children }: React.PropsWithChildren) {
         <SidebarNav />
         <div className="flex min-h-screen flex-col">
           <Topbar onToggleSidebar={() => setOpen((s) => !s)} />
-          {/* compensate fixed topbar */}
-          <div className="h-14" />
           <main className="p-3 sm:p-6">
             <div className="mx-auto w-full max-w-screen-2xl">{children}</div>
           </main>

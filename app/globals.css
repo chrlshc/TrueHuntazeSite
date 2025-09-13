@@ -95,14 +95,6 @@ html { font-size: 14px; }
 
   /* Back-compat mapping remains valid in dark */
 }
-.dark{
-  /* chart + tooltip overrides in dark */
-  --chart-grid: rgba(227,227,227,0.06);
-  --chart-tick: #A5A7AB;
-  --tooltip-bg: #202223;
-  --tooltip-fg: #E3E3E3;
-  --tooltip-border: #3A3B3D;
-}
 
 /* Optimized rendering */
 body {

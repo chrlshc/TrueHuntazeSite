@@ -32,8 +32,8 @@ export default function HeaderShopify() {
   if (isApp) return null
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-[1000] transition-all duration-300 ${
-      isScrolled ? 'bg-[#1a1a1a]/95 backdrop-blur-md' : 'bg-[#1a1a1a]'
+    <header className={`fixed inset-x-0 top-0 z-[1000] transition-all duration-300 dark ${
+      isScrolled ? 'bg-surface/95 backdrop-blur-md' : 'bg-surface'
     }`}>
       <nav className="max-w-[1400px] mx-auto px-8">
         <div className="flex items-center justify-between h-[64px]">
@@ -65,7 +65,7 @@ export default function HeaderShopify() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 mt-2 w-80 bg-[#1a1a1a] border border-gray-800 rounded-lg shadow-xl"
+                      className="absolute top-full left-0 mt-2 w-80 bg-surface border border-border rounded-lg shadow-xl"
                       onMouseEnter={() => setActiveDropdown('solutions')}
                       onMouseLeave={() => setActiveDropdown(null)}
                     >
@@ -143,7 +143,7 @@ export default function HeaderShopify() {
                         </Link>
 
                         {/* Divider */}
-                        <div className="h-px bg-gray-800 my-2" />
+                        <div className="h-px bg-border my-2" />
 
                         {/* View all */}
                         <Link
@@ -223,7 +223,7 @@ export default function HeaderShopify() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="lg:hidden bg-[#1a1a1a]"
+            className="lg:hidden bg-surface"
           >
             <div className="px-6 py-4 space-y-4">
               <Link

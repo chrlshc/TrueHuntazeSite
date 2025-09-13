@@ -3,13 +3,63 @@ import type { NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const response = NextResponse.next();
+  
+  // Geo-targeting
+  const country = request.geo?.country || 'US';
+  const city = request.geo?.city || 'Unknown';
+  
+  response.headers.set('X-User-Country', country);
+  response.headers.set('X-User-City', city);
+  
+  // A/B Testing
+  const bucket = Math.random() > 0.5 ? 'A' : 'B';
+  response.cookies.set('ab-test-bucket', bucket, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: 60 * 60 * 24 * 30 // 30 days
+  });
+  
+  // Cache headers by route
+  if (pathname === '/') {
+    // Homepage: short cache with revalidation
+    response.headers.set(
+      'Cache-Control',
+      'public, s-maxage=60, stale-while-revalidate=300'
+    );
+  } else if (pathname.startsWith('/blog')) {
+    // Blog: longer cache
+    response.headers.set(
+      'Cache-Control', 
+      'public, s-maxage=3600, stale-while-revalidate=86400'
+    );
+  } else if (pathname.startsWith('/pricing')) {
+    // Pricing: no cache (dynamic data)
+    response.headers.set(
+      'Cache-Control',
+      'private, no-cache, no-store, must-revalidate'
+    );
+  } else if (pathname.match(/\.(jpg|jpeg|png|gif|svg|ico|woff|woff2|ttf|otf)$/)) {
+    // Static assets: immutable cache
+    response.headers.set(
+      'Cache-Control',
+      'public, max-age=31536000, immutable'
+    );
+  }
+  
+  // Performance hints
+  response.headers.set('Link', '<https://fonts.googleapis.com>; rel=preconnect');
+  response.headers.set('X-DNS-Prefetch-Control', 'on');
+  response.headers.set('X-Frame-Options', 'SAMEORIGIN');
+  response.headers.set('X-Content-Type-Options', 'nosniff');
   
   // Local dev convenience: disable auth checks on localhost/non-production
   const host = request.nextUrl.hostname;
   const isLocalhost = host === 'localhost' || host === '127.0.0.1' || host === '0.0.0.0';
   const DEV_MODE = process.env.NODE_ENV !== 'production' && isLocalhost;
   if (DEV_MODE) {
-    return NextResponse.next();
+    return response;
   }
   
   // Get auth token (prefer new cookie, keep legacy compatibility)
@@ -85,7 +135,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/dashboard', request.url));
   }
   
-  return NextResponse.next();
+  return response;
 }
 
 export const config = {
