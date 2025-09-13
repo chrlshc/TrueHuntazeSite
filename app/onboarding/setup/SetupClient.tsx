@@ -65,14 +65,18 @@ type Step = 'profile' | 'sell-plan' | 'niche' | 'platform' | 'ai-config' | 'plan
 export default function OnboardingSetupClient({
   initialOnlyfansConnected = false,
   showConnectedToast = false,
+  forceStep,
+  navMode = 'inline',
 }: {
   initialOnlyfansConnected?: boolean;
   showConnectedToast?: boolean;
+  forceStep?: Step;
+  navMode?: 'inline' | 'route';
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { completeOnboarding, sellPlan, setSellPlan, updateOps } = useOnboarding();
-  const [currentStep, setCurrentStep] = useState<Step>('profile');
+  const [currentStep, setCurrentStep] = useState<Step>(forceStep || 'profile');
   const [loading, setLoading] = useState(false);
   const [animationDirection, setAnimationDirection] = useState<'forward' | 'backward'>('forward');
   
@@ -131,6 +135,11 @@ export default function OnboardingSetupClient({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Keep URL-driven step authoritative when navMode=route
+  useEffect(() => {
+    if (forceStep) setCurrentStep(forceStep);
+  }, [forceStep]);
 
   useEffect(() => {
     if (showPlaybook && formData.niche) {
@@ -219,6 +228,19 @@ export default function OnboardingSetupClient({
     }
   }, [searchParams]);
 
+  const nextPathFor = (s: Step) => {
+    const order: Step[] = ['profile', 'sell-plan', 'niche', 'platform', 'ai-config', 'plan', 'complete'];
+    const i = order.indexOf(s);
+    const next = order[Math.min(i + 1, order.length - 1)];
+    return `/onboarding/setup/${next === 'complete' ? 'plan' : next}`;
+  };
+  const prevPathFor = (s: Step) => {
+    const order: Step[] = ['profile', 'sell-plan', 'niche', 'platform', 'ai-config', 'plan'];
+    const i = order.indexOf(s);
+    const prev = order[Math.max(i - 1, 0)];
+    return `/onboarding/setup/${prev}`;
+  };
+
   const handleNext = async () => {
     setLoading(true);
     setAnimationDirection('forward');
@@ -231,6 +253,10 @@ export default function OnboardingSetupClient({
           await fetch('/api/onboarding/save-ai-config', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ tone: formData.aiPersonality.tone, responseSpeed: formData.aiPersonality.responseSpeed, personalityTraits: formData.aiPersonality.traits, contentTypes: formData.contentTypes, voiceSample: formData.aiPersonality.voiceSample ? 'uploaded' : null, writingSamples: formData.aiPersonality.writingSamples, autoLearn: true, selectedNicheId: formData.niche || null, price: formData.monthlyPrice || null, ...(formData.niche && (presets as any)[formData.niche] ? (() => { const p = (presets as any)[formData.niche]; const dm = customPlaybook.dmSequences ? { ...p.dmSequences, ...customPlaybook.dmSequences } : p.dmSequences; const cadence = customPlaybook.cadence || p.cadence; return { dmSequences: dm, cadence, upsellMenu: customPlaybook.upsellMenu || p.upsellMenu }; })() : {}), }) });
           try { router.push('/onboarding/optimize'); } catch {}
           return;
+      }
+      if (navMode === 'route') {
+        router.push(nextPathFor(currentStep));
+        return;
       }
       const stepOrder: Step[] = ['profile', 'sell-plan', 'niche', 'platform', 'ai-config', 'plan', 'complete'];
       const currentIndex = stepOrder.indexOf(currentStep);
@@ -249,6 +275,10 @@ export default function OnboardingSetupClient({
 
   const handlePrevious = () => {
     setAnimationDirection('backward');
+    if (navMode === 'route') {
+      router.push(prevPathFor(currentStep));
+      return;
+    }
     const stepOrder: Step[] = ['profile', 'sell-plan', 'niche', 'platform', 'ai-config', 'plan', 'complete'];
     const currentIndex = stepOrder.indexOf(currentStep);
     if (currentIndex > 0) setCurrentStep(stepOrder[currentIndex - 1]);
@@ -395,4 +425,3 @@ export default function OnboardingSetupClient({
 
   return renderStep();
 }
-
