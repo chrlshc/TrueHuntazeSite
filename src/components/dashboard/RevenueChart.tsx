@@ -25,17 +25,27 @@ export default function RevenueChart() {
                 <stop offset="95%" stopColor="#2C6ECB" stopOpacity={0.02} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(17,18,19,0.06)" />
-            <XAxis dataKey="label" tickLine={false} axisLine={false} tick={{ fill: 'var(--tw-prose-body, #6D7175)' }} />
-            <YAxis tickLine={false} axisLine={false} tickFormatter={(v) => `$${v / 1000}k`} tick={{ fill: 'var(--tw-prose-body, #6D7175)' }} />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
+            <XAxis
+              dataKey="label"
+              tickLine={false}
+              axisLine={false}
+              tick={{ fill: 'var(--chart-tick)' }}
+            />
+            <YAxis
+              tickLine={false}
+              axisLine={false}
+              tickFormatter={(v) => `$${v / 1000}k`}
+              tick={{ fill: 'var(--chart-tick)' }}
+            />
             <Tooltip
               contentStyle={{
-                background: document.documentElement.classList.contains('dark') ? '#202223' : '#FFFFFF',
-                color: document.documentElement.classList.contains('dark') ? '#E3E3E3' : '#111213',
-                border: `1px solid ${document.documentElement.classList.contains('dark') ? '#3A3B3D' : '#E1E3E5'}`,
+                background: 'var(--tooltip-bg)',
+                color: 'var(--tooltip-fg)',
+                border: '1px solid var(--tooltip-border)',
                 borderRadius: 8,
               }}
-              labelStyle={{ color: document.documentElement.classList.contains('dark') ? '#A5A7AB' : '#6D7175' }}
+              labelStyle={{ color: 'var(--chart-tick)' }}
               formatter={(v: number) => [`$${(v as number).toLocaleString()}`, 'Net']}
             />
             <Area type="monotone" dataKey="net" stroke="#2C6ECB" fill="url(#fillNet)" strokeWidth={2} activeDot={{ r: 4 }} />

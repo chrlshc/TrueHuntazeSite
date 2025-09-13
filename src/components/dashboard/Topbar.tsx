@@ -5,6 +5,7 @@ import PeriodSelector from './PeriodSelector';
 import { Plus, Sparkles, Menu, Sun, Moon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { initTheme, setTheme } from '@/lib/theme';
+import SearchInput from '@/components/ui/search-input';
 
 export default function Topbar({
   onToggleSidebar,
@@ -24,8 +25,8 @@ export default function Topbar({
   }
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-40 flex h-14 items-center justify-between border-b border-[#E1E3E5] bg-[#FFFFFF]/95 px-3 backdrop-blur-md dark:border-[#3A3B3D] dark:bg-[#202223]/80">
-      <div className="flex items-center gap-2">
+    <div className="fixed top-0 left-0 right-0 z-40 flex h-14 items-center gap-3 border-b border-[#E1E3E5] bg-[#FFFFFF]/95 px-3 backdrop-blur-md dark:border-[#3A3B3D] dark:bg-[#202223]/80">
+      <div className="flex items-center gap-2 shrink-0">
         <button
           className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-md hover:bg-[#F6F6F7] dark:hover:bg-[#2C2D2F]"
           onClick={onToggleSidebar}
@@ -35,8 +36,10 @@ export default function Topbar({
         </button>
         <span className="text-sm font-medium text-[#111213] dark:text-[#E3E3E3]">Dashboard</span>
       </div>
-
-      <div className="flex items-center gap-2">
+      <div className="hidden md:flex w-full max-w-md">
+        <SearchInput />
+      </div>
+      <div className="flex items-center gap-2 shrink-0">
         <PeriodSelector />
         <Button variant="secondary">
           <Sparkles className="mr-2 h-4 w-4" /> Generate content

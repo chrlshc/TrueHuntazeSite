@@ -29,8 +29,23 @@ html {
   --border:#E1E3E5;
   --border-dark:#3A3B3D;
   --accent:#2C6ECB; /* indigo Shopify-like */
+  /* Charts / Tooltip */
+  --chart-grid: rgba(17,18,19,0.06);
+  --chart-tick: #6D7175;
+  --tooltip-bg: #FFFFFF;
+  --tooltip-fg: #111213;
+  --tooltip-border: #E1E3E5;
 }
 html{ font-size:14px; } /* body 14px comme Polaris */
+
+.dark{
+  /* chart + tooltip overrides in dark */
+  --chart-grid: rgba(227,227,227,0.06);
+  --chart-tick: #A5A7AB;
+  --tooltip-bg: #202223;
+  --tooltip-fg: #E3E3E3;
+  --tooltip-border: #3A3B3D;
+}
 
 /* Optimized rendering */
 body {
