@@ -10,7 +10,10 @@
     "export": "node scripts/validate-env.js && next build && next export",
     "check:env": "node scripts/validate-env.js",
     "test:visual": "percy exec -- node scripts/percy-test.js",
-    "test:visual:ci": "PERCY_TOKEN=$PERCY_TOKEN percy exec -- node scripts/percy-test.js"
+    "test:visual:ci": "PERCY_TOKEN=$PERCY_TOKEN percy exec -- node scripts/percy-test.js",
+    "capture:dashboard": "node scripts/capture-dashboard.mjs --url=http://localhost:3000/dashboard --out=artifacts/dashboard-preview.png",
+    "capture:dashboard:dark": "node scripts/capture-dashboard.mjs --url=http://localhost:3000/dashboard --out=artifacts/dashboard-preview-dark.png --dark=true",
+    "capture:dashboard:mobile": "node scripts/capture-dashboard.mjs --url=http://localhost:3000/dashboard --out=artifacts/dashboard-preview-mobile.png --device=mobile"
   },
   "dependencies": {
     "@aws-sdk/client-eventbridge": "^3.876.0",
