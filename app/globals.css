@@ -11,6 +11,10 @@
 @import '../styles/gpu-optimize.css';
 @import '../styles/animations-linear.css';
 
+/* Import Shopify Page Styles */
+@import '../styles/shopify-page.css';
+@import '../styles/landing-page.css';
+
 /* === PROFESSIONAL OVERRIDES === */
 
 /* Smooth scrolling */

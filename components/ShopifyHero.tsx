@@ -20,63 +20,61 @@ export default function ShopifyHero() {
             {/* Badge */}
             <div className="hero-badge">
               <Star className="w-4 h-4" />
-              <span>Trusted by 50,000+ Creators</span>
+              <span>Trusted by 150,000+ Creators</span>
             </div>
 
             {/* Main Title */}
             <h1 className="heading-display hero-title">
-              Gérez et développez vos{' '}
-              <span className="text-gradient">revenus créateurs</span>{' '}
-              grâce à l'IA
+              Scale your creator business{' '}
+              <span className="text-gradient">with AI automation</span>
             </h1>
 
             {/* Description */}
             <p className="text-lead hero-description">
-              Automatisez la gestion de vos fans, maximisez vos revenus et 
-              gardez le contrôle total de votre business. Sans agence, sans 
-              commission excessive.
+              Automate fan management, maximize revenue, and keep full control 
+              of your business. No agencies, no excessive commissions.
             </p>
 
             {/* Key Benefits */}
             <ul className="benefit-list mb-8">
               <li className="benefit-item">
                 <CheckCircle className="benefit-icon" />
-                <span>Gestion automatique de 10,000+ fans</span>
+                <span>Manage 10,000+ fans automatically</span>
               </li>
               <li className="benefit-item">
                 <CheckCircle className="benefit-icon" />
-                <span>0% de commission (vs 40% des agences)</span>
+                <span>0% commission (vs 40% agencies charge)</span>
               </li>
               <li className="benefit-item">
                 <CheckCircle className="benefit-icon" />
-                <span>Conformité GDPR et plateformes garantie</span>
+                <span>GDPR compliant & platform approved</span>
               </li>
             </ul>
 
             {/* CTA Buttons */}
-            <div className="hero-cta-group">
-              <Link href="/demo" className="btn btn-primary btn-large">
-                Demander une démo
-                <ArrowRight className="ml-2 w-5 h-5" />
+            <div className="cta-group">
+              <Link href="/onboarding/setup" className="cta-primary">
+                Start free trial
+                <ArrowRight className="w-5 h-5" />
               </Link>
-              <Link href="/pricing" className="btn btn-secondary btn-large">
-                Voir les tarifs
+              <Link href="/demo" className="cta-secondary">
+                Watch demo
               </Link>
             </div>
 
             {/* Trust Indicators */}
-            <div className="trust-indicators">
-              <div className="trust-stat">
-                <span className="trust-number text-mono">$10M+</span>
-                <span className="trust-label">Revenus générés</span>
+            <div className="flex flex-wrap gap-6 text-sm text-[#6D7175] dark:text-[#A5A7AB]">
+              <div className="flex flex-col">
+                <span className="text-2xl font-bold text-[#111213] dark:text-white">€50M+</span>
+                <span>Revenue generated</span>
               </div>
-              <div className="trust-stat">
-                <span className="trust-number text-mono">99.9%</span>
-                <span className="trust-label">Uptime garanti</span>
+              <div className="flex flex-col">
+                <span className="text-2xl font-bold text-[#111213] dark:text-white">99.9%</span>
+                <span>Uptime SLA</span>
               </div>
-              <div className="trust-stat">
-                <span className="trust-number text-mono">24/7</span>
-                <span className="trust-label">Support dédié</span>
+              <div className="flex flex-col">
+                <span className="text-2xl font-bold text-[#111213] dark:text-white">24/7</span>
+                <span>Support</span>
               </div>
             </div>
           </motion.div>
@@ -86,28 +84,15 @@ export default function ShopifyHero() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="hero-visual-wrapper"
+            className="relative"
           >
             <div className="hero-visual">
-              <Image
-                src="/images/dashboard-preview.png"
-                alt="Huntaze Dashboard Preview"
-                fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-              {/* Floating elements for dynamism */}
-              <div className="floating-card floating-card-1">
-                <div className="stat-card">
-                  <span className="stat-value text-mono">+127%</span>
-                  <span className="stat-label">Revenue Growth</span>
-                </div>
-              </div>
-              <div className="floating-card floating-card-2">
-                <div className="stat-card">
-                  <span className="stat-value text-mono">5,234</span>
-                  <span className="stat-label">Active Fans</span>
+              <div className="hero-screenshot">
+                <div className="w-full h-[400px] bg-gradient-to-br from-[#5E6AD2] to-[#2C6ECB] rounded-lg flex items-center justify-center">
+                  <div className="text-white text-center">
+                    <div className="text-4xl font-bold mb-2">Huntaze Dashboard</div>
+                    <div className="text-lg opacity-80">AI-Powered Creator Management</div>
+                  </div>
                 </div>
               </div>
             </div>
