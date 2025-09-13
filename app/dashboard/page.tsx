@@ -12,14 +12,14 @@ export default function Page() {
       <Card>
         <CardContent className="flex flex-col gap-2 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
           <div>
-            <div className="font-semibold">Finish onboarding</div>
-            <div className="text-sm text-zinc-500">
+            <div className="font-semibold text-[#111213] dark:text-[#E3E3E3]">Finish onboarding</div>
+            <div className="text-sm text-[#6D7175] dark:text-[#A5A7AB]">
               Complete your profile, connect platforms and enable the AI assistant.
             </div>
           </div>
           <a
             href="/onboarding/setup"
-            className="inline-flex h-10 items-center justify-center rounded-md bg-black px-4 text-sm font-medium text-white hover:bg-zinc-800"
+            className="inline-flex h-10 items-center justify-center rounded-md bg-[#2C6ECB] px-4 text-sm font-medium text-white hover:bg-[#245CAD]"
           >
             Continue setup
           </a>

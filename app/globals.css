@@ -19,6 +19,19 @@ html {
   -webkit-overflow-scrolling: touch;
 }
 
+/* Polaris-like base tokens */
+:root{
+  --bg-page:#F6F6F7;
+  --bg-surface:#FFFFFF;
+  --bg-surface-dark:#202223;
+  --ink:#111213;
+  --ink-subdued:#6D7175;
+  --border:#E1E3E5;
+  --border-dark:#3A3B3D;
+  --accent:#2C6ECB;
+}
+html{ font-size:14px; }
+
 /* Optimized rendering */
 body {
   text-rendering: optimizeLegibility;

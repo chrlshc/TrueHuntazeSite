@@ -2,26 +2,38 @@
 
 import { Button } from '@/components/ui/button';
 import PeriodSelector from './PeriodSelector';
-import { Plus, Sparkles, Menu } from 'lucide-react';
+import { Plus, Sparkles, Menu, Sun, Moon } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { initTheme, setTheme } from '@/lib/theme';
 
 export default function Topbar({
   onToggleSidebar,
 }: {
   onToggleSidebar?: () => void;
 }) {
+  const [mode, setMode] = useState<'light' | 'dark' | 'system'>('system');
+
+  useEffect(() => {
+    initTheme();
+  }, []);
+
+  function cycleTheme() {
+    const next = mode === 'system' ? 'light' : mode === 'light' ? 'dark' : 'system';
+    setMode(next);
+    setTheme(next);
+  }
+
   return (
-    <div className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-zinc-200 bg-white/70 px-3 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/40">
+    <div className="fixed top-0 left-0 right-0 z-40 flex h-16 items-center justify-between border-b border-[#E1E3E5] bg-[#FFFFFF]/95 px-3 backdrop-blur-md dark:border-[#3A3B3D] dark:bg-[#202223]/80">
       <div className="flex items-center gap-2">
         <button
-          className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800"
+          className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-md hover:bg-[#F6F6F7] dark:hover:bg-[#2C2D2F]"
           onClick={onToggleSidebar}
           aria-label="Toggle navigation"
-       >
+        >
           <Menu className="h-5 w-5" />
         </button>
-        <h1 className="text-sm font-medium text-zinc-700 dark:text-zinc-200">
-          Dashboard
-        </h1>
+        <span className="text-sm font-medium text-[#111213] dark:text-[#E3E3E3]">Dashboard</span>
       </div>
 
       <div className="flex items-center gap-2">
@@ -32,8 +44,16 @@ export default function Topbar({
         <Button>
           <Plus className="mr-2 h-4 w-4" /> Create campaign
         </Button>
+        <button
+          onClick={cycleTheme}
+          title={`Theme: ${mode}`}
+          className="ml-1 inline-flex h-10 w-10 items-center justify-center rounded-md border border-[#E1E3E5] hover:bg-[#F6F6F7] dark:border-[#3A3B3D] dark:hover:bg-[#2C2D2F]"
+          aria-label="Toggle theme"
+        >
+          <Sun className="hidden h-4 w-4 dark:block" />
+          <Moon className="h-4 w-4 dark:hidden" />
+        </button>
       </div>
     </div>
   );
 }
-

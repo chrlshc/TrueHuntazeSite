@@ -11,11 +11,11 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    'bg-black text-white hover:bg-zinc-800 focus:ring-zinc-400 dark:bg-white dark:text-black dark:hover:bg-zinc-100',
+    'bg-[#2C6ECB] text-white hover:bg-[#245CAD] focus:ring-[#79A6E8] dark:bg-[#2C6ECB] dark:hover:bg-[#245CAD]',
   secondary:
-    'bg-white text-zinc-900 border border-zinc-200 hover:bg-zinc-50 focus:ring-zinc-400 dark:bg-zinc-900 dark:text-white dark:border-zinc-800 dark:hover:bg-zinc-800',
+    'bg-white text-[#111213] border border-[#E1E3E5] hover:bg-[#F6F6F7] focus:ring-[#79A6E8] dark:bg-[#202223] dark:text-[#E3E3E3] dark:border-[#3A3B3D] dark:hover:bg-[#2C2D2F]',
   ghost:
-    'bg-transparent text-zinc-900 hover:bg-zinc-50 focus:ring-zinc-300 dark:text-zinc-100 dark:hover:bg-zinc-800',
+    'bg-transparent text-[#111213] hover:bg-[#F6F6F7] focus:ring-[#79A6E8] dark:text-[#E3E3E3] dark:hover:bg-[#2C2D2F]',
 };
 
 const sizes: Record<Size, string> = {
@@ -40,4 +40,3 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ),
 );
 Button.displayName = 'Button';
-
