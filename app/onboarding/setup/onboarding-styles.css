@@ -14,14 +14,14 @@
 
 .progress-bar-fill {
   @apply h-full transition-all duration-500 ease-out;
-  background: var(--gradient-primary, linear-gradient(90deg, #7c3aed 0%, #ec4899 100%));
+  background: #7c3aed; /* solid violet for a cleaner, pro look */
   will-change: width;
 }
 
 /* Alias for alt markup used in page-new */
 .progress-fill {
   @apply h-full transition-all duration-500 ease-out;
-  background: var(--gradient-primary, linear-gradient(90deg, #7c3aed 0%, #ec4899 100%));
+  background: #7c3aed; /* solid accent */
   will-change: width;
 }
 
@@ -44,7 +44,7 @@
 
 .progress-step.active .progress-step-indicator {
   @apply border-purple-600;
-  background: var(--gradient-primary);
+  background: #7c3aed; /* remove gradient */
   box-shadow: var(--shadow-md);
   transform: scale(1.1);
 }
@@ -110,7 +110,7 @@
 .progress-step.completed::before,
 .progress-step.completed::after,
 .progress-step.active::before {
-  background: var(--gradient-primary, linear-gradient(90deg, #7c3aed 0%, #ec4899 100%));
+  background: #7c3aed; /* unify connector color */
 }
 
 @media (max-width: 640px) {
@@ -145,7 +145,7 @@
 
 .vertical-rail-fill {
   @apply absolute left-4 w-1 rounded-full;
-  background: var(--gradient-primary);
+  background: #7c3aed;
   height: 0%;
   transition: height 500ms ease-out;
 }
@@ -168,7 +168,7 @@
 
 .vertical-step.active .vertical-step-indicator {
   @apply border-purple-600;
-  background: var(--gradient-primary);
+  background: #7c3aed;
   box-shadow: var(--shadow-md);
   transform: scale(1.05);
 }

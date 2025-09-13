@@ -14,7 +14,7 @@ export const ONBOARDING_COPY = {
 
   // 1) Welcome & Setup intent
   welcome: {
-    title: 'Let’s set you up 🚀',
+    title: 'Let’s set you up',
     subtitle: 'A quick, guided setup to personalize your AI and maximize earnings.',
     qBusinessState: {
       title: 'Is this for a new creator or an existing page?',
@@ -219,4 +219,3 @@ export const NICHE_LABELS: Record<string, { label: string; hint: string }> = {
   ethnic: { label: 'Ethnic focus', hint: 'Latina, Ebony…' },
   luxury: { label: 'Luxury / High‑roller', hint: 'Exclusive, premium' },
 };
-
