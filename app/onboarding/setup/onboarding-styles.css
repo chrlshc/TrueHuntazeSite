@@ -287,14 +287,13 @@
 
 /* Niche Grid */
 .niche-grid {
-  @apply grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4;
+  @apply grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-6;
 }
 
 .niche-card {
-  @apply p-4 rounded-xl cursor-pointer transition-all;
-  @apply bg-surface-light dark:bg-surface;
-  @apply border-2 border-border-light dark:border-border;
-  @apply hover:border-purple-600/30;
+  @apply p-5 rounded-xl cursor-pointer transition-all;
+  @apply bg-[#111214] border border-white/10;
+  @apply hover:border-purple-500/40 hover:bg-white/[0.02];
 }
 
 .niche-card.selected {
@@ -313,6 +312,7 @@
 
 .niche-title {
   @apply font-medium text-content-primary text-center;
+  overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
 }
 
 /* Platform Grid */
@@ -322,9 +322,8 @@
 
 .platform-card {
   @apply p-6 rounded-xl cursor-pointer transition-all;
-  @apply bg-surface-light dark:bg-surface;
-  @apply border-2 border-border-light dark:border-border;
-  @apply hover:border-purple-600/30;
+  @apply bg-[#111214] border border-white/10;
+  @apply hover:border-purple-500/40 hover:bg-white/[0.02];
 }
 
 .platform-card.selected {
@@ -523,7 +522,7 @@
 /* Generic primary button (used by some steps/variations) */
 .btn-primary {
   @apply px-6 py-3 rounded-lg font-medium transition-all;
-  @apply bg-gradient-to-r from-purple-600 to-pink-600 text-white;
+  @apply bg-violet-600 text-white;
   @apply inline-flex items-center justify-center gap-2;
   box-shadow: var(--shadow-sm);
 }
@@ -550,7 +549,7 @@
 
 .complete-icon-container {
   @apply w-24 h-24 mx-auto mb-6;
-  @apply bg-gradient-to-r from-purple-600 to-pink-600 rounded-full;
+  @apply bg-violet-600 rounded-full;
   @apply flex items-center justify-center;
   box-shadow: var(--shadow-lg);
   animation: bounce-in 0.5s ease-out;
@@ -576,9 +575,7 @@
   @apply text-center;
 }
 
-.complete-stat-value {
-  @apply text-2xl font-bold text-purple-600 mb-1;
-}
+.complete-stat-value { @apply text-2xl font-bold text-violet-500 mb-1; }
 
 .complete-stat-label {
   @apply text-sm text-content-tertiary;

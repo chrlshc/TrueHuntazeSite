@@ -50,26 +50,9 @@ export function StepShellV2({
             </div>
           </div>
           <div className="py-3">
-            <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
+            <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">{title}</h1>
             {subtitle && <p className="text-sm text-muted-foreground mt-1">{subtitle}</p>}
-            {stepTitles && (
-              <div className="hidden lg:flex gap-2 mt-3 overflow-x-auto pb-2">
-                {stepTitles.map((s, i) => (
-                  <div
-                    key={i}
-                    className={cn(
-                      "flex items-center gap-2 rounded-full border px-3 py-1 text-xs",
-                      i + 1 < step && "bg-muted/60 text-foreground/80",
-                      i + 1 === step && "bg-primary/10 border-primary/30 text-primary",
-                      i + 1 > step && "text-muted-foreground"
-                    )}
-                  >
-                    {i + 1 < step ? <Check className="h-3.5 w-3.5" /> : <span className="h-1.5 w-1.5 rounded-full bg-current" />}
-                    <span className="whitespace-nowrap">{i + 1}. {s}</span>
-                  </div>
-                ))}
-              </div>
-            )}
+            {/* Minimal header: no step chips for a cleaner premium look */}
           </div>
         </div>
 
