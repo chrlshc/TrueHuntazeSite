@@ -183,6 +183,20 @@ export default function ROICalculator() {
                   </div>
                 </div>
 
+                {/* Urgency indicator for high ROI */}
+                {calculations.monthlyROI > 300 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mt-4 p-3 bg-green-500/10 border border-green-500/20 rounded-lg"
+                  >
+                    <p className="text-sm text-green-400 flex items-center gap-2">
+                      <TrendingUp className="w-4 h-4" />
+                      <span>Exceptional ROI! Lock in current pricing before it increases</span>
+                    </p>
+                  </motion.div>
+                )}
+
                 {/* CTA */}
                 <motion.button
                   whileHover={{ scale: 1.02 }}

@@ -173,8 +173,8 @@ export default function EnterpriseFooter() {
         <div className="container-width py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-[#9CA3AF]">
             <div className="flex items-center gap-1">
-              <span>© 2024 Huntaze. All rights reserved.</span>
-              <span className="hidden md:inline mx-2">"</span>
+              <span>Â© 2024 Huntaze. All rights reserved.</span>
+              <span className="hidden md:inline mx-2">|</span>
               <span className="hidden md:inline">Built with love for creators worldwide</span>
             </div>
             

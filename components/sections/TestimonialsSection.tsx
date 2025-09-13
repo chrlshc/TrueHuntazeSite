@@ -44,8 +44,8 @@ const testimonials: Testimonial[] = [
     metrics: [
       {
         label: 'Monthly Revenue',
-        before: '¬8K',
-        after: '¬24K',
+        before: 'â‚¬8K',
+        after: 'â‚¬24K',
         change: '+200%',
         icon: <DollarSign className="w-4 h-4" />
       },
@@ -89,8 +89,8 @@ const testimonials: Testimonial[] = [
       },
       {
         label: 'Agency Revenue',
-        before: '¬45K/mo',
-        after: '¬180K/mo',
+        before: 'â‚¬45K/mo',
+        after: 'â‚¬180K/mo',
         change: '+300%',
         icon: <TrendingUp className="w-4 h-4" />
       },
@@ -144,8 +144,8 @@ const testimonials: Testimonial[] = [
     metrics: [
       {
         label: 'Operational Cost',
-        before: '¬120K/yr',
-        after: '¬40K/yr',
+        before: 'â‚¬120K/yr',
+        after: 'â‚¬40K/yr',
         change: '-67%',
         icon: <DollarSign className="w-4 h-4" />
       },
@@ -230,7 +230,7 @@ export default function TestimonialsSection() {
                             <div className="flex items-center gap-2 mt-2 text-sm text-[#5E6AD2]">
                               {featuredTestimonials[activeIndex].platform.icon}
                               <span>{featuredTestimonials[activeIndex].platform.name}</span>
-                              <span className="text-[#9CA3AF]">"</span>
+                              <span className="text-[#9CA3AF]">|</span>
                               <span className="text-[#9CA3AF]">
                                 {featuredTestimonials[activeIndex].platform.followers}
                               </span>
@@ -267,7 +267,7 @@ export default function TestimonialsSection() {
                           </div>
                           <div className="flex items-center gap-2 text-sm">
                             <span className="text-[#9CA3AF]">{metric.before}</span>
-                            <span className="text-[#5E6AD2]">’</span>
+                            <span className="text-[#5E6AD2]">â†’</span>
                             <span className="text-white font-semibold">{metric.after}</span>
                           </div>
                         </motion.div>

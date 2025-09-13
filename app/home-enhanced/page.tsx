@@ -10,8 +10,14 @@ import TestimonialsSection from '@/components/sections/TestimonialsSection'
 import CommandPalette from '@/components/ui/CommandPalette'
 import EnhancedHeader from '@/components/layout/EnhancedHeader'
 import EnterpriseFooter from '@/components/layout/EnterpriseFooter'
+import { UrgencyProvider } from '@/components/providers/UrgencyProvider'
+import UrgencyBanner from '@/components/ui/UrgencyBanner'
+import { useUrgency } from '@/components/providers/UrgencyProvider'
 
-export default function HomeEnhanced() {
+function HomeContent() {
+  const { indicators, dismissIndicator } = useUrgency()
+  const bannerIndicators = indicators.filter(i => i.severity === 'high' || i.severity === 'critical')
+
   return (
     <>
       {/* Command Palette - Linear Style */}
@@ -19,6 +25,15 @@ export default function HomeEnhanced() {
       
       {/* Enhanced Navigation with Mega Menu */}
       <EnhancedHeader />
+      
+      {/* Urgency Banner for high priority indicators */}
+      {bannerIndicators.length > 0 && (
+        <UrgencyBanner 
+          indicators={bannerIndicators}
+          onDismiss={dismissIndicator}
+          className="container-width mt-20"
+        />
+      )}
       
       {/* Hero Section with Trust Bar and Metrics */}
       <HeroSection />
@@ -41,5 +56,13 @@ export default function HomeEnhanced() {
       {/* Enterprise Footer */}
       <EnterpriseFooter />
     </>
+  )
+}
+
+export default function HomeEnhanced() {
+  return (
+    <UrgencyProvider mockMode={true} displayMode="both" position="bottom-right">
+      <HomeContent />
+    </UrgencyProvider>
   )
 }
