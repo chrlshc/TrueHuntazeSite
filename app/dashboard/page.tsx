@@ -22,8 +22,6 @@ import {
 import './dashboard-styles.css';
 import { useSearchParams } from 'next/navigation';
 import { resolveLocale } from '@/src/lib/onboarding/locale';
-import OnboardingChecklist from '@/components/onboarding/OnboardingChecklist';
-import ResumeBanner from '@/components/onboarding/ResumeBanner';
 
 export default function DashboardPage() {
   const sp = useSearchParams();
@@ -77,11 +75,6 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-surface-light dark:bg-surface">
       <div className="p-4 lg:p-8">
-        {/* Onboarding prompts */}
-        <div className="mb-6 space-y-3">
-          <ResumeBanner />
-          <OnboardingChecklist />
-        </div>
         {/* Onboarding prompt + checklist */}
         <div className="mb-6 space-y-3">
           <ResumeBanner locale={locale} />
