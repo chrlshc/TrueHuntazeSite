@@ -3,9 +3,9 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 
-export default function CommandCenter() {
+export default function RevenueIntel() {
   return (
-    <section className="py-20 px-4 bg-gray-950">
+    <section className="py-20 px-4 bg-black">
       <div className="container mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -13,12 +13,12 @@ export default function CommandCenter() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Command Center</h2>
-          <p className="text-xl text-gray-400">Your entire business in one dashboard</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Revenue Intelligence</h2>
+          <p className="text-xl text-gray-400">Track, analyze, and optimize your earnings</p>
         </motion.div>
         <div className="bg-gray-900 rounded-2xl p-8 border border-gray-800">
-          <div className="h-96 bg-gradient-to-r from-violet-600/10 to-purple-600/10 rounded-lg flex items-center justify-center">
-            <span className="text-gray-600">Full Dashboard Mockup</span>
+          <div className="h-64 bg-gradient-to-r from-violet-600/10 to-purple-600/10 rounded-lg flex items-center justify-center">
+            <span className="text-gray-600">Dashboard Mockup</span>
           </div>
         </div>
       </div>

@@ -1,59 +1,63 @@
-'use client';
+'use client'
 
-import { motion } from 'framer-motion';
-import { ReactNode } from 'react';
+import React from 'react'
+import { motion } from 'framer-motion'
 
 interface PhoneMockupProps {
-  children: ReactNode;
-  delay?: number;
-  className?: string;
-  variant?: 'iphone14' | 'iphone15pro';
+  children: React.ReactNode
+  delay?: number
+  scale?: number
 }
 
-export default function PhoneMockup({ 
-  children, 
-  delay = 0, 
-  className = '',
-  variant = 'iphone14'
-}: PhoneMockupProps) {
+export default function PhoneMockup({ children, delay = 0, scale = 1 }: PhoneMockupProps) {
   return (
     <motion.div 
-      className={`relative ${className}`}
-      style={{
-        width: '375px',
-        height: '812px',
+      className="relative"
+      style={{ 
+        width: `${375 * scale}px`, 
+        height: `${812 * scale}px` 
       }}
       initial={{ opacity: 0, scale: 0.8, y: 100 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ delay, duration: 0.8, ease: "easeOut" }}
     >
-      {/* Phone Frame */}
+      {/* iPhone Frame */}
       <div className="absolute inset-0 bg-gray-900 rounded-[60px] shadow-2xl">
-        {/* Dynamic Island / Notch */}
-        {variant === 'iphone15pro' ? (
-          <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-[120px] h-[35px] bg-black rounded-full" />
-        ) : (
-          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[150px] h-[30px] bg-black rounded-b-3xl" />
-        )}
+        {/* Dynamic Island */}
+        <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-[120px] h-[35px] bg-black rounded-full" />
         
-        {/* Volume buttons */}
-        <div className="absolute left-[-2px] top-[120px] w-[4px] h-[30px] bg-gray-800 rounded-l" />
-        <div className="absolute left-[-2px] top-[160px] w-[4px] h-[50px] bg-gray-800 rounded-l" />
-        <div className="absolute left-[-2px] top-[220px] w-[4px] h-[50px] bg-gray-800 rounded-l" />
-        
-        {/* Power button */}
-        <div className="absolute right-[-2px] top-[180px] w-[4px] h-[80px] bg-gray-800 rounded-r" />
+        {/* Side buttons */}
+        <div className="absolute left-[-3px] top-[130px] w-[3px] h-[60px] bg-gray-700 rounded-r-lg" />
+        <div className="absolute left-[-3px] top-[200px] w-[3px] h-[40px] bg-gray-700 rounded-r-lg" />
+        <div className="absolute right-[-3px] top-[180px] w-[3px] h-[80px] bg-gray-700 rounded-l-lg" />
         
         {/* Screen */}
-        <div className="absolute inset-[3px] bg-black rounded-[57px] overflow-hidden">
-          <div className="absolute inset-0 bg-gray-950">
+        <div className="absolute inset-[12px] bg-black rounded-[48px] overflow-hidden">
+          {/* Status bar */}
+          <div className="absolute top-0 left-0 right-0 h-[50px] px-8 flex items-center justify-between text-white text-xs z-10">
+            <span>9:41</span>
+            <div className="flex items-center gap-1">
+              <div className="w-4 h-3 border border-white rounded-sm">
+                <div className="w-full h-full bg-white rounded-sm scale-x-[0.7] origin-left" />
+              </div>
+              <div className="flex gap-[2px]">
+                {[...Array(4)].map((_, i) => (
+                  <div 
+                    key={i} 
+                    className="w-[3px] bg-white rounded-full"
+                    style={{ height: `${8 + i * 2}px` }}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+          
+          {/* Content */}
+          <div className="pt-[50px] h-full">
             {children}
           </div>
         </div>
       </div>
-      
-      {/* Reflection effect */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent rounded-[60px] pointer-events-none" />
     </motion.div>
-  );
+  )
 }

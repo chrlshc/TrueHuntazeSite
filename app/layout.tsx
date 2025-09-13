@@ -5,13 +5,14 @@ import "./mobile.css";
 // import "./mobile-emergency-fix.css";
 // import "./nuclear-mobile-fix.css";
 import "./animations.css";
+import "../styles/animations-optimized.css"; // GPU-optimized animations
 // First pass DS consolidation: disable some legacy visual layers
 // import "./glass.css";
 // import "../styles/remove-dark-overlay.css";
 // import "../styles/no-dark-filters.css";
 // import "../styles/mockups.css";
 // Hybrid Design System - Shopify Typography + Linear Animations
-import "../styles/shopify-linear-hybrid.css"; // Combined Shopify + Linear design system
+// import "../styles/shopify-linear-hybrid.css"; // Combined Shopify + Linear design system - temporarily disabled due to @layer conflict
 
 // Legacy styles - To be migrated progressively
 // import "../styles/shopify-design-system.css"; // Replaced by hybrid system
@@ -39,6 +40,7 @@ import "../styles/section-separation.css"; // Section visual separation
 // import "../styles/typography-fixes.css"; // Integrated into shopify-design-system.css
 import "../styles/enterprise.css"; // Enterprise landing page styles
 import "../styles/clean-dark-theme.css"; // Clean dark theme
+import "../styles/shopify-page.css"; // Shopify page specific styles
 // import HeaderShopify from "@/src/components/header-shopify";
 // import FooterImproved from "@/src/components/footer-improved";
 // import MobileBottomNav from "@/src/components/mobile-bottom-nav";

@@ -1,164 +1,93 @@
-'use client';
+'use client'
 
-import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle, Sparkles, Zap, Crown } from 'lucide-react';
-import { useInView } from 'react-intersection-observer';
-
-const StepCard = ({ number, title, description, icon: Icon, delay }: any) => {
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
-
-  return (
-    <motion.div
-      ref={ref}
-      className="relative"
-      initial={{ opacity: 0, y: 50 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-      transition={{ delay, duration: 0.6 }}
-    >
-      {/* Connector line */}
-      {number < 3 && (
-        <motion.div
-          className="hidden lg:block absolute top-1/2 left-full w-full h-0.5 bg-gradient-to-r from-purple-600 to-pink-600"
-          initial={{ scaleX: 0, originX: 0 }}
-          animate={inView ? { scaleX: 1 } : { scaleX: 0 }}
-          transition={{ delay: delay + 0.3, duration: 0.6 }}
-        />
-      )}
-
-      <motion.div
-        className="bg-gray-900 rounded-2xl p-8 border border-gray-800 hover:border-purple-600/50 transition-all relative z-10"
-        whileHover={{ y: -10, boxShadow: '0 20px 40px rgba(147, 51, 234, 0.1)' }}
-      >
-        {/* Step number */}
-        <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-xl font-bold">
-          {number}
-        </div>
-
-        {/* Icon */}
-        <div className="w-16 h-16 bg-purple-600/20 rounded-xl flex items-center justify-center mb-6 ml-4">
-          <Icon className="w-8 h-8 text-purple-400" />
-        </div>
-
-        {/* Content */}
-        <h3 className="text-2xl font-bold mb-3">{title}</h3>
-        <p className="text-gray-400 mb-4">{description}</p>
-
-        {/* Features */}
-        <ul className="space-y-2">
-          <li className="flex items-center gap-2 text-sm">
-            <CheckCircle className="w-4 h-4 text-green-400" />
-            <span className="text-gray-300">No credit card required</span>
-          </li>
-          <li className="flex items-center gap-2 text-sm">
-            <CheckCircle className="w-4 h-4 text-green-400" />
-            <span className="text-gray-300">Setup in under 5 minutes</span>
-          </li>
-        </ul>
-      </motion.div>
-    </motion.div>
-  );
-};
+import React from 'react'
+import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 export default function GetStarted() {
-  const { ref: titleRef, inView: titleInView } = useInView({ triggerOnce: true, threshold: 0.3 });
-
   const steps = [
     {
-      number: 1,
-      title: "Connect Your Platforms",
-      description: "Link your OnlyFans, Instagram, TikTok, and Reddit accounts in one click.",
-      icon: Zap
+      number: '01',
+      title: 'Sign up in seconds',
+      description: 'Create your account with one click. No credit card required.'
     },
     {
-      number: 2,
-      title: "Train Your AI Twin",
-      description: "Upload voice samples and chat examples. Our AI learns your unique style.",
-      icon: Sparkles
+      number: '02',
+      title: 'Connect your platforms',
+      description: 'Link your OnlyFans, Instagram, TikTok, and Reddit accounts.'
     },
     {
-      number: 3,
-      title: "Watch Revenue Grow",
-      description: "Sit back as AI handles conversations and you see earnings multiply.",
-      icon: Crown
+      number: '03',
+      title: 'Watch AI work magic',
+      description: 'Your AI starts responding instantly. Sit back and earn.'
     }
-  ];
+  ]
 
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-950 to-gray-900">
-      <div className="container mx-auto px-4">
+    <section className="py-20 px-4 bg-gradient-to-b from-gray-950 to-black">
+      <div className="container mx-auto max-w-6xl">
         <motion.div
-          ref={titleRef}
-          className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
-          animate={titleInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 bg-purple-600/20 text-purple-400 px-4 py-2 rounded-full text-sm font-medium mb-6">
-            <Sparkles className="w-4 h-4" />
-            Get Started in Minutes
-          </div>
-          
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            Three Steps to 10x Your Revenue
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            Get started in{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-purple-400">
+              60 seconds
+            </span>
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Join thousands of creators who are already using Huntaze to transform their business
+          <p className="text-xl text-gray-400">
+            Join thousands earning more with less work
           </p>
         </motion.div>
 
         {/* Steps */}
-        <div className="grid lg:grid-cols-3 gap-8 lg:gap-12 mb-16 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
           {steps.map((step, index) => (
-            <StepCard
-              key={step.number}
-              {...step}
-              delay={index * 0.2}
-            />
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.2 }}
+              className="relative"
+            >
+              {/* Connection line */}
+              {index < steps.length - 1 && (
+                <div className="hidden md:block absolute top-12 left-full w-full h-[2px] bg-gradient-to-r from-violet-600 to-purple-600 -translate-x-1/2" />
+              )}
+              
+              <div className="text-center">
+                <div className="w-24 h-24 bg-gradient-to-br from-violet-600 to-purple-600 rounded-full flex items-center justify-center text-3xl font-bold mb-4 mx-auto">
+                  {step.number}
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                <p className="text-gray-400">{step.description}</p>
+              </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* CTA section */}
+        {/* CTA */}
         <motion.div
-          className="text-center"
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          className="text-center"
         >
-          <div className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-2xl p-12 max-w-4xl mx-auto border border-purple-600/30">
-            <h3 className="text-3xl font-bold mb-4">
-              Ready to Transform Your Business?
-            </h3>
-            <p className="text-xl text-gray-400 mb-8">
-              Start your free trial today and see results within 24 hours
-            </p>
-
-            <motion.button
-              className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-lg rounded-xl hover:shadow-lg hover:shadow-purple-500/25 transition-all mb-6"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Start Free Trial
-              <ArrowRight className="w-6 h-6" />
-            </motion.button>
-
-            <div className="flex items-center justify-center gap-8 text-sm text-gray-400">
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-green-400" />
-                14-day free trial
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-green-400" />
-                Cancel anytime
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-green-400" />
-                No credit card required
-              </div>
-            </div>
-          </div>
+          <Link
+            href="/get-started"
+            className="inline-block px-12 py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white text-lg rounded-lg font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
+          >
+            Start Your Free Trial
+          </Link>
+          <p className="text-sm text-gray-500 mt-4">
+            No credit card required • Cancel anytime
+          </p>
         </motion.div>
       </div>
     </section>
-  );
+  )
 }

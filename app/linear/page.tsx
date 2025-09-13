@@ -60,7 +60,7 @@ export default function LinearPage() {
 
       {/* Import hybrid CSS */}
       <style jsx global>{`
-        @import '/styles/shopify-linear-hybrid.css';
+        /* @import '/styles/shopify-linear-hybrid.css'; - disabled due to @layer conflict */
         
         /* Override with Linear-specific styles */
         .linear-page {

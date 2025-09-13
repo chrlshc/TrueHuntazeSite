@@ -1,84 +1,70 @@
-import EnterpriseNav from '@/src/components/enterprise-nav';
-import EnterpriseHero from '@/components/sections/EnterpriseHero';
-import EnterpriseTrustBar from '@/components/sections/EnterpriseTrustBar';
-import ValuePropositions from '@/components/sections/ValuePropositions';
-import PlatformCapabilities from '@/components/sections/PlatformCapabilities';
-import PricingSection from '@/components/sections/PricingSection';
-import ProofByNumbers from '@/components/sections/ProofByNumbers';
-import CreatorPainPoints from '@/components/sections/CreatorPainPoints';
-import EnterpriseReady from '@/components/sections/EnterpriseReady';
-import ROICalculator from '@/components/sections/ROICalculator';
-import FAQSection from '@/components/sections/FAQSection';
-import EnterpriseFinalCTA from '@/components/sections/EnterpriseFinalCTA';
-import EnterpriseFooter from '@/components/sections/EnterpriseFooter';
+import ShopifyHero from '@/components/ShopifyHero'
+import ShopifyTrustBar from '@/components/ShopifyTrustBar'
+import ShopifyValueProps from '@/components/ShopifyValueProps'
+import PlatformCapabilitiesV2 from '@/components/sections/PlatformCapabilitiesV2'
+import ShopifyPricing from '@/components/ShopifyPricing'
+import ProofByNumbers from '@/components/sections/ProofByNumbers'
+import CreatorPainPoints from '@/components/sections/CreatorPainPoints'
+import EnterpriseReady from '@/components/sections/EnterpriseReady'
+import ROICalculator from '@/components/sections/ROICalculator'
+import FAQSection from '@/components/sections/FAQSection'
+import EnterpriseFinalCTA from '@/components/sections/EnterpriseFinalCTA'
+import EnterpriseFooter from '@/components/sections/EnterpriseFooter'
+import EnterpriseNav from '@/src/components/enterprise-nav'
+import DarkModeToggle from '@/components/DarkModeToggle'
 
 export default function HomePage() {
   return (
     <>
-      <div className="enterprise-page min-h-screen">
-        {/* Enterprise Navigation - Replaces standard header */}
-        <EnterpriseNav />
+      {/* Skip to content link for accessibility */}
+      <a href="#main-content" className="skip-to-content">
+        Skip to main content
+      </a>
+
+      {/* Navigation with Dark Mode Toggle */}
+      <div className="fixed top-4 right-4 z-50">
+        <DarkModeToggle />
+      </div>
+      <EnterpriseNav />
+
+      {/* Main Content with all fixes */}
+      <main id="main-content" className="shopify-page">
+        {/* Hero Section */}
+        <ShopifyHero />
         
-        {/* Hero Section with Authority Positioning */}
-        <section className="hero-section">
-          <EnterpriseHero />
-        </section>
+        {/* Trust Bar */}
+        <ShopifyTrustBar />
         
-        {/* Trust Bar with Anonymous Metrics */}
-        <section className="trust-bar">
-          <EnterpriseTrustBar />
-        </section>
+        {/* Value Propositions */}
+        <ShopifyValueProps />
         
-        {/* Value Propositions - 3 Pillars */}
-        <section className="value-propositions">
-          <ValuePropositions />
-        </section>
-        
-        {/* Platform Capabilities with Progressive Disclosure */}
-        <section className="platform-capabilities">
-          <PlatformCapabilities />
-        </section>
+        {/* Platform Capabilities with Screenshot Preview */}
+        <PlatformCapabilitiesV2 />
         
         {/* Pricing Section */}
-        <section className="pricing-section">
-          <PricingSection />
-        </section>
+        <ShopifyPricing />
         
-        {/* Social Proof by Numbers (No Testimonials) */}
-        <section className="proof-numbers">
-          <ProofByNumbers />
-        </section>
+        {/* Proof by Numbers with Clickable Case Studies */}
+        <ProofByNumbers />
         
-        {/* Creator Pain Points - Anti-Agency */}
-        <section className="creator-pain-points">
-          <CreatorPainPoints />
-        </section>
+        {/* Creator Pain Points */}
+        <CreatorPainPoints />
         
-        {/* Enterprise Features & Compliance */}
-        <section className="enterprise-ready">
-          <EnterpriseReady />
-        </section>
+        {/* Enterprise Ready Features */}
+        <EnterpriseReady />
         
-        {/* ROI Calculator with Revenue Share */}
-        <section className="roi-section interactive-section">
-          <ROICalculator />
-        </section>
+        {/* ROI Calculator */}
+        <ROICalculator />
         
         {/* FAQ Section */}
-        <section className="faq-section">
-          <FAQSection />
-        </section>
+        <FAQSection />
         
-        {/* Final CTA with Consultative Approach */}
-        <section className="final-cta-section">
-          <EnterpriseFinalCTA />
-        </section>
-        
-        {/* Enterprise Footer */}
-        <section className="footer-section">
-          <EnterpriseFooter />
-        </section>
-      </div>
+        {/* Final CTA */}
+        <EnterpriseFinalCTA />
+      </main>
+
+      {/* Footer */}
+      <EnterpriseFooter />
     </>
   );
 }

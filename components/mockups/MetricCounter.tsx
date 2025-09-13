@@ -1,55 +1,45 @@
-'use client';
+'use client'
 
-import { useEffect, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
-import CountUp from 'react-countup';
+import React from 'react'
+import { motion } from 'framer-motion'
+import CountUp from 'react-countup'
 
 interface MetricCounterProps {
-  start?: number;
-  end: number;
-  duration?: number;
-  prefix?: string;
-  suffix?: string;
-  decimals?: number;
-  className?: string;
+  label: string
+  value: number
+  prefix?: string
+  suffix?: string
+  duration?: number
+  delay?: number
 }
 
-export default function MetricCounter({
-  start = 0,
-  end,
-  duration = 2.5,
-  prefix = '',
-  suffix = '',
-  decimals = 0,
-  className = ''
+export default function MetricCounter({ 
+  label, 
+  value, 
+  prefix = '', 
+  suffix = '', 
+  duration = 2,
+  delay = 0 
 }: MetricCounterProps) {
-  const [hasStarted, setHasStarted] = useState(false);
-  const { ref, inView } = useInView({
-    threshold: 0.3,
-    triggerOnce: true
-  });
-
-  useEffect(() => {
-    if (inView) {
-      setHasStarted(true);
-    }
-  }, [inView]);
-
   return (
-    <span ref={ref} className={className}>
-      {hasStarted ? (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay, duration: 0.5 }}
+      className="text-center"
+    >
+      <div className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-purple-400">
         <CountUp
-          start={start}
-          end={end}
+          start={0}
+          end={value}
           duration={duration}
+          delay={delay}
           prefix={prefix}
           suffix={suffix}
-          decimals={decimals}
           separator=","
         />
-      ) : (
-        `${prefix}${start}${suffix}`
-      )}
-    </span>
-  );
+      </div>
+      <div className="text-sm text-gray-400 mt-1">{label}</div>
+    </motion.div>
+  )
 }

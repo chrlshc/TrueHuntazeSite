@@ -1,224 +1,224 @@
-'use client';
+'use client'
 
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { 
-  MessageCircle, 
-  BarChart3, 
-  DollarSign, 
-  Calendar, 
-  Users, 
-  Shield,
-  TrendingUp,
-  Zap
-} from 'lucide-react';
-import MetricCounter from '@/components/mockups/MetricCounter';
-import AnimatedCard from '@/components/ui/AnimatedCard';
-import WorkflowPreview from '@/components/sections/WorkflowPreview';
+import React from 'react'
+import { motion } from 'framer-motion'
+import { MessageCircle, BarChart3, DollarSign, Calendar, Users, Shield } from 'lucide-react'
 
-// Mini chart animation
+// Mini animations for each feature
+const MiniChatAnimation = () => {
+  return (
+    <div className="space-y-2">
+      <motion.div
+        initial={{ opacity: 0, x: -10 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.5 }}
+        className="bg-gray-800 rounded-lg px-3 py-2 text-xs"
+      >
+        Hey there!
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, x: 10 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 1 }}
+        className="bg-violet-600 rounded-lg px-3 py-2 text-xs ml-auto"
+      >
+        Hi! 😊
+      </motion.div>
+    </div>
+  )
+}
+
 const MiniChartAnimation = () => {
-  const data = [20, 45, 30, 70, 55, 85, 90];
-  const { ref, inView } = useInView({ triggerOnce: true });
+  const data = [20, 45, 30, 70, 55, 85]
   
   return (
-    <div ref={ref} className="flex items-end gap-1 h-16 mt-4">
-      {data.map((value, i) => (
+    <div className="flex items-end gap-1 h-12">
+      {data.map((height, i) => (
         <motion.div
           key={i}
-          className="bg-gradient-to-t from-purple-500 to-purple-400 w-3 rounded-t"
+          className="bg-gradient-to-t from-violet-600 to-purple-600 w-3 rounded-t"
           initial={{ height: 0 }}
-          animate={inView ? { height: `${value}%` } : { height: 0 }}
+          animate={{ height: `${height}%` }}
           transition={{ delay: i * 0.1, duration: 0.5 }}
         />
       ))}
     </div>
-  );
-};
+  )
+}
 
-// Mini chat bubbles animation
-const MiniChatAnimation = () => {
-  const { ref, inView } = useInView({ triggerOnce: true });
+const MiniCounterAnimation = ({ start = 0, end = 547 }: { start?: number; end?: number }) => {
+  const [value, setValue] = React.useState(start)
+  
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      const interval = setInterval(() => {
+        setValue(prev => {
+          if (prev >= end) {
+            clearInterval(interval)
+            return end
+          }
+          return prev + Math.floor((end - prev) / 10) + 1
+        })
+      }, 50)
+    }, 1000)
+    
+    return () => clearTimeout(timer)
+  }, [end])
   
   return (
-    <div ref={ref} className="space-y-2 mt-4">
-      <motion.div
-        className="bg-gray-800 rounded-lg p-2 text-xs max-w-[80%]"
-        initial={{ opacity: 0, x: -20 }}
-        animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-        transition={{ delay: 0.2 }}
-      >
-        Hey! 👋
-      </motion.div>
-      <motion.div
-        className="bg-purple-600 dark:bg-purple-500 rounded-lg p-2 text-xs max-w-[80%] ml-auto"
-        initial={{ opacity: 0, x: 20 }}
-        animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
-        transition={{ delay: 0.4 }}
-      >
-        Hi babe! 💕
-      </motion.div>
+    <div className="text-2xl font-bold text-violet-400">
+      ${value}
     </div>
-  );
-};
+  )
+}
 
-// Calendar animation
 const MiniCalendarAnimation = () => {
-  const { ref, inView } = useInView({ triggerOnce: true });
-  
   return (
-    <div ref={ref} className="grid grid-cols-7 gap-1 mt-4">
-      {[...Array(14)].map((_, i) => (
+    <div className="grid grid-cols-3 gap-1">
+      {[...Array(9)].map((_, i) => (
         <motion.div
           key={i}
-          className={`h-3 rounded-sm ${
-            [3, 7, 10, 13].includes(i) ? 'bg-purple-500' : 'bg-gray-800'
-          }`}
+          className={`w-3 h-3 rounded ${i === 4 ? 'bg-violet-600' : 'bg-gray-700'}`}
           initial={{ scale: 0 }}
-          animate={inView ? { scale: 1 } : { scale: 0 }}
+          animate={{ scale: 1 }}
           transition={{ delay: i * 0.05 }}
         />
       ))}
     </div>
-  );
-};
+  )
+}
+
+const MiniRedditFeed = () => {
+  return (
+    <div className="space-y-1">
+      {[...Array(3)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="h-2 bg-gray-700 rounded"
+          initial={{ width: 0 }}
+          animate={{ width: '100%' }}
+          transition={{ delay: i * 0.2 }}
+        />
+      ))}
+    </div>
+  )
+}
+
+const AccountSwitchAnimation = () => {
+  const [active, setActive] = React.useState(0)
+  
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setActive(prev => (prev + 1) % 3)
+    }, 2000)
+    return () => clearInterval(interval)
+  }, [])
+  
+  return (
+    <div className="flex gap-2">
+      {[...Array(3)].map((_, i) => (
+        <motion.div
+          key={i}
+          className={`w-8 h-8 rounded-full ${active === i ? 'bg-violet-600' : 'bg-gray-700'}`}
+          animate={{ scale: active === i ? 1.2 : 1 }}
+        />
+      ))}
+    </div>
+  )
+}
 
 const features = [
   {
     title: 'Real-time AI Chat',
-    description: 'AI responds 24/7 in your voice',
+    description: 'Convert 3x more with AI that sounds exactly like you',
     icon: MessageCircle,
-    color: 'from-purple-500 to-purple-600',
     animation: <MiniChatAnimation />
   },
   {
     title: 'Analytics Dashboard',
-    description: 'Track revenue & growth metrics',
+    description: 'Track revenue, fans, and growth in real-time',
     icon: BarChart3,
-    color: 'from-blue-500 to-blue-600',
     animation: <MiniChartAnimation />
   },
   {
-    title: 'Smart PPV Sales',
-    description: 'Maximize earnings per fan',
+    title: 'PPV Notifications',
+    description: 'Never miss a sale with smart notifications',
     icon: DollarSign,
-    color: 'from-green-500 to-green-600',
-    animation: (
-      <div className="text-3xl font-bold mt-4">
-        <MetricCounter start={0} end={547} prefix="$" duration={2} />
-      </div>
-    )
+    animation: <MiniCounterAnimation start={0} end={547} />
   },
   {
     title: 'Content Scheduler',
-    description: 'Plan posts across platforms',
+    description: 'Plan and post across all platforms',
     icon: Calendar,
-    color: 'from-pink-500 to-pink-600',
     animation: <MiniCalendarAnimation />
   },
   {
-    title: 'Fan Management',
-    description: 'Track VIPs & top spenders',
+    title: 'Reddit Management',
+    description: 'Automate your Reddit presence and grow',
     icon: Users,
-    color: 'from-orange-500 to-orange-600',
-    animation: (
-      <div className="flex -space-x-2 mt-4">
-        {[...Array(5)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 border-2 border-gray-900"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: i * 0.1 }}
-          />
-        ))}
-      </div>
-    )
+    animation: <MiniRedditFeed />
   },
   {
-    title: 'Multi-Platform',
-    description: 'OnlyFans, Instagram, TikTok+',
-    icon: Zap,
-    color: 'from-yellow-500 to-yellow-600',
-    animation: (
-      <div className="flex gap-2 mt-4">
-        {['OF', 'IG', 'TT'].map((platform, i) => (
-          <motion.div
-            key={platform}
-            className="px-3 py-1 bg-gray-800 rounded text-xs font-semibold"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.2 }}
-          >
-            {platform}
-          </motion.div>
-        ))}
-      </div>
-    )
+    title: 'Multi-Account Control',
+    description: 'Manage all your accounts from one dashboard',
+    icon: Shield,
+    animation: <AccountSwitchAnimation />
   }
-];
+]
 
 export default function FeaturesGrid() {
   return (
-    <section className="py-20 bg-gray-950">
-      <div className="container mx-auto px-4">
-        <motion.div 
-          className="text-center mb-12"
+    <section className="py-20 px-4 bg-gray-950">
+      <div className="container mx-auto max-w-6xl">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold mb-4">Everything you need to scale</h2>
-          <p className="text-xl text-gray-400">Powerful features that grow your business</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            Everything you need to{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-purple-400">
+              dominate
+            </span>
+          </h2>
+          <p className="text-xl text-gray-400">
+            One platform, all the tools to grow your empire
+          </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-6">
-          {/* Main feature - Workflow Preview (large card) */}
-          <div className="lg:col-span-2">
-            <AnimatedCard>
-              <WorkflowPreview />
-            </AnimatedCard>
-          </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {features.map((feature, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="group relative bg-gray-900 rounded-xl p-6 border border-gray-800 hover:border-violet-700/50 transition-all duration-300"
+            >
+              {/* Hover gradient effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-violet-600/10 to-purple-600/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              
+              <div className="relative z-10">
+                {/* Icon */}
+                <div className="w-12 h-12 bg-violet-600/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-violet-600/30 transition-colors">
+                  <feature.icon className="w-6 h-6 text-violet-400" />
+                </div>
 
-          {/* Side features */}
-          <div className="space-y-6">
-            {features.slice(0, 2).map((feature, index) => {
-              const Icon = feature.icon;
-              return (
-                <AnimatedCard key={feature.title} delay={index * 0.1}>
-                  <div className="p-6">
-                    <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4`}>
-                      <Icon className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                    <p className="text-gray-400 text-sm">{feature.description}</p>
-                    {feature.animation}
-                  </div>
-                </AnimatedCard>
-              );
-            })}
-          </div>
-        </div>
+                {/* Content */}
+                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                <p className="text-gray-400 text-sm mb-4">{feature.description}</p>
 
-        {/* Bottom features grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
-          {features.slice(2).map((feature, index) => {
-            const Icon = feature.icon;
-            return (
-              <AnimatedCard key={feature.title} delay={(index + 2) * 0.1}>
-                <div className="p-6">
-                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4`}>
-                    <Icon className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-gray-400 text-sm">{feature.description}</p>
+                {/* Animation container */}
+                <div className="h-16 flex items-center justify-center overflow-hidden">
                   {feature.animation}
                 </div>
-              </AnimatedCard>
-            );
-          })}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
-  );
+  )
 }
