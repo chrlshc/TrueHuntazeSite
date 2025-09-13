@@ -59,6 +59,9 @@ import {
   Plane,
   Copy
 } from 'lucide-react';
+import ProfileStep from '@/components/onboarding/steps/ProfileStep';
+import PlatformsStep from '@/components/onboarding/steps/PlatformsStep';
+import { getCopy, type Locale } from '@/src/lib/onboarding/copy';
 
 type Step = 'profile' | 'sell-plan' | 'niche' | 'platform' | 'ai-config' | 'plan' | 'complete';
 
@@ -72,6 +75,7 @@ export default function OnboardingSetupClient({
   showConnectedToast?: boolean;
   forceStep?: Step;
   navMode?: 'inline' | 'route';
+  locale?: Locale;
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -298,26 +302,28 @@ export default function OnboardingSetupClient({
           <StepShell
             step={1}
             total={totalSteps}
-            title={C.welcome.title}
-            subtitle={C.welcome.subtitle}
+            title={t.steps.profile.title}
+            subtitle={t.steps.profile.subtitle}
             onBack={handlePrevious}
-            onSkip={() => setCurrentStep('sell-plan')}
             onContinue={handleNext}
+            continueDisabled={!formData.gdprConsent}
+            locale={locale}
           >
-            <div className="space-y-6">
-              <div className="form-group">
-                <label className="form-label text-center block mb-2">Display name</label>
-                <input type="text" value={formData.displayName} onChange={(e) => setFormData({ ...formData, displayName: e.target.value })} placeholder="e.g. Ava Hart" className="form-input text-center text-2xl font-semibold" autoFocus />
-              </div>
-              <div className="form-group">
-                <label className="form-label text-center block mb-2">Primary language</label>
-                <input type="text" value="English (United States)" readOnly className="form-input text-center opacity-70 cursor-not-allowed" />
-              </div>
-              <div className="form-group">
-                <label className="form-label text-center block mb-2">Time zone (auto‑detected)</label>
-                <input type="text" value={formData.timezone || detectTimezone()} readOnly placeholder="Auto‑detected" className="form-input text-center opacity-70 cursor-not-allowed" />
-              </div>
-            </div>
+            <ProfileStep
+              values={{
+                displayName: formData.displayName,
+                bio: formData.bio,
+                timezone: formData.timezone,
+                language: formData.language,
+                businessType: formData.businessType,
+                contentFrequency: formData.contentFrequency,
+                gdprConsent: formData.gdprConsent,
+                marketingEmails: formData.marketingEmails,
+              }}
+              tzDetected={detectTimezone()}
+              onChange={(patch) => setFormData({ ...formData, ...patch })}
+              locale={locale}
+            />
           </StepShell>
         );
       case 'sell-plan':
@@ -363,30 +369,23 @@ export default function OnboardingSetupClient({
         );
       case 'platform':
         return (
-          <StepShell step={4} total={totalSteps} title={C.connect.title} subtitle={C.connect.subtitle} onBack={handlePrevious} onSkip={() => setCurrentStep('ai-config')} onContinue={handleNext}>
-            {(sellPlan || []).includes('calls' as any) && (
-              <div className="rounded-lg border p-3 text-xs text-content-tertiary mb-3">Calls are selected in your Sell Plan. Call options become available after platform connect.</div>
-            )}
-            <div className="platform-grid">
-              <div className={`platform-card ${formData.connectedPlatforms.includes('onlyfans') ? 'selected' : ''}`}>
-                <div className="platform-header">
-                  <div className="platform-icon-container bg-blue-500"><MessageSquare className="platform-icon text-white" /></div>
-                  <h3 className="platform-name">OnlyFans</h3>
-                </div>
-                <ul className="platform-features">
-                  <li className="platform-feature"><Check className="platform-feature-icon" /><span>Smart auto‑DMs</span></li>
-                  <li className="platform-feature"><Check className="platform-feature-icon" /><span>Schedule posts</span></li>
-                  <li className="platform-feature"><Check className="platform-feature-icon" /><span>Insights & alerts</span></li>
-                </ul>
-                <button onClick={() => {
+          <StepShell step={4} total={totalSteps} title={t.steps.platforms.title} subtitle={t.steps.platforms.subtitle} onBack={handlePrevious} onSkip={() => handleNext()} onContinue={handleNext} locale={locale}>
+            <PlatformsStep
+              connected={formData.connectedPlatforms}
+              onConnect={(key) => {
+                if (key === 'onlyfans') {
                   if (formData.connectedPlatforms.includes('onlyfans')) return;
                   try { window.location.href = '/api/platforms/onlyfans/connect'; } catch { window.location.assign('/api/platforms/onlyfans/connect'); }
-                }} className="btn-primary w-full mt-4" disabled={loading}>
-                  {formData.connectedPlatforms.includes('onlyfans') ? (<><CheckCircle className="w-4 h-4" />Connected</>) : (<><Plus className="w-4 h-4" />Connect OnlyFans</>)}
-                </button>
-              </div>
-              {/* Socials ... unchanged */}
-            </div>
+                } else {
+                  // mark as selected (simulated connect)
+                  if (!formData.connectedPlatforms.includes(key)) {
+                    setFormData({ ...formData, connectedPlatforms: [...formData.connectedPlatforms, key] });
+                  }
+                }
+              }}
+              onSkip={() => handleNext()}
+              locale={locale}
+            />
           </StepShell>
         );
       case 'ai-config':
@@ -417,6 +416,7 @@ export default function OnboardingSetupClient({
         );
     }
   };
+  const t = getCopy((typeof (locale as any) === 'string' ? (locale as any) : 'en'));
 
   return renderStep();
 }

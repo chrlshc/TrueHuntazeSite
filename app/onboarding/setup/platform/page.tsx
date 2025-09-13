@@ -6,8 +6,8 @@ export default function PlatformStepPage({ searchParams }: { searchParams?: Reco
   const onlyfansCookie = cookieStore.get('ops_platforms_onlyfans')
   const initialOnlyfansConnected = onlyfansCookie?.value === 'true'
   const showConnectedToast = (typeof searchParams?.connected === 'string' && searchParams?.connected === 'onlyfans') || false
+  const locale = (typeof searchParams?.locale === 'string' && (searchParams?.locale === 'fr' || searchParams?.locale === 'en')) ? (searchParams?.locale as 'fr'|'en') : 'en'
   return (
-    <OnboardingSetupClient initialOnlyfansConnected={initialOnlyfansConnected} showConnectedToast={showConnectedToast} forceStep="platform" navMode="route" />
+    <OnboardingSetupClient initialOnlyfansConnected={initialOnlyfansConnected} showConnectedToast={showConnectedToast} forceStep="platform" navMode="route" locale={locale} />
   )
 }
-

@@ -4,6 +4,7 @@ import * as React from "react";
 import { Check, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { getCopy, type Locale } from "@/src/lib/onboarding/copy";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 
@@ -19,6 +20,7 @@ export type StepShellV2Props = {
   onContinue?: () => void;
   continueDisabled?: boolean;
   rightRail?: React.ReactNode;
+  locale?: Locale;
 };
 
 export function StepShellV2({
@@ -33,9 +35,11 @@ export function StepShellV2({
   onContinue,
   continueDisabled,
   rightRail,
+  locale = 'en',
 }: StepShellV2Props) {
   const pct = Math.round((step / total) * 100);
   const hasRightRail = !!rightRail;
+  const t = getCopy(locale);
 
   return (
     <div className="min-h-dvh flex flex-col">
@@ -43,7 +47,7 @@ export function StepShellV2({
         {/* Inline header (no separate black bar), placed at the very top */}
         <div className={cn("mx-auto w-full px-4 pt-0", hasRightRail ? "max-w-screen-2xl" : "max-w-3xl") }>
           <div className="flex items-center gap-3">
-            <div className="text-xs text-muted-foreground">Step {step} of {total}</div>
+            <div className="text-xs text-muted-foreground">{t.shell.stepOf(step, total)}</div>
             <div className="hidden md:flex items-center gap-2 flex-1">
               <Progress value={pct} className="h-1.5 flex-1" />
               <span className="text-xs text-muted-foreground w-14 text-right">{pct}%</span>
@@ -77,11 +81,16 @@ export function StepShellV2({
       <footer className="sticky bottom-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-background/70">
         <div className={cn("mx-auto px-4 py-3 flex items-center gap-2", hasRightRail ? "max-w-screen-2xl" : "max-w-3xl") }>
           <button onClick={onBack} type="button" className="text-sm text-muted-foreground hover:text-foreground inline-flex items-center gap-1">
-            <ChevronLeft className="h-4 w-4" /> Back
+            <ChevronLeft className="h-4 w-4" /> {t.shell.back}
           </button>
+          {onSkip && (
+            <button onClick={onSkip} type="button" className="text-sm text-muted-foreground hover:text-foreground">
+              {t.shell.skip}
+            </button>
+          )}
           <div className="ml-auto" />
           <Button size="sm" onClick={onContinue} disabled={continueDisabled} type="button">
-            Continue <ChevronRight className="ml-1 h-4 w-4" />
+            {t.shell.continue} <ChevronRight className="ml-1 h-4 w-4" />
           </Button>
         </div>
       </footer>
