@@ -527,6 +527,14 @@
   box-shadow: var(--shadow-sm);
 }
 
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium;
+}
+
+.btn-secondary { @apply border border-gray-300 bg-white hover:bg-gray-50; }
+.btn-ghost { @apply text-gray-600 hover:bg-gray-100; }
+.i-check { @apply inline-block h-4 w-4 rounded-full bg-green-600; }
+
 .btn-primary:hover {
   transform: translateY(-1px);
   box-shadow: var(--shadow-md);

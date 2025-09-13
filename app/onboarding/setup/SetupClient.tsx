@@ -59,6 +59,10 @@ import {
   Plane,
   Copy
 } from 'lucide-react';
+import ActivityStep, { ActivityValues } from '@/components/onboarding/steps/ActivityStep';
+import AIConfigStep, { AIConfigValues } from '@/components/onboarding/steps/AIConfigStep';
+import PlanStep from '@/components/onboarding/steps/PlanStep';
+import CompletionStep from '@/components/onboarding/steps/CompletionStep';
 import ProfileStep from '@/components/onboarding/steps/ProfileStep';
 import PlatformsStep from '@/components/onboarding/steps/PlatformsStep';
 import { getCopy, type Locale } from '@/src/lib/onboarding/copy';
@@ -127,6 +131,29 @@ export default function OnboardingSetupClient({
   const [editCadence, setEditCadence] = useState(false);
   const [editUpsells, setEditUpsells] = useState(false);
   const [autoSave, setAutoSave] = useState(false);
+
+  // Activity & AI temp values synced with formData
+  const [activityValues, setActivityValues] = useState<ActivityValues>({
+    niche: '',
+    goals: [],
+    contentTypes: [],
+  });
+  const [aiValues, setAIValues] = useState<AIConfigValues>({});
+
+  useEffect(() => {
+    setActivityValues({
+      niche: formData.niche || '',
+      goals: Array.isArray(formData.goals) ? (formData.goals as any) : [],
+      contentTypes: Array.isArray(formData.contentTypes) ? formData.contentTypes : [],
+    });
+    setAIValues({
+      personality: formData.personality || '',
+      tone: formData.responseStyle || '',
+      monthlyPrice: formData.monthlyPrice ? Number(formData.monthlyPrice) : '',
+      welcome: formData.welcomeMessage || '',
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Initial SSR state hydrate for OnlyFans connection + toast
   useEffect(() => {
@@ -362,9 +389,16 @@ export default function OnboardingSetupClient({
         );
       case 'niche':
         return (
-          <StepShell step={3} total={totalSteps} title={t.steps.activity?.title ?? 'Your activity'} subtitle={t.steps.activity?.subtitle ?? ''} onBack={handlePrevious} onSkip={() => setCurrentStep('platform')} onContinue={handleNext} locale={locale}>
-            {/* ... keep existing niche selection UI ... */}
-            {/* Retained content omitted for brevity; untouched logic remains the same */}
+          <StepShell step={3} total={totalSteps} title={t.steps.activity?.title ?? 'Your activity'} subtitle={t.steps.activity?.subtitle ?? ''} onBack={handlePrevious} onSkip={() => setCurrentStep('platform')} onContinue={() => {
+            // sync activity values into formData
+            setFormData({ ...formData, niche: activityValues.niche || '', goals: activityValues.goals as any, contentTypes: activityValues.contentTypes });
+            handleNext();
+          }} locale={locale}>
+            <ActivityStep
+              locale={locale as any}
+              values={activityValues}
+              onChange={setActivityValues}
+            />
           </StepShell>
         );
       case 'platform':
@@ -390,29 +424,41 @@ export default function OnboardingSetupClient({
         );
       case 'ai-config':
         return (
-          <StepShell step={5} total={totalSteps} title={t.steps.ai?.title ?? 'Configure your AI assistant'} subtitle={t.steps.ai?.subtitle ?? ''} onBack={handlePrevious} onSkip={() => setCurrentStep('plan')} onContinue={handleNext} locale={locale}>
-            {/* keep existing AI config UI */}
+          <StepShell step={5} total={totalSteps} title={t.steps.ai?.title ?? 'Configure your AI assistant'} subtitle={t.steps.ai?.subtitle ?? ''} onBack={handlePrevious} onSkip={() => setCurrentStep('plan')} onContinue={() => {
+            setFormData({ ...formData, personality: aiValues.personality || '', responseStyle: (aiValues.tone as any) || formData.responseStyle, monthlyPrice: (aiValues.monthlyPrice as any) ?? formData.monthlyPrice, welcomeMessage: aiValues.welcome || formData.welcomeMessage });
+            handleNext();
+          }} locale={locale}>
+            <AIConfigStep
+              locale={locale as any}
+              values={aiValues}
+              onChange={setAIValues}
+            />
           </StepShell>
         );
       case 'plan':
         return (
           <StepShell step={6} total={totalSteps} title={t.steps.plan?.title ?? 'Choose your plan'} subtitle={t.steps.plan?.subtitle ?? ''} onBack={handlePrevious} onSkip={() => setCurrentStep('complete')} onContinue={completeAndRoute} locale={locale}>
-            {/* pricing cards unchanged */}
+            <PlanStep
+              locale={locale as any}
+              onSkip={() => setCurrentStep('complete')}
+              onChoose={() => setCurrentStep('complete')}
+            />
           </StepShell>
         );
       case 'complete':
         return (
-          <div className="complete-container">
-            <div className="complete-icon-container"><Rocket className="complete-icon" /></div>
-            <h2 className="complete-title">{t.steps.done?.title ?? 'All set!'}</h2>
-            <p className="complete-message">{t.steps.done?.subtitle ?? 'Your personalized dashboard is ready.'}</p>
-            <div className="complete-stats">
-              <div className="complete-stat"><div className="complete-stat-value">24/7</div><div className="complete-stat-label">AI Response</div></div>
-              <div className="complete-stat"><div className="complete-stat-value">5x</div><div className="complete-stat-label">Time Saved</div></div>
-              <div className="complete-stat"><div className="complete-stat-value">∞</div><div className="complete-stat-label">Possibilities</div></div>
-            </div>
-            <button onClick={completeAndRoute} className="btn-primary"><Sparkles className="w-5 h-5" />{t.steps.done?.cta ?? 'Go to dashboard'}</button>
-          </div>
+          <CompletionStep
+            locale={locale as any}
+            data={{
+              displayName: formData.displayName,
+              nicheName: activityValues.niche,
+              goalsCount: activityValues.goals?.length || 0,
+              connectedPlatforms: formData.connectedPlatforms,
+              planName: undefined,
+              aiConfigured: Boolean(aiValues.tone || aiValues.welcome),
+            }}
+            onGoDashboard={completeAndRoute}
+          />
         );
     }
   };
