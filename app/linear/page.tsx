@@ -1,3 +1,5 @@
+'use client'
+
 import LinearHero from '@/components/LinearHero'
 import LinearFeatureGrid from '@/components/LinearFeatureGrid'
 import ShopifyTrustBar from '@/components/ShopifyTrustBar'

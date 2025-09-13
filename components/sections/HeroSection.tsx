@@ -30,7 +30,7 @@ export default function HeroSection() {
               className="inline-flex items-center gap-2 px-4 py-2 bg-violet-900/30 border border-violet-700/50 rounded-full text-sm text-violet-300 mb-6"
             >
               <span className="animate-pulse w-2 h-2 bg-green-400 rounded-full" />
-              15,000+ creators earning more
+              Trusted by 15,000+ creators worldwide
             </motion.div>
 
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
@@ -40,7 +40,7 @@ export default function HeroSection() {
                 transition={{ delay: 0.3 }}
                 className="block text-white"
               >
-                Become the creator
+                Scale your creator
               </motion.span>
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
@@ -48,9 +48,9 @@ export default function HeroSection() {
                 transition={{ delay: 0.4 }}
                 className="block"
               >
-                earning{' '}
+                business{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-purple-400">
-                  six figures
+                  professionally
                 </span>
               </motion.span>
             </h1>
@@ -61,7 +61,7 @@ export default function HeroSection() {
               transition={{ delay: 0.5 }}
               className="text-xl text-gray-400 mb-8 max-w-lg"
             >
-              Build bigger, earn smarter, grow further with Huntaze's AI that works 24/7 so you don't have to.
+              Automate operations, analyze performance, and grow revenue with enterprise-grade tools designed for modern creators.
             </motion.p>
 
             <motion.div

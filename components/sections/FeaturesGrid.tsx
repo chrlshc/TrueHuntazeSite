@@ -22,7 +22,7 @@ const MiniChatAnimation = () => {
         transition={{ delay: 1 }}
         className="bg-violet-600 rounded-lg px-3 py-2 text-xs ml-auto"
       >
-        Hi! 😊
+        Hello!
       </motion.div>
     </div>
   )
@@ -129,38 +129,38 @@ const AccountSwitchAnimation = () => {
 
 const features = [
   {
-    title: 'Real-time AI Chat',
-    description: 'Convert 3x more with AI that sounds exactly like you',
+    title: 'AI-Powered Conversations',
+    description: 'Scale personalized interactions with intelligent automation',
     icon: MessageCircle,
     animation: <MiniChatAnimation />
   },
   {
-    title: 'Analytics Dashboard',
-    description: 'Track revenue, fans, and growth in real-time',
+    title: 'Advanced Analytics',
+    description: 'Real-time insights to drive data-informed decisions',
     icon: BarChart3,
     animation: <MiniChartAnimation />
   },
   {
-    title: 'PPV Notifications',
-    description: 'Never miss a sale with smart notifications',
+    title: 'Revenue Optimization',
+    description: 'Maximize earnings with intelligent pricing strategies',
     icon: DollarSign,
     animation: <MiniCounterAnimation start={0} end={547} />
   },
   {
-    title: 'Content Scheduler',
-    description: 'Plan and post across all platforms',
+    title: 'Content Planning',
+    description: 'Unified editorial calendar across all platforms',
     icon: Calendar,
     animation: <MiniCalendarAnimation />
   },
   {
-    title: 'Reddit Management',
-    description: 'Automate your Reddit presence and grow',
+    title: 'Community Management',
+    description: 'Streamline engagement across social platforms',
     icon: Users,
     animation: <MiniRedditFeed />
   },
   {
-    title: 'Multi-Account Control',
-    description: 'Manage all your accounts from one dashboard',
+    title: 'Secure Multi-Account',
+    description: 'Enterprise-grade security for all your accounts',
     icon: Shield,
     animation: <AccountSwitchAnimation />
   }
@@ -179,11 +179,11 @@ export default function FeaturesGrid() {
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Everything you need to{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-purple-400">
-              dominate
+              scale professionally
             </span>
           </h2>
           <p className="text-xl text-gray-400">
-            One platform, all the tools to grow your empire
+            One platform, all the tools to grow your business sustainably
           </p>
         </motion.div>
 

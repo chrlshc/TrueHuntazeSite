@@ -1,3 +1,5 @@
+'use client'
+
 import ShopifyHero from '@/components/ShopifyHero'
 import ShopifyTrustBar from '@/components/ShopifyTrustBar'
 import ShopifyValueProps from '@/components/ShopifyValueProps'

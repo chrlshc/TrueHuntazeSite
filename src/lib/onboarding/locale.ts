@@ -1,6 +1,7 @@
-export type Locale = 'en' | 'fr'
+export type Locale = 'en' | 'fr' | 'es'
 
 export function resolveLocale(param?: string | null): Locale {
-  return param === 'fr' ? 'fr' : 'en'
+  if (param === 'fr') return 'fr'
+  if (param === 'es') return 'es'
+  return 'en'
 }
-

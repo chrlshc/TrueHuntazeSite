@@ -1,4 +1,4 @@
-export type Locale = 'en' | 'fr';
+export type Locale = 'en' | 'fr' | 'es';
 
 export const ONBOARDING_COPY = {
   en: {
@@ -88,6 +88,71 @@ export const ONBOARDING_COPY = {
         subtitle: 'Votre tableau de bord personnalisé est prêt.',
         summaryTitle: 'Récapitulatif',
         cta: 'Accéder au tableau de bord',
+      },
+    },
+  },
+  es: {
+    shell: {
+      back: 'Atrás',
+      continue: 'Continuar',
+      skip: 'Omitir por ahora',
+      stepOf: (step: number, total: number) => `Paso ${step} de ${total}`,
+    },
+    steps: {
+      profile: {
+        title: 'Perfil',
+        subtitle: 'Personalicemos tu perfil.',
+        labels: {
+          displayName: 'Nombre para mostrar',
+          bio: 'Biografía',
+          timezone: 'Zona horaria (auto)',
+          language: 'Idioma',
+          accountType: 'Tipo de cuenta',
+          frequency: 'Frecuencia de contenido',
+          consentTOS: 'Acepto los Términos y la Política de Privacidad',
+          consentEmails: 'Deseo recibir novedades útiles por email',
+        },
+      },
+      activity: {
+        title: 'Tu actividad',
+        subtitle: 'Cuéntanos tu sector y lo que piensas vender.',
+        labels: {
+          goals: 'Objetivos de negocio',
+          contentTypes: 'Tipos de contenido',
+          revenueCurrent: 'Ingresos mensuales actuales',
+          revenueTarget: 'Meta de ingresos mensuales',
+        },
+      },
+      platforms: {
+        title: 'Conecta tus plataformas',
+        subtitle: 'Controla todo desde Huntaze y ahorra tiempo.',
+        states: { connect: 'Conectar', connected: 'Conectado', soon: 'Próximamente' },
+      },
+      ai: {
+        title: 'Configura tu asistente de IA',
+        subtitle: 'Define la personalidad, el tono y el mensaje de bienvenida.',
+        labels: {
+          personality: 'Personalidad / nombre del asistente',
+          tone: 'Tono de conversación',
+          monthlyPrice: 'Precio de suscripción mensual ($)',
+          welcome: 'Mensaje de bienvenida (para nuevos fans)',
+        },
+      },
+      plan: {
+        title: 'Elige tu plan',
+        subtitle: 'Prueba gratis 14 días. Puedes cambiar en cualquier momento.',
+        cards: {
+          starter: { name: 'Starter', cta: 'Empezar gratis' },
+          pro: { name: 'Pro', cta: 'Iniciar prueba gratis', recommended: 'Recomendado' },
+          enterprise: { name: 'Enterprise', cta: 'Contáctanos' },
+        },
+        billing: { monthly: 'Mensual', yearly: 'Anual (ahorra 20%)' },
+      },
+      done: {
+        title: '¡Todo listo!',
+        subtitle: 'Tu panel personalizado está preparado.',
+        summaryTitle: 'Resumen de configuración',
+        cta: 'Ir al panel',
       },
     },
   },
