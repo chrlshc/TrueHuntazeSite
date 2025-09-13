@@ -44,12 +44,8 @@ export default function PlatformsStep({ connected, onConnect, onSkip, locale = '
               type="button"
               disabled={disabled}
               onClick={() => onConnect(p.key)}
-              className={[
-                'rounded-xl border p-4 text-sm transition-all text-left',
-                'bg-[#111214] border-white/10 hover:border-purple-500/40 hover:bg-white/[0.02]',
-                disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer',
-                isConnected && 'ring-2 ring-purple-500/40 border-purple-500/40',
-              ].join(' ')}
+              aria-pressed={isConnected}
+              className={`select-card ${isConnected ? 'is-selected' : ''} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               <div className="flex items-center justify-between">
                 <div className="font-medium">{p.label}</div>

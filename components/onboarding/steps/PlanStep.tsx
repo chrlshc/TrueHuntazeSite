@@ -98,14 +98,7 @@ export default function PlanStep({
           const price = cycle === 'monthly' ? p.priceMonthly : p.priceYearly;
           const isFree = price === 0 && p.id === 'starter';
           return (
-            <div
-              key={p.id}
-              className={
-                'rounded-xl border p-4 shadow-sm transition ' +
-                (p.recommended ? 'border-purple-600 ring-1 ring-purple-600/20 ' : 'border-gray-200 ') +
-                'hover:shadow-md'
-              }
-            >
+            <div key={p.id} className={`pricing-card ${p.recommended ? 'recommended' : ''}`}>
               <div className="flex items-start justify-between">
                 <h3 className="text-lg font-semibold">{p.name}</h3>
                 {p.recommended && (

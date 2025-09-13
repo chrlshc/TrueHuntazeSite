@@ -167,6 +167,18 @@ export default function OnboardingSetupClient({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Guard: resync from cookie if SSR missed it
+  useEffect(() => {
+    try {
+      const hasCookie = typeof document !== 'undefined' && document.cookie.includes('ops_platforms_onlyfans=true');
+      if (hasCookie && !formData.connectedPlatforms.includes('onlyfans')) {
+        setFormData((prev) => ({ ...prev, connectedPlatforms: [...prev.connectedPlatforms, 'onlyfans'] }));
+        try { updateOps?.({ platforms: { onlyfans: true } }); } catch {}
+      }
+    } catch {}
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Keep URL-driven step authoritative when navMode=route
   useEffect(() => {
     if (forceStep) setCurrentStep(forceStep);

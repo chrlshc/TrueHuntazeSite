@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { getCopy } from '@/src/lib/onboarding/copy';
 import { pick } from '@/src/lib/onboarding/i18n-utils';
+import { useActivityOptions } from '@/src/lib/onboarding/options';
 
 export type ActivityValues = {
   niche?: string;
@@ -22,9 +23,7 @@ type Props = {
 
 export default function ActivityStep({ locale = 'en', values, onChange }: Props) {
   const t = getCopy(locale);
-  const goalsOptions = t.steps.activity.options?.goals?.map((o: any) => ({ key: o.key, label: pick(o, locale as any) })) ?? [];
-  const contentOptions = t.steps.activity.options?.contentTypes?.map((o: any) => ({ key: o.key, label: pick(o, locale as any) })) ?? [];
-  const nicheOptions = t.steps.activity.options?.niches?.map((o: any) => ({ key: o.key, label: pick(o, locale as any) })) ?? [];
+  const { goals: goalsOptions, contentTypes: contentOptions, niches: nicheOptions } = useActivityOptions(locale as any)
 
   const toggle = (list: string[], key: string) =>
     list.includes(key) ? list.filter(k => k !== key) : [...list, key];
@@ -48,12 +47,8 @@ export default function ActivityStep({ locale = 'en', values, onChange }: Props)
                 key={opt.key}
                 type="button"
                 onClick={() => onChange({ ...values, niche: opt.key })}
-                className={
-                  'rounded-xl border p-3 text-left transition ' +
-                  (selected
-                    ? 'border-purple-600 bg-purple-50'
-                    : 'border-gray-300 hover:shadow-sm')
-                }
+                aria-pressed={selected}
+                className={`select-card ${selected ? 'is-selected' : ''}`}
               >
                 <div className="flex items-center gap-2">
                   {opt.icon}
@@ -79,12 +74,8 @@ export default function ActivityStep({ locale = 'en', values, onChange }: Props)
                 onClick={() =>
                   onChange({ ...values, goals: toggle(values.goals, opt.key) })
                 }
-                className={
-                  'rounded-xl border p-3 text-left transition ' +
-                  (selected
-                    ? 'border-purple-600 bg-purple-50'
-                    : 'border-gray-300 hover:shadow-sm')
-                }
+                aria-pressed={selected}
+                className={`select-card ${selected ? 'is-selected' : ''}`}
               >
                 <span className="text-sm">{opt.label}</span>
               </button>
@@ -110,12 +101,8 @@ export default function ActivityStep({ locale = 'en', values, onChange }: Props)
                     contentTypes: toggle(values.contentTypes, opt.key),
                   })
                 }
-                className={
-                  'rounded-xl border p-3 text-left transition ' +
-                  (selected
-                    ? 'border-purple-600 bg-purple-50'
-                    : 'border-gray-300 hover:shadow-sm')
-                }
+                aria-pressed={selected}
+                className={`select-card ${selected ? 'is-selected' : ''}`}
               >
                 <span className="text-sm">{opt.label}</span>
               </button>
