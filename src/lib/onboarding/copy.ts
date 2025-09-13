@@ -110,6 +110,22 @@ export const ONBOARDING_COPY = {
         },
       },
     },
+    dashboard: {
+      banner: {
+        title: 'Resume your setup to unlock all features.',
+        next: (step: string) => `Next: ${step}`,
+        cta: (step: string) => `Continue to ${step}`,
+      },
+      steps: {
+        profile: 'Profile',
+        sellPlan: 'Sell Plan',
+        activity: 'Your activity',
+        platforms: 'Platforms',
+        ai: 'AI Setup',
+        plan: 'Choose plan',
+      },
+      progress: (done: number, total: number) => `${done}/${total} complete`,
+    },
   },
   fr: {
     shell: {
@@ -220,6 +236,22 @@ export const ONBOARDING_COPY = {
         },
       },
     },
+    dashboard: {
+      banner: {
+        title: 'Terminez votre configuration pour débloquer toutes les fonctionnalités.',
+        next: (step: string) => `Étape suivante : ${step}`,
+        cta: (step: string) => `Continuer vers ${step}`,
+      },
+      steps: {
+        profile: 'Profil',
+        sellPlan: 'Offre',
+        activity: 'Votre activité',
+        platforms: 'Plateformes',
+        ai: 'Assistant AI',
+        plan: 'Choisir une offre',
+      },
+      progress: (done: number, total: number) => `${done}/${total} terminées`,
+    },
   },
   es: {
     shell: {
@@ -329,6 +361,22 @@ export const ONBOARDING_COPY = {
           plan: (p: string) => `Plan: ${p}`,
         },
       },
+    },
+    dashboard: {
+      banner: {
+        title: 'Reanuda tu configuración para desbloquear todas las funciones.',
+        next: (step: string) => `Siguiente: ${step}`,
+        cta: (step: string) => `Continuar a ${step}`,
+      },
+      steps: {
+        profile: 'Perfil',
+        sellPlan: 'Oferta',
+        activity: 'Tu actividad',
+        platforms: 'Plataformas',
+        ai: 'Config. IA',
+        plan: 'Elegir plan',
+      },
+      progress: (done: number, total: number) => `${done}/${total} completados`,
     },
   },
 } as const;

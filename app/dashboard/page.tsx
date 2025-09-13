@@ -20,8 +20,14 @@ import {
   ShoppingBag
 } from 'lucide-react';
 import './dashboard-styles.css';
+import { useSearchParams } from 'next/navigation';
+import { resolveLocale } from '@/src/lib/onboarding/locale';
+import OnboardingChecklist from '@/components/onboarding/OnboardingChecklist';
+import ResumeBanner from '@/components/onboarding/ResumeBanner';
 
 export default function DashboardPage() {
+  const sp = useSearchParams();
+  const locale = resolveLocale(sp.get('locale'));
   const [dateRange, setDateRange] = useState('last-30-days');
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
@@ -76,6 +82,12 @@ export default function DashboardPage() {
           <ResumeBanner />
           <OnboardingChecklist />
         </div>
+        {/* Onboarding prompt + checklist */}
+        <div className="mb-6 space-y-3">
+          <ResumeBanner locale={locale} />
+          <OnboardingChecklist locale={locale} />
+        </div>
+
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-6">
