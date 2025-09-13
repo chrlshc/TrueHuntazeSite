@@ -1,10 +1,10 @@
 "use client";
 
 import * as React from "react";
-import { Check, ChevronLeft, ChevronRight, ShieldCheck, Sparkles, Clock } from "lucide-react";
+import { Check, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 
 export type StepShellV2Props = {
@@ -80,9 +80,11 @@ export function StepShellV2({
             </Card>
           </section>
 
-          <aside className="hidden lg:flex lg:col-span-5">
-            <div className="w-full space-y-4">{rightRail ?? <RightRailDefault />}</div>
-          </aside>
+          {rightRail && (
+            <aside className="hidden lg:flex lg:col-span-5">
+              <div className="w-full space-y-4">{rightRail}</div>
+            </aside>
+          )}
         </div>
       </main>
 
@@ -102,35 +104,7 @@ export function StepShellV2({
   );
 }
 
-function RightRailDefault() {
-  return (
-    <>
-      <Card className="rounded-2xl shadow-sm">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2"><ShieldCheck className="h-4 w-4" /> Auto‑calibration</CardTitle>
-          <CardDescription>Applied after connecting OnlyFans.</CardDescription>
-        </CardHeader>
-        <CardContent className="text-sm grid gap-2">
-          <Line icon={<Clock className="h-3.5 w-3.5" />} text="Send‑time heatmap (peak hours)" />
-          <Line icon={<Check className="h-3.5 w-3.5" />} text="Volume up/down cadence & caps" />
-          <Line icon={<Check className="h-3.5 w-3.5" />} text="VIP routing for high‑LTV clusters" />
-          <Line icon={<Check className="h-3.5 w-3.5" />} text="IG/TT soft‑sell if risk detected" />
-        </CardContent>
-      </Card>
-
-      <Card className="rounded-2xl shadow-sm">
-        <CardHeader>
-          <CardTitle>Time zone</CardTitle>
-          <CardDescription>Auto‑detected. You can change it anytime.</CardDescription>
-        </CardHeader>
-        <CardContent className="flex items-center justify-between gap-3">
-          <div className="text-sm">America/New_York</div>
-          <Button variant="outline" size="sm">Change</Button>
-        </CardContent>
-      </Card>
-    </>
-  );
-}
+// No default right rail; only render when provided via props
 
 function Line({ icon, text }: { icon: React.ReactNode; text: string }) {
   return (
