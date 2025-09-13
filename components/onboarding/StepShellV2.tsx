@@ -107,19 +107,6 @@ function RightRailDefault() {
     <>
       <Card className="rounded-2xl shadow-sm">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2"><Sparkles className="h-4 w-4" /> DM Preview</CardTitle>
-          <CardDescription>How your AI would talk based on your settings.</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-3">
-          <blockquote className="text-sm rounded-xl border p-3 bg-muted/40">
-            Hey love 💕 I just posted something a little too spicy for IG. Want a peek? It’s yours for $22 😘
-          </blockquote>
-          <div className="text-xs text-muted-foreground">Typical PPV uses niche multipliers and your defaults.</div>
-        </CardContent>
-      </Card>
-
-      <Card className="rounded-2xl shadow-sm">
-        <CardHeader>
           <CardTitle className="flex items-center gap-2"><ShieldCheck className="h-4 w-4" /> Auto‑calibration</CardTitle>
           <CardDescription>Applied after connecting OnlyFans.</CardDescription>
         </CardHeader>
@@ -153,4 +140,3 @@ function Line({ icon, text }: { icon: React.ReactNode; text: string }) {
     </div>
   );
 }
-
