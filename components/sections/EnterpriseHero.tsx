@@ -10,7 +10,7 @@ export default function EnterpriseHero() {
   return (
     <section className="pt-24 pb-20 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" aria-hidden>
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" aria-hidden="true">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] bg-[size:4rem_4rem]" />
       </div>
 

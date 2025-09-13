@@ -89,8 +89,8 @@ export default function PricingSection() {
           </div>
         </motion.div>
 
-        {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        {/* Pricing Cards - Explicit mobile responsive */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {pricingTiers.map((tier, index) => (
             <motion.div
               key={tier.name}

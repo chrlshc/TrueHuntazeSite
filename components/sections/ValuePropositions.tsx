@@ -52,8 +52,8 @@ export default function ValuePropositions() {
           </p>
         </motion.div>
 
-        {/* Value Props Grid */}
-        <div className="grid md:grid-cols-3 gap-8">
+        {/* Value Props Grid - Explicit mobile responsive */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {valueProps.map((prop, index) => (
             <motion.div
               key={index}
