@@ -103,18 +103,15 @@ export default function EnterpriseNav() {
 
   return (
     <nav className="fixed inset-x-0 top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl">
-      <div className="w-full pl-80 pr-8">
-        <div className="flex items-center h-16">
-          {/* Logo - Invisible mais garde l'espace */}
-          <div className="invisible">
-            <span className="text-2xl font-bold">Huntaze</span>
-          </div>
-
-          {/* Spacer pour pousser le reste à droite */}
-          <div className="flex-1"></div>
+      <div className="mx-auto w-full max-w-screen-2xl px-4">
+        <div className="flex items-center h-16 gap-6">
+          {/* Logo */}
+          <Link href="/" className="text-xl font-semibold text-gray-900 dark:text-white">
+            Huntaze
+          </Link>
 
           {/* Navigation Items */}
-          <div className="hidden lg:flex items-center space-x-6">
+          <div className="hidden lg:flex items-center gap-6">
             {/* Solutions Dropdown */}
             <div className="relative">
               <button
@@ -222,15 +219,15 @@ export default function EnterpriseNav() {
           {/* Sign in - Indépendant */}
           <Link
             href="/auth"
-            className="ml-20 inline-flex h-9 items-center rounded-lg px-3 text-sm text-neutral-200 hover:bg-white/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 transition-colors"
+            className="inline-flex h-9 items-center rounded-lg px-3 text-sm text-neutral-700 dark:text-neutral-200 hover:bg-white/5 hover:text-black dark:hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 dark:focus-visible:ring-white/40 transition-colors"
           >
             Sign in
           </Link>
 
           {/* Start for free - Indépendant */}
           <Link
-            href="/get-started"
-            className="ml-6 inline-flex h-9 items-center rounded-lg bg-white px-4 text-sm font-medium text-black hover:bg-white/90 transition-colors"
+            href="/onboarding/setup/profile"
+            className="inline-flex h-9 items-center rounded-lg bg-black dark:bg-white px-4 text-sm font-medium text-white dark:text-black hover:opacity-90 transition-colors"
           >
             Start for free
           </Link>
