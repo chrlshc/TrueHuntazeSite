@@ -248,6 +248,24 @@ export default function OnboardingSetupPage() {
     }
   }, [searchParams])
 
+  // Sync OnlyFans connected flag from cookie set by our callback (SSR-friendly persistence)
+  useEffect(() => {
+    try {
+      const cookie = typeof document !== 'undefined'
+        ? document.cookie.split('; ').find((c) => c.startsWith('ops_platforms_onlyfans='))
+        : undefined;
+      const flag = cookie?.split('=')[1] === 'true';
+      if (flag && !formData.connectedPlatforms.includes('onlyfans')) {
+        setFormData({
+          ...formData,
+          connectedPlatforms: [...formData.connectedPlatforms, 'onlyfans'],
+        });
+        try { updateOps?.({ platforms: { onlyfans: true } }); } catch {}
+      }
+    } catch {}
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleNext = async () => {
     setLoading(true);
     setAnimationDirection('forward');
@@ -1082,75 +1100,19 @@ export default function OnboardingSetupPage() {
                   <li className="platform-feature"><Check className="platform-feature-icon" /><span>Insights & alerts</span></li>
                 </ul>
                 <button
-                  onClick={async () => {
-                    if (!formData.connectedPlatforms.includes('onlyfans')) {
-                      setLoading(true);
-                      try {
-                        const response = await fetch('/api/onboarding/connect-platform', {
-                          method: 'POST',
-                          headers: { 'Content-Type': 'application/json' },
-                          body: JSON.stringify({ platform: 'onlyfans', action: 'connect' })
-                        });
-                        const data = await response.json();
-                        if (data.authUrl) {
-                          // In production, redirect to OAuth
-                          // window.location.href = data.authUrl;
-                          // For demo, just mark as connected and apply auto calibration
-                          setFormData({ 
-                            ...formData, 
-                            connectedPlatforms: [...formData.connectedPlatforms, 'onlyfans'] 
-                          });
-                          try { updateOps?.({ platforms: { onlyfans: true } }); } catch {}
-                          try {
-                            const res = await fetch('/api/onboarding/mock-ingest');
-                            if (res.ok) {
-                              const mock = await res.json();
-                              const niche = formData.niche || (typeof window !== 'undefined' ? localStorage.getItem('selectedNiche') || '' : '');
-                              const def = NICHES.find(x => x.id === niche);
-                              const mult = def?.ppvMultiplier || 1.0;
-                              const typical = Math.round((mock.ppvAnchor || DEFAULTS.ppv.typical) * mult);
-                              const min = Math.max(DEFAULTS.ppv.min, Math.round(typical * 0.33));
-                              const max = Math.round(typical * 2.5);
-                              updateMonetization({ ppvRange: { min, typical, max } });
-                              if (Array.isArray(mock.peakHours) && mock.peakHours.length > 0) {
-                                const h = mock.peakHours[0];
-                                updateOps({ activeHours: [{ start: h.start, end: h.end }] });
-                              }
-                              if (mock.sendVolume === 'high') {
-                                updateOps({ dailyCaps: { global: DEFAULTS.caps.dailyGlobal, vip: DEFAULTS.caps.dailyVip } });
-                              }
-                              if (mock.suggestLowerWhaleThreshold) {
-                                updateSegmentation({ whaleThreshold: mock.suggestLowerWhaleThreshold });
-                              }
-                              if (mock.igRisk || mock.ttRisk) {
-                                updateBoundaries({ platformRulesFlags: { IG: !!mock.igRisk, TT: !!mock.ttRisk } });
-                              }
-                            }
-                          } catch {}
-                          alert('OnlyFans connected! Auto‑calibration applied. (Demo mode)');
-                        }
-                      } catch (error) {
-                        alert('Failed to connect OnlyFans');
-                      } finally {
-                        setLoading(false);
-                      }
-                    } else {
-                      // Disconnect
-                      setFormData({ 
-                        ...formData, 
-                        connectedPlatforms: formData.connectedPlatforms.filter(p => p !== 'onlyfans') 
-                      });
+                  onClick={() => {
+                    if (formData.connectedPlatforms.includes('onlyfans')) return;
+                    // Redirect to OAuth/connect flow (local demo bounces to callback setting a cookie)
+                    try {
+                      window.location.href = '/api/platforms/onlyfans/connect';
+                    } catch {
+                      window.location.assign('/api/platforms/onlyfans/connect');
                     }
                   }}
                   className="btn-primary w-full mt-4"
                   disabled={loading}
                 >
-                  {loading ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      Connecting...
-                    </>
-                  ) : formData.connectedPlatforms.includes('onlyfans') ? (
+                  {formData.connectedPlatforms.includes('onlyfans') ? (
                     <>
                       <CheckCircle className="w-4 h-4" />
                       Connected
