@@ -63,6 +63,12 @@
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
     --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.6);
+    
+    /* === GLASSMORPHISM === */
+    --glass-blur: 16px;
+    --glass-saturation: 180%;
+    --glass-opacity: 0.08;
+    --glass-border-opacity: 0.12;
 }
 
 /* === BASE STYLES === */
@@ -238,4 +244,42 @@ body {
 .card:hover {
   border-color: rgb(var(--color-border-interactive) / 0.5);
   box-shadow: var(--shadow-lg);
+}
+
+/* === GLASSMORPHISM COMPONENTS === */
+.glass-panel {
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+  background: rgba(255, 255, 255, var(--glass-opacity));
+  border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity));
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.glass-panel-dark {
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+  background: rgba(15, 15, 16, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel-hover:hover {
+  backdrop-filter: blur(20px) saturate(200%);
+  border-color: rgba(94, 106, 210, 0.3);
+  box-shadow: 
+    0 12px 40px rgba(94, 106, 210, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Frosted glass effect */
+.glass-frosted {
+  backdrop-filter: blur(40px) saturate(150%);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }

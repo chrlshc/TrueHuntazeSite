@@ -5,6 +5,8 @@ import { motion } from 'framer-motion'
 import PhoneMockup from '@/components/mockups/PhoneMockup'
 import ChatAnimation from '@/components/mockups/ChatAnimation'
 import Link from 'next/link'
+import TrustBar from './TrustBar'
+import MetricsBar from './MetricsBar'
 
 export default function HeroSection() {
   return (
@@ -23,15 +25,8 @@ export default function HeroSection() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-violet-900/30 border border-violet-700/50 rounded-full text-sm text-violet-300 mb-6"
-            >
-              <span className="animate-pulse w-2 h-2 bg-green-400 rounded-full" />
-              Trusted by 15,000+ creators worldwide
-            </motion.div>
+            {/* Trust Bar - Shopify Style */}
+            <TrustBar />
 
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
               <motion.span
@@ -84,26 +79,8 @@ export default function HeroSection() {
               </Link>
             </motion.div>
 
-            {/* Trust indicators */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.8 }}
-              className="mt-12 flex items-center gap-8 text-sm text-gray-500"
-            >
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                No credit card required
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                Setup in 60 seconds
-              </div>
-            </motion.div>
+            {/* Metrics Bar - Shopify Style */}
+            <MetricsBar />
           </motion.div>
 
           {/* Phone mockup with animations */}
