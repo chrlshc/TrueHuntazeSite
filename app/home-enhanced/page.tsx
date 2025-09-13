@@ -6,8 +6,10 @@ import FeaturesGrid from '@/components/sections/FeaturesGrid'
 import ROICalculator from '@/components/sections/ROICalculator'
 import EnterpriseSection from '@/components/sections/EnterpriseSection'
 import AIDemo from '@/components/sections/AIDemo'
+import TestimonialsSection from '@/components/sections/TestimonialsSection'
 import CommandPalette from '@/components/ui/CommandPalette'
 import EnhancedHeader from '@/components/layout/EnhancedHeader'
+import EnterpriseFooter from '@/components/layout/EnterpriseFooter'
 
 export default function HomeEnhanced() {
   return (
@@ -30,19 +32,14 @@ export default function HomeEnhanced() {
       {/* ROI Calculator */}
       <ROICalculator />
       
+      {/* Testimonials Section */}
+      <TestimonialsSection />
+      
       {/* Enterprise Section */}
       <EnterpriseSection />
       
-      {/* Placeholder for additional sections */}
-      <div className="text-center py-20 text-[#9CA3AF] bg-[#0F0F10]">
-        <p>Additional sections coming soon:</p>
-        <ul className="mt-4 space-y-2">
-          <li>• Video Testimonials with Metrics</li>
-          <li>• Urgency Indicators (Live Data)</li>
-          <li>• Comprehensive Footer</li>
-          <li>• Case Studies Section</li>
-        </ul>
-      </div>
+      {/* Enterprise Footer */}
+      <EnterpriseFooter />
     </>
   )
 }
