@@ -76,10 +76,9 @@ export function StepShellV2({
 
       <footer className="sticky bottom-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-background/70">
         <div className={cn("mx-auto px-4 py-3 flex items-center gap-2", hasRightRail ? "max-w-screen-2xl" : "max-w-3xl") }>
-          <Button variant="ghost" size="sm" onClick={onBack} type="button">
-            <ChevronLeft className="mr-1 h-4 w-4" /> Back
-          </Button>
-          <Button variant="secondary" size="sm" onClick={onSkip} type="button">Skip for now</Button>
+          <button onClick={onBack} type="button" className="text-sm text-muted-foreground hover:text-foreground inline-flex items-center gap-1">
+            <ChevronLeft className="h-4 w-4" /> Back
+          </button>
           <div className="ml-auto" />
           <Button size="sm" onClick={onContinue} disabled={continueDisabled} type="button">
             Continue <ChevronRight className="ml-1 h-4 w-4" />

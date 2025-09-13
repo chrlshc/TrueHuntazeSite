@@ -322,21 +322,16 @@ export default function OnboardingSetupClient({
         );
       case 'sell-plan':
         return (
-          <StepShell step={2} total={totalSteps} title={C.sellPlan.title} subtitle={C.sellPlan.subtitle} onBack={handlePrevious} onSkip={() => setCurrentStep('niche')} onContinue={handleNext} rightRail={
-            <div className="space-y-2">
-              <div className="platform-card">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="text-sm font-semibold">Recommended setup</div>
-                    <div className="text-xs text-content-tertiary">{C.sellPlan.recommendedTip}</div>
-                  </div>
-                  <button type="button" onClick={() => { setSellPlan(['subs','ppv']); updateOps?.({ sellPlan: ['subs','ppv'] }); handleNext(); }} className="btn-outline">
-                    <Check className="w-4 h-4 mr-1 inline-block" /> {C.sellPlan.primaryCta}
-                  </button>
-                </div>
+          <StepShell step={2} total={totalSteps} title={C.sellPlan.title} subtitle={C.sellPlan.subtitle} onBack={handlePrevious} onContinue={handleNext}>
+            <div className="mb-3 flex items-center justify-between rounded-lg border border-white/10 bg-[#111214] p-3">
+              <div>
+                <div className="text-sm font-semibold">Recommended setup</div>
+                <div className="text-xs text-content-tertiary">{C.sellPlan.recommendedTip}</div>
               </div>
+              <button type="button" onClick={() => { setSellPlan(['subs','ppv']); updateOps?.({ sellPlan: ['subs','ppv'] }); handleNext(); }} className="btn-primary px-3 py-2 text-sm">
+                <Check className="w-4 h-4 mr-1 inline-block" /> {C.sellPlan.primaryCta}
+              </button>
             </div>
-          }>
             <div className="form-group">
               <label className="form-label">Choose what you plan to sell</label>
               <div className="niche-grid">

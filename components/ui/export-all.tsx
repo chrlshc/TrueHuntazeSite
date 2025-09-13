@@ -18,7 +18,7 @@ export const AlertTitle = ({ children, className = "" }: any) => <h4 className={
 export const Progress = ({ value = 0, className = "" }: any) => (
   <div className={`h-2 w-full bg-gray-200 rounded-full overflow-hidden ${className}`}>
     <div
-      className="h-full rounded-full transition-all bg-gradient-to-r from-violet-600 to-pink-500"
+      className="h-full rounded-full transition-all bg-violet-600"
       style={{ width: `${value}%` }}
     />
   </div>
