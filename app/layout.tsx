@@ -1,20 +1,23 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./mobile.css";
-import "./mobile-emergency-fix.css";
-import "./nuclear-mobile-fix.css";
+// Removed emergency layers (kept for DEV via NEXT_PUBLIC_DEV_STYLES links)
+// import "./mobile-emergency-fix.css";
+// import "./nuclear-mobile-fix.css";
 import "./animations.css";
-import "./glass.css";
-import "../styles/remove-dark-overlay.css";
-import "../styles/no-dark-filters.css";
-import "../styles/mockups.css";
-import "../styles/shopify-typography.css";
+// First pass DS consolidation: disable some legacy visual layers
+// import "./glass.css";
+// import "../styles/remove-dark-overlay.css";
+// import "../styles/no-dark-filters.css";
+// import "../styles/mockups.css";
+import "../styles/design-system.css"; // DS: colors, base typography, utilities
+import "../styles/shopify-typography.css"; // keep temporarily during transition
 import "../styles/app-visuals.css";
 import "../styles/performance-optimizations.css";
 import "../styles/fix-animations.css"; // MUST BE LAST to fix animations
-import "../styles/simple-animations.css"; // Simple CSS animations
+// import "../styles/simple-animations.css"; // Simple CSS animations (disabled)
 import "../styles/link-hover.css"; // Link hover effects
-import "../styles/nebula-background.css"; // Purple nebula effects
+// import "../styles/nebula-background.css"; // Purple nebula effects (disabled)
 import "../styles/mobile-standards.css"; // Mobile design standards
 import "../styles/viewport-fixes.css"; // Fix viewport units for mobile
 import "../styles/button-mobile-optimized.css"; // Mobile-optimized buttons
@@ -28,7 +31,7 @@ import "../styles/high-contrast.css"; // High contrast for better readability
 import "../styles/contrast-improvements.css"; // AA compliance contrast fixes
 import "../styles/section-separation.css"; // Section visual separation
 import "../styles/cta-buttons.css"; // Unified CTA button styles
-import "../styles/typography-fixes.css"; // Typography visibility fixes
+// import "../styles/typography-fixes.css"; // Merged into design-system.css (disabled)
 import "../styles/enterprise.css"; // Enterprise landing page styles
 import "../styles/clean-dark-theme.css"; // Clean dark theme
 // import HeaderShopify from "@/src/components/header-shopify";
@@ -88,6 +91,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const DEV_STYLES = (process.env.NEXT_PUBLIC_DEV_STYLES || '').toLowerCase() === 'true';
   const minimal = (process.env.NEXT_PUBLIC_MINIMAL_UI || '').toLowerCase() === 'true';
   const disableOverlays = (process.env.NEXT_PUBLIC_DISABLE_OVERLAYS || '').toLowerCase() === 'true';
   const forceDark = false; // Disabled to fix blank page issue
@@ -126,19 +130,23 @@ export default function RootLayout({
         {/* CTA button fixes */}
         <link rel="stylesheet" href="/styles/cta-button-fixes.css?v=dev" />
         {/* Full site fixes */}
-        <link rel="stylesheet" href="/styles/full-site-fixes.css?v=dev" />
-        {/* Final button fix - MUST be last */}
-        <link rel="stylesheet" href="/styles/final-button-fix.css?v=dev" />
-        {/* Emergency fix - Remove all borders */}
-        <link rel="stylesheet" href="/styles/emergency-fix.css?v=dev" />
-        {/* Linear dropdown fix - Match Linear.app */}
-        <link rel="stylesheet" href="/styles/linear-dropdown-fix.css?v=dev" />
-        {/* Remove purple sections - CRITICAL */}
-        <link rel="stylesheet" href="/styles/remove-purple-sections.css?v=dev" />
-        {/* FORCE BLACK EVERYWHERE - ABSOLUTELY NO PURPLE */}
-        <link rel="stylesheet" href="/styles/force-black-everywhere.css?v=dev" />
-        {/* Remove white backgrounds from nav */}
-        <link rel="stylesheet" href="/styles/remove-white-backgrounds.css?v=dev" />
+        {DEV_STYLES && (
+          <>
+            <link rel="stylesheet" href="/styles/full-site-fixes.css?v=dev" />
+            {/* Final button fix - MUST be last */}
+            <link rel="stylesheet" href="/styles/final-button-fix.css?v=dev" />
+            {/* Emergency fix - Remove all borders */}
+            <link rel="stylesheet" href="/styles/emergency-fix.css?v=dev" />
+            {/* Linear dropdown fix - Match Linear.app */}
+            <link rel="stylesheet" href="/styles/linear-dropdown-fix.css?v=dev" />
+            {/* Remove purple sections - CRITICAL */}
+            <link rel="stylesheet" href="/styles/remove-purple-sections.css?v=dev" />
+            {/* FORCE BLACK EVERYWHERE - ABSOLUTELY NO PURPLE */}
+            <link rel="stylesheet" href="/styles/force-black-everywhere.css?v=dev" />
+            {/* Remove white backgrounds from nav */}
+            <link rel="stylesheet" href="/styles/remove-white-backgrounds.css?v=dev" />
+          </>
+        )}
         {/* Mobile fixes script - must run early */}
         <script src="/mobile-fix.js" async />
         {forceDark && (
@@ -195,12 +203,16 @@ export default function RootLayout({
             `,
           }}
         />)}
-        {/* Force remove ALL nav borders - MUST BE LAST */}
-        <link rel="stylesheet" href="/styles/nav-no-borders.css?v=dev" />
-        {/* Remove selection effect */}
-        <link rel="stylesheet" href="/styles/remove-selection-effect.css?v=dev" />
-        {/* Force remove nav borders with JS */}
-        <script src="/remove-nav-borders.js" defer></script>
+        {DEV_STYLES && (
+          <>
+            {/* Force remove ALL nav borders - MUST BE LAST */}
+            <link rel="stylesheet" href="/styles/nav-no-borders.css?v=dev" />
+            {/* Remove selection effect */}
+            <link rel="stylesheet" href="/styles/remove-selection-effect.css?v=dev" />
+            {/* Force remove nav borders with JS */}
+            <script src="/remove-nav-borders.js" defer></script>
+          </>
+        )}
       </head>
       <body className="antialiased dark-mode theme-dark" data-ui={minimal ? 'minimal' : undefined}>
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:z-[100] focus:top-2 focus:left-2 focus:bg-white focus:text-black focus:px-3 focus:py-2 focus:rounded" aria-label="Skip to content">Skip to content</a>
