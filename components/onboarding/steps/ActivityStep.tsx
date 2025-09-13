@@ -1,6 +1,7 @@
 'use client';
 import * as React from 'react';
 import { getCopy } from '@/src/lib/onboarding/copy';
+import { pick } from '@/src/lib/onboarding/i18n-utils';
 
 export type ActivityValues = {
   niche?: string;
@@ -19,31 +20,11 @@ type Props = {
   nicheOptions?: { key: string; label: string; icon?: React.ReactNode }[];
 };
 
-export default function ActivityStep({
-  locale = 'en',
-  values,
-  onChange,
-  goalsOptions = [
-    { key: 'revenue', label: 'Revenue' },
-    { key: 'engagement', label: 'Engagement' },
-    { key: 'growth', label: 'Audience growth' },
-    { key: 'time_saving', label: 'Time saving' },
-  ],
-  contentOptions = [
-    { key: 'photos', label: 'Photos' },
-    { key: 'videos', label: 'Videos' },
-    { key: 'live', label: 'Live' },
-    { key: 'messages', label: 'Messages' },
-    { key: 'posts', label: 'Posts' },
-  ],
-  nicheOptions = [
-    { key: 'fitness', label: 'Fitness' },
-    { key: 'fashion', label: 'Fashion' },
-    { key: 'gaming', label: 'Gaming' },
-    { key: 'education', label: 'Education' },
-  ],
-}: Props) {
+export default function ActivityStep({ locale = 'en', values, onChange }: Props) {
   const t = getCopy(locale);
+  const goalsOptions = t.steps.activity.options?.goals?.map((o: any) => ({ key: o.key, label: pick(o, locale as any) })) ?? [];
+  const contentOptions = t.steps.activity.options?.contentTypes?.map((o: any) => ({ key: o.key, label: pick(o, locale as any) })) ?? [];
+  const nicheOptions = t.steps.activity.options?.niches?.map((o: any) => ({ key: o.key, label: pick(o, locale as any) })) ?? [];
 
   const toggle = (list: string[], key: string) =>
     list.includes(key) ? list.filter(k => k !== key) : [...list, key];
@@ -182,4 +163,3 @@ export default function ActivityStep({
     </section>
   );
 }
-

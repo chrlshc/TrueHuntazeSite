@@ -23,6 +23,47 @@ export const ONBOARDING_COPY = {
           consentEmails: 'I agree to receive helpful updates by email',
         },
       },
+      activity: {
+        title: 'Your activity',
+        subtitle: 'Tell us about your domain and what you plan to sell.',
+        labels: {
+          goals: 'Business goals',
+          contentTypes: 'Content types',
+          revenueCurrent: 'Current monthly revenue',
+          revenueTarget: 'Target monthly revenue',
+        },
+        options: {
+          goals: [
+            { key: 'revenue', en: 'Revenue', fr: 'Revenu', es: 'Ingresos' },
+            { key: 'engagement', en: 'Engagement', fr: 'Engagement', es: 'Engagement' },
+            { key: 'growth', en: 'Audience growth', fr: 'Croissance audience', es: 'Crecimiento de audiencia' },
+            { key: 'time_saving', en: 'Time saving', fr: 'Gain de temps', es: 'Ahorro de tiempo' },
+          ],
+          contentTypes: [
+            { key: 'photos', en: 'Photos', fr: 'Photos', es: 'Fotos' },
+            { key: 'videos', en: 'Videos', fr: 'Vidéos', es: 'Vídeos' },
+            { key: 'live', en: 'Live', fr: 'Live', es: 'En vivo' },
+            { key: 'messages', en: 'Messages', fr: 'Messages', es: 'Mensajes' },
+            { key: 'posts', en: 'Posts', fr: 'Posts', es: 'Publicaciones' },
+          ],
+          niches: [
+            { key: 'fitness', en: 'Fitness', fr: 'Fitness', es: 'Fitness' },
+            { key: 'fashion', en: 'Fashion', fr: 'Mode', es: 'Moda' },
+            { key: 'gaming', en: 'Gaming', fr: 'Gaming', es: 'Gaming' },
+            { key: 'education', en: 'Education', fr: 'Éducation', es: 'Educación' },
+          ],
+        },
+      },
+      ai: {
+        title: 'Configure your AI assistant',
+        subtitle: 'Set the personality, tone and welcome message.',
+        labels: {
+          personality: 'Assistant personality / name',
+          tone: 'Conversation tone',
+          monthlyPrice: 'Monthly subscription price ($)',
+          welcome: 'Welcome message (sent to new fans)',
+        },
+      },
       platforms: {
         title: 'Connect your platforms',
         subtitle: 'Control everything from Huntaze and save time.',
@@ -37,12 +78,36 @@ export const ONBOARDING_COPY = {
           enterprise: { name: 'Enterprise', cta: 'Contact us' },
         },
         billing: { monthly: 'Monthly', yearly: 'Yearly (save 20%)' },
+        features: {
+          starter: [
+            { key: 'basic_ai', en: 'Basic AI assistant', fr: 'Assistant AI basique', es: 'Asistente de IA básico' },
+            { key: 'essentials', en: 'Essential tools', fr: 'Outils essentiels', es: 'Herramientas esenciales' },
+          ],
+          pro: [
+            { key: 'adv_ai', en: 'Advanced AI', fr: 'AI avancée', es: 'IA avanzada' },
+            { key: 'automation', en: 'Automation', fr: 'Automatisation', es: 'Automatización' },
+            { key: 'analytics', en: 'Analytics', fr: 'Analytique', es: 'Analítica' },
+          ],
+          enterprise: [
+            { key: 'sla', en: 'Custom SLAs', fr: 'SLA personnalisés', es: 'SLA personalizados' },
+            { key: 'seats', en: 'Team seats', fr: 'Licences équipe', es: 'Licencias de equipo' },
+            { key: 'support', en: 'Priority support', fr: 'Support prioritaire', es: 'Soporte prioritario' },
+          ],
+        },
       },
       done: {
         title: 'All set!',
         subtitle: 'Your personalized dashboard is ready.',
         summaryTitle: 'Setup summary',
         cta: 'Go to dashboard',
+        summary: {
+          profile: 'Profile completed',
+          niche: (n: string) => `Niche: ${n}`,
+          goals: (n: number) => `Goals selected: ${n}`,
+          platforms: (n: number) => `Platforms connected: ${n}`,
+          ai: 'AI configured',
+          plan: (p: string) => `Plan: ${p}`,
+        },
       },
     },
   },
@@ -68,6 +133,47 @@ export const ONBOARDING_COPY = {
           consentEmails: 'Je souhaite recevoir des updates par email',
         },
       },
+      activity: {
+        title: 'Votre activité',
+        subtitle: 'Parlez-nous de votre domaine et de ce que vous vendez.',
+        labels: {
+          goals: 'Objectifs',
+          contentTypes: 'Types de contenu',
+          revenueCurrent: 'Revenu mensuel actuel',
+          revenueTarget: 'Revenu mensuel cible',
+        },
+        options: {
+          goals: [
+            { key: 'revenue', en: 'Revenue', fr: 'Revenu', es: 'Ingresos' },
+            { key: 'engagement', en: 'Engagement', fr: 'Engagement', es: 'Engagement' },
+            { key: 'growth', en: 'Audience growth', fr: 'Croissance audience', es: 'Crecimiento de audiencia' },
+            { key: 'time_saving', en: 'Time saving', fr: 'Gain de temps', es: 'Ahorro de tiempo' },
+          ],
+          contentTypes: [
+            { key: 'photos', en: 'Photos', fr: 'Photos', es: 'Fotos' },
+            { key: 'videos', en: 'Videos', fr: 'Vidéos', es: 'Vídeos' },
+            { key: 'live', en: 'Live', fr: 'Live', es: 'En vivo' },
+            { key: 'messages', en: 'Messages', fr: 'Messages', es: 'Mensajes' },
+            { key: 'posts', en: 'Posts', fr: 'Posts', es: 'Publicaciones' },
+          ],
+          niches: [
+            { key: 'fitness', en: 'Fitness', fr: 'Fitness', es: 'Fitness' },
+            { key: 'fashion', en: 'Fashion', fr: 'Mode', es: 'Moda' },
+            { key: 'gaming', en: 'Gaming', fr: 'Gaming', es: 'Gaming' },
+            { key: 'education', en: 'Education', fr: 'Éducation', es: 'Educación' },
+          ],
+        },
+      },
+      ai: {
+        title: 'Configurez votre assistant AI',
+        subtitle: 'Définissez la personnalité, le ton et le message d’accueil.',
+        labels: {
+          personality: 'Personnalité / nom de l’assistant',
+          tone: 'Ton de conversation',
+          monthlyPrice: 'Prix mensuel de l’abonnement ($)',
+          welcome: 'Message de bienvenue (envoyé aux nouveaux fans)',
+        },
+      },
       platforms: {
         title: 'Connectez vos plateformes',
         subtitle: 'Pilotez tout depuis Huntaze et gagnez du temps.',
@@ -82,12 +188,36 @@ export const ONBOARDING_COPY = {
           enterprise: { name: 'Enterprise', cta: 'Contactez-nous' },
         },
         billing: { monthly: 'Mensuel', yearly: 'Annuel (-20 %)' },
+        features: {
+          starter: [
+            { key: 'basic_ai', en: 'Basic AI assistant', fr: 'Assistant AI basique', es: 'Asistente de IA básico' },
+            { key: 'essentials', en: 'Essential tools', fr: 'Outils essentiels', es: 'Herramientas esenciales' },
+          ],
+          pro: [
+            { key: 'adv_ai', en: 'Advanced AI', fr: 'AI avancée', es: 'IA avanzada' },
+            { key: 'automation', en: 'Automation', fr: 'Automatisation', es: 'Automatización' },
+            { key: 'analytics', en: 'Analytics', fr: 'Analytique', es: 'Analítica' },
+          ],
+          enterprise: [
+            { key: 'sla', en: 'Custom SLAs', fr: 'SLA personnalisés', es: 'SLA personalizados' },
+            { key: 'seats', en: 'Team seats', fr: 'Licences équipe', es: 'Licencias de equipo' },
+            { key: 'support', en: 'Priority support', fr: 'Support prioritaire', es: 'Soporte prioritario' },
+          ],
+        },
       },
       done: {
         title: 'Tout est prêt !',
         subtitle: 'Votre tableau de bord personnalisé est prêt.',
         summaryTitle: 'Récapitulatif',
         cta: 'Accéder au tableau de bord',
+        summary: {
+          profile: 'Profil complété',
+          niche: (n: string) => `Niche : ${n}`,
+          goals: (n: number) => `Objectifs sélectionnés : ${n}`,
+          platforms: (n: number) => `Plateformes connectées : ${n}`,
+          ai: 'Assistant AI configuré',
+          plan: (p: string) => `Offre : ${p}`,
+        },
       },
     },
   },
@@ -122,6 +252,27 @@ export const ONBOARDING_COPY = {
           revenueCurrent: 'Ingresos mensuales actuales',
           revenueTarget: 'Meta de ingresos mensuales',
         },
+        options: {
+          goals: [
+            { key: 'revenue', en: 'Revenue', fr: 'Revenu', es: 'Ingresos' },
+            { key: 'engagement', en: 'Engagement', fr: 'Engagement', es: 'Engagement' },
+            { key: 'growth', en: 'Audience growth', fr: 'Croissance audience', es: 'Crecimiento de audiencia' },
+            { key: 'time_saving', en: 'Time saving', fr: 'Gain de temps', es: 'Ahorro de tiempo' },
+          ],
+          contentTypes: [
+            { key: 'photos', en: 'Photos', fr: 'Photos', es: 'Fotos' },
+            { key: 'videos', en: 'Videos', fr: 'Vidéos', es: 'Vídeos' },
+            { key: 'live', en: 'Live', fr: 'Live', es: 'En vivo' },
+            { key: 'messages', en: 'Messages', fr: 'Messages', es: 'Mensajes' },
+            { key: 'posts', en: 'Posts', fr: 'Posts', es: 'Publicaciones' },
+          ],
+          niches: [
+            { key: 'fitness', en: 'Fitness', fr: 'Fitness', es: 'Fitness' },
+            { key: 'fashion', en: 'Fashion', fr: 'Mode', es: 'Moda' },
+            { key: 'gaming', en: 'Gaming', fr: 'Gaming', es: 'Gaming' },
+            { key: 'education', en: 'Education', fr: 'Éducation', es: 'Educación' },
+          ],
+        },
       },
       platforms: {
         title: 'Conecta tus plataformas',
@@ -147,12 +298,36 @@ export const ONBOARDING_COPY = {
           enterprise: { name: 'Enterprise', cta: 'Contáctanos' },
         },
         billing: { monthly: 'Mensual', yearly: 'Anual (ahorra 20%)' },
+        features: {
+          starter: [
+            { key: 'basic_ai', en: 'Basic AI assistant', fr: 'Assistant AI basique', es: 'Asistente de IA básico' },
+            { key: 'essentials', en: 'Essential tools', fr: 'Outils essentiels', es: 'Herramientas esenciales' },
+          ],
+          pro: [
+            { key: 'adv_ai', en: 'Advanced AI', fr: 'AI avancée', es: 'IA avanzada' },
+            { key: 'automation', en: 'Automation', fr: 'Automatisation', es: 'Automatización' },
+            { key: 'analytics', en: 'Analytics', fr: 'Analytique', es: 'Analítica' },
+          ],
+          enterprise: [
+            { key: 'sla', en: 'Custom SLAs', fr: 'SLA personnalisés', es: 'SLA personalizados' },
+            { key: 'seats', en: 'Team seats', fr: 'Licences équipe', es: 'Licencias de equipo' },
+            { key: 'support', en: 'Priority support', fr: 'Support prioritaire', es: 'Soporte prioritario' },
+          ],
+        },
       },
       done: {
         title: '¡Todo listo!',
         subtitle: 'Tu panel personalizado está preparado.',
         summaryTitle: 'Resumen de configuración',
         cta: 'Ir al panel',
+        summary: {
+          profile: 'Perfil completado',
+          niche: (n: string) => `Nicho: ${n}`,
+          goals: (n: number) => `Objetivos seleccionados: ${n}`,
+          platforms: (n: number) => `Plataformas conectadas: ${n}`,
+          ai: 'IA configurada',
+          plan: (p: string) => `Plan: ${p}`,
+        },
       },
     },
   },

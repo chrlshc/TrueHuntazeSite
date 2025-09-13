@@ -451,10 +451,10 @@ export default function OnboardingSetupClient({
             locale={locale as any}
             data={{
               displayName: formData.displayName,
-              nicheName: activityValues.niche,
-              goalsCount: activityValues.goals?.length || 0,
+              nicheKey: activityValues.niche,
+              goalsKeys: activityValues.goals,
               connectedPlatforms: formData.connectedPlatforms,
-              planName: undefined,
+              planId: undefined,
               aiConfigured: Boolean(aiValues.tone || aiValues.welcome),
             }}
             onGoDashboard={completeAndRoute}

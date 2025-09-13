@@ -1,15 +1,16 @@
 'use client';
 import * as React from 'react';
 import { getCopy } from '@/src/lib/onboarding/copy';
+import { pick } from '@/src/lib/onboarding/i18n-utils';
 
 type Props = {
   locale?: 'en' | 'fr' | 'es';
   data: {
     displayName?: string;
-    nicheName?: string;
-    goalsCount?: number;
+    nicheKey?: string;
+    goalsKeys?: string[];
     connectedPlatforms?: string[];
-    planName?: string;
+    planId?: 'starter'|'pro'|'enterprise';
     aiConfigured?: boolean;
   };
   onGoDashboard?: () => void;
@@ -21,6 +22,22 @@ export default function CompletionStep({
   onGoDashboard,
 }: Props) {
   const t = getCopy(locale);
+
+  // Resolve labels
+  const nicheLabel = data.nicheKey
+    ? pick(
+        (t.steps.activity as any).options?.niches?.find((n: any) => n.key === data.nicheKey) ?? { en: data.nicheKey!, fr: data.nicheKey!, es: data.nicheKey! },
+        locale as any
+      )
+    : undefined;
+  const goalsCount = data.goalsKeys?.length ?? 0;
+  const planName = data.planId
+    ? (data.planId === 'starter'
+        ? t.steps.plan.cards.starter.name
+        : data.planId === 'pro'
+        ? t.steps.plan.cards.pro.name
+        : t.steps.plan.cards.enterprise.name)
+    : undefined;
 
   return (
     <section className="flex flex-col items-center text-center gap-6">
@@ -37,18 +54,18 @@ export default function CompletionStep({
         <ul className="space-y-2">
           <li className="flex items-start gap-2">
             <span className="i-check mt-0.5" />
-            <span>{t.steps.done.summaryTitle}{data.displayName ? ` — ${data.displayName}` : ''}</span>
+            <span>{t.steps.done.summary.profile}{data.displayName ? ` — ${data.displayName}` : ''}</span>
           </li>
-          {data.nicheName && (
+          {nicheLabel && (
             <li className="flex items-start gap-2">
               <span className="i-check mt-0.5" />
-              <span>{/* niche */}{t.steps.done.summary.niche?.(data.nicheName) ?? `Niche: ${data.nicheName}`}</span>
+              <span>{t.steps.done.summary.niche?.(nicheLabel) ?? `Niche: ${nicheLabel}`}</span>
             </li>
           )}
-          {typeof data.goalsCount === 'number' && (
+          {typeof goalsCount === 'number' && (
             <li className="flex items-start gap-2">
               <span className="i-check mt-0.5" />
-              <span>{t.steps.done.summary.goals?.(data.goalsCount) ?? `Goals selected: ${data.goalsCount}`}</span>
+              <span>{t.steps.done.summary.goals?.(goalsCount) ?? `Goals selected: ${goalsCount}`}</span>
             </li>
           )}
           {data.connectedPlatforms && (
@@ -65,10 +82,10 @@ export default function CompletionStep({
               <span>{t.steps.done.summary.ai ?? 'AI configured'}</span>
             </li>
           )}
-          {data.planName && (
+          {planName && (
             <li className="flex items-start gap-2">
               <span className="i-check mt-0.5" />
-              <span>{t.steps.done.summary.plan?.(data.planName) ?? `Plan: ${data.planName}`}</span>
+              <span>{t.steps.done.summary.plan?.(planName) ?? `Plan: ${planName}`}</span>
             </li>
           )}
         </ul>
@@ -80,4 +97,3 @@ export default function CompletionStep({
     </section>
   );
 }
-

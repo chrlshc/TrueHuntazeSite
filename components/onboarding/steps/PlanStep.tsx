@@ -1,6 +1,7 @@
 'use client';
 import * as React from 'react';
 import { getCopy } from '@/src/lib/onboarding/copy';
+import { pick } from '@/src/lib/onboarding/i18n-utils';
 
 type PlanId = 'starter' | 'pro' | 'enterprise';
 
@@ -30,13 +31,17 @@ export default function PlanStep({
   const t = getCopy(locale);
   const [cycle, setCycle] = React.useState<'monthly' | 'yearly'>('monthly');
 
+  const featuresStarter = (t.steps.plan as any).features?.starter?.map((f: any) => pick(f, locale as any)) ?? [];
+  const featuresPro = (t.steps.plan as any).features?.pro?.map((f: any) => pick(f, locale as any)) ?? [];
+  const featuresEnt = (t.steps.plan as any).features?.enterprise?.map((f: any) => pick(f, locale as any)) ?? [];
+
   const defaultPlans: Plan[] = [
     {
       id: 'starter',
       name: t.steps.plan.cards.starter.name,
       priceMonthly: 0,
       priceYearly: 0,
-      features: ['Basic AI assistant', 'Essential tools'],
+      features: featuresStarter,
       cta: t.steps.plan.cards.starter.cta,
     },
     {
@@ -44,7 +49,7 @@ export default function PlanStep({
       name: t.steps.plan.cards.pro.name,
       priceMonthly: 29,
       priceYearly: 24,
-      features: ['Advanced AI', 'Automation', 'Analytics'],
+      features: featuresPro,
       cta: t.steps.plan.cards.pro.cta,
       recommended: true,
     },
@@ -53,12 +58,16 @@ export default function PlanStep({
       name: t.steps.plan.cards.enterprise.name,
       priceMonthly: 0,
       priceYearly: 0,
-      features: ['Custom SLAs', 'Team seats', 'Priority support'],
+      features: featuresEnt,
       cta: t.steps.plan.cards.enterprise.cta,
     },
   ];
 
   const plans = plansOverride ?? defaultPlans;
+
+  const period = (c: 'monthly'|'yearly') => c === 'monthly'
+    ? (locale === 'fr' ? 'mois' : locale === 'es' ? 'mes' : 'mo')
+    : (locale === 'fr' ? 'an' : locale === 'es' ? 'año' : 'yr');
 
   return (
     <section className="space-y-6">
@@ -110,18 +119,7 @@ export default function PlanStep({
                 {isFree ? 'Free' : `$${price}`}
                 {!isFree && (
                   <span className="text-sm font-normal">
-                    /
-                    {cycle === 'monthly'
-                      ? locale === 'fr'
-                        ? 'mois'
-                        : locale === 'es'
-                        ? 'mes'
-                        : 'mo'
-                      : locale === 'fr'
-                      ? 'an'
-                      : locale === 'es'
-                      ? 'año'
-                      : 'yr'}
+                    /{period(cycle)}
                   </span>
                 )}
               </div>
@@ -151,4 +149,3 @@ export default function PlanStep({
     </section>
   );
 }
-
