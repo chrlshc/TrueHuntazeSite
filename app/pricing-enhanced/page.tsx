@@ -65,8 +65,8 @@ const plans = [
 
 function PricingContent() {
   const { indicators } = useUrgency()
-  const priceIncreaseIndicator = indicators.find(i => i.type === 'price_increase')
-  const limitedSpotsIndicator = indicators.find(i => i.type === 'limited_spots')
+  const priceIndicator = indicators.find(i => i.type === 'offer' || i.type === 'update')
+  const socialProofIndicator = indicators.find(i => i.type === 'social_proof')
 
   return (
     <>
@@ -88,15 +88,15 @@ function PricingContent() {
               Choose the perfect plan for your creator business. All plans include a 14-day free trial.
             </p>
             
-            {/* Urgency Alert */}
-            {priceIncreaseIndicator && (
+            {/* Professional Alert */}
+            {priceIndicator && (
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mt-6 inline-flex items-center gap-2 px-4 py-2 bg-orange-500/10 border border-orange-500/20 rounded-lg text-orange-400"
+                className="mt-6 inline-flex items-center gap-2 px-4 py-2 bg-[#5E6AD2]/10 border border-[#5E6AD2]/20 rounded-lg text-[#5E6AD2]"
               >
                 <TrendingUp className="w-4 h-4" />
-                <span className="text-sm font-medium">{priceIncreaseIndicator.message}</span>
+                <span className="text-sm font-medium">{priceIndicator.message}</span>
               </motion.div>
             )}
           </motion.div>
@@ -137,13 +137,13 @@ function PricingContent() {
                       )}
                     </div>
                     
-                    {plan.popular && limitedSpotsIndicator && (
+                    {plan.popular && socialProofIndicator && (
                       <motion.p
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="mt-2 text-sm text-red-400"
+                        className="mt-2 text-sm text-[#9CA3AF]"
                       >
-                        {limitedSpotsIndicator.message}
+                        {socialProofIndicator.message}
                       </motion.p>
                     )}
                   </div>
@@ -245,7 +245,7 @@ function PricingContent() {
 
 export default function PricingEnhanced() {
   return (
-    <UrgencyProvider mockMode={true} displayMode="both" position="bottom-right">
+    <UrgencyProvider mockMode={true} displayMode="none" position="bottom-right">
       <PricingContent />
     </UrgencyProvider>
   )

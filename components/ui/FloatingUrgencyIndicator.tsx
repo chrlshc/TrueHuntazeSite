@@ -16,37 +16,37 @@ interface FloatingUrgencyIndicatorProps {
 }
 
 const iconMap = {
-  limited_spots: Users,
-  price_increase: TrendingUp,
-  flash_sale: Zap,
-  user_activity: Users,
-  trending: TrendingUp
+  announcement: AlertCircle,
+  update: TrendingUp,
+  offer: Zap,
+  social_proof: Users,
+  feature: TrendingUp
 }
 
 const severityConfig = {
-  low: {
-    bg: 'bg-blue-500',
-    text: 'text-blue-50',
-    border: 'border-blue-400',
-    glow: 'shadow-blue-500/50'
+  info: {
+    bg: 'bg-[#5E6AD2]',
+    text: 'text-white',
+    border: 'border-[#5E6AD2]',
+    glow: 'shadow-[#5E6AD2]/30'
   },
-  medium: {
-    bg: 'bg-yellow-500',
-    text: 'text-yellow-50',
-    border: 'border-yellow-400',
-    glow: 'shadow-yellow-500/50'
+  success: {
+    bg: 'bg-green-600',
+    text: 'text-white',
+    border: 'border-green-500',
+    glow: 'shadow-green-500/30'
   },
-  high: {
-    bg: 'bg-orange-500',
-    text: 'text-orange-50',
-    border: 'border-orange-400',
-    glow: 'shadow-orange-500/50'
+  warning: {
+    bg: 'bg-[#252528]',
+    text: 'text-white',
+    border: 'border-[#2D2D30]',
+    glow: 'shadow-black/20'
   },
-  critical: {
-    bg: 'bg-red-500',
-    text: 'text-red-50',
-    border: 'border-red-400',
-    glow: 'shadow-red-500/50'
+  important: {
+    bg: 'bg-gradient-to-br from-[#5E6AD2] to-[#4C5BC0]',
+    text: 'text-white',
+    border: 'border-[#5E6AD2]',
+    glow: 'shadow-[#5E6AD2]/50'
   }
 }
 
@@ -102,13 +102,12 @@ export default function FloatingUrgencyIndicator({
             <div className="flex items-center gap-2">
               <motion.div
                 animate={{ 
-                  scale: [1, 1.2, 1],
-                  rotate: indicator.severity === 'critical' ? [0, -10, 10, -10, 0] : 0
+                  scale: [1, 1.1, 1],
                 }}
                 transition={{ 
-                  duration: indicator.severity === 'critical' ? 0.5 : 2,
+                  duration: 2,
                   repeat: Infinity,
-                  repeatDelay: indicator.severity === 'critical' ? 0 : 3
+                  repeatDelay: 3
                 }}
                 className="flex-shrink-0"
               >
@@ -174,8 +173,8 @@ export default function FloatingUrgencyIndicator({
             </motion.div>
           )}
 
-          {/* Time indicator for critical */}
-          {indicator.severity === 'critical' && (
+          {/* Time indicator for important */}
+          {indicator.severity === 'important' && indicator.expiresAt && (
             <motion.div
               className="absolute top-2 right-2"
               animate={{ opacity: [0.5, 1, 0.5] }}

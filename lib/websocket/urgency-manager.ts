@@ -2,9 +2,9 @@ import { EventEmitter } from 'events'
 
 export interface UrgencyIndicator {
   id: string
-  type: 'limited_spots' | 'price_increase' | 'flash_sale' | 'user_activity' | 'trending'
+  type: 'announcement' | 'update' | 'offer' | 'social_proof' | 'feature'
   message: string
-  severity: 'low' | 'medium' | 'high' | 'critical'
+  severity: 'info' | 'success' | 'warning' | 'important'
   data?: any
   timestamp: number
   expiresAt?: number
@@ -215,37 +215,37 @@ export class UrgencyWebSocketManager extends EventEmitter {
 
 // Mock data generator for development
 export function createMockUrgencyIndicator(): UrgencyIndicator {
-  const types: UrgencyIndicator['type'][] = ['limited_spots', 'price_increase', 'flash_sale', 'user_activity', 'trending']
-  const severities: UrgencyIndicator['severity'][] = ['low', 'medium', 'high', 'critical']
+  const types: UrgencyIndicator['type'][] = ['announcement', 'update', 'offer', 'social_proof', 'feature']
+  const severities: UrgencyIndicator['severity'][] = ['info', 'success', 'warning', 'important']
   
   const type = types[Math.floor(Math.random() * types.length)]
   const severity = severities[Math.floor(Math.random() * severities.length)]
   
   const messages: Record<UrgencyIndicator['type'], string[]> = {
-    limited_spots: [
-      'Only 3 spots left for Pro plan at current price',
-      'Enterprise demo slots filling up - 2 remaining today',
-      'Limited beta access: 5 spots remaining'
+    announcement: [
+      'Annual plan discount available for new customers',
+      'Schedule a demo with our team this week',
+      'Early access to new features now available'
     ],
-    price_increase: [
-      'Prices increase in 24 hours - lock in current rates',
-      'Early bird pricing ends in 2 days',
-      'Save 30% - offer expires at midnight'
+    update: [
+      'Current pricing available through end of month',
+      'Lock in introductory rates with annual billing',
+      'Grandfather pricing for early adopters'
     ],
-    flash_sale: [
-      'Flash Sale: 50% off annual plans for next 2 hours',
-      'Weekend Special: Get 3 months free with annual plan',
-      'Limited Time: Unlock all features at starter price'
+    offer: [
+      'Save 20% with annual billing',
+      'Complimentary onboarding for Enterprise plans',
+      'Extended trial available for qualified businesses'
     ],
-    user_activity: [
-      '127 creators joined in the last hour',
-      'Sarah M. just earned $5,000 this month',
-      '15 people viewing this plan right now'
+    social_proof: [
+      'Join leading creators using Huntaze',
+      'Trusted by fast-growing businesses',
+      'See how teams scale with our platform'
     ],
-    trending: [
-      'Featured in TechCrunch - high traffic alert',
-      '#1 trending in Creator Tools category',
-      'Viral on Creator Twitter - servers scaling'
+    feature: [
+      'New: Advanced analytics dashboard',
+      'Product update: Enhanced AI capabilities',
+      'Case study: 300% ROI improvement'
     ]
   }
   

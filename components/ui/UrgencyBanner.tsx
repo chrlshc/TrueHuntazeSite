@@ -12,18 +12,18 @@ interface UrgencyBannerProps {
 }
 
 const iconMap = {
-  limited_spots: Users,
-  price_increase: TrendingUp,
-  flash_sale: Zap,
-  user_activity: Users,
-  trending: TrendingUp
+  announcement: AlertCircle,
+  update: TrendingUp,
+  offer: Zap,
+  social_proof: Users,
+  feature: TrendingUp
 }
 
 const severityColors = {
-  low: 'bg-blue-500/10 border-blue-500/20 text-blue-400',
-  medium: 'bg-yellow-500/10 border-yellow-500/20 text-yellow-400',
-  high: 'bg-orange-500/10 border-orange-500/20 text-orange-400',
-  critical: 'bg-red-500/10 border-red-500/20 text-red-400'
+  info: 'bg-blue-500/10 border-blue-500/20 text-blue-400',
+  success: 'bg-green-500/10 border-green-500/20 text-green-400',
+  warning: 'bg-yellow-500/10 border-yellow-500/20 text-yellow-400',
+  important: 'bg-purple-500/10 border-purple-500/20 text-purple-400'
 }
 
 export default function UrgencyBanner({ indicators, onDismiss, className }: UrgencyBannerProps) {

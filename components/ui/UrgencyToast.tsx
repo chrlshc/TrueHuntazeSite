@@ -12,11 +12,11 @@ interface UrgencyToastProps {
 }
 
 const iconMap = {
-  limited_spots: Users,
-  price_increase: TrendingUp,
-  flash_sale: Zap,
-  user_activity: Users,
-  trending: TrendingUp
+  announcement: AlertCircle,
+  update: TrendingUp,
+  offer: Zap,
+  social_proof: Users,
+  feature: TrendingUp
 }
 
 export default function UrgencyToast({ indicator, onDismiss, duration = 5000 }: UrgencyToastProps) {
@@ -40,9 +40,9 @@ export default function UrgencyToast({ indicator, onDismiss, duration = 5000 }: 
         <div className="flex items-start gap-3">
           <div className={`
             p-2 rounded-lg
-            ${indicator.severity === 'critical' ? 'bg-red-500/20 text-red-400' :
-              indicator.severity === 'high' ? 'bg-orange-500/20 text-orange-400' :
-              indicator.severity === 'medium' ? 'bg-yellow-500/20 text-yellow-400' :
+            ${indicator.severity === 'important' ? 'bg-purple-500/20 text-purple-400' :
+              indicator.severity === 'warning' ? 'bg-yellow-500/20 text-yellow-400' :
+              indicator.severity === 'success' ? 'bg-green-500/20 text-green-400' :
               'bg-blue-500/20 text-blue-400'}
           `}>
             <Icon className="w-5 h-5" />

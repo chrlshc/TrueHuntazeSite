@@ -12,8 +12,8 @@ interface UseUrgencyIndicatorsOptions {
 export function useUrgencyIndicators(options: UseUrgencyIndicatorsOptions = {}) {
   const { 
     mockMode = process.env.NODE_ENV === 'development',
-    mockInterval = 30000, // 30 seconds
-    maxIndicators = 5
+    mockInterval = 120000, // 2 minutes
+    maxIndicators = 3
   } = options
 
   const [indicators, setIndicators] = useState<UrgencyIndicator[]>([])
@@ -26,9 +26,8 @@ export function useUrgencyIndicators(options: UseUrgencyIndicatorsOptions = {}) 
   // Initialize WebSocket connection
   useEffect(() => {
     if (mockMode) {
-      // Start with some initial mock indicators
+      // Start with one subtle initial mock indicator
       setIndicators([
-        createMockUrgencyIndicator(),
         createMockUrgencyIndicator()
       ])
       

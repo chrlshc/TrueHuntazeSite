@@ -16,7 +16,7 @@ import { useUrgency } from '@/components/providers/UrgencyProvider'
 
 function HomeContent() {
   const { indicators, dismissIndicator } = useUrgency()
-  const bannerIndicators = indicators.filter(i => i.severity === 'high' || i.severity === 'critical')
+  const bannerIndicators = indicators.filter(i => i.severity === 'important')
 
   return (
     <>
@@ -61,7 +61,7 @@ function HomeContent() {
 
 export default function HomeEnhanced() {
   return (
-    <UrgencyProvider mockMode={true} displayMode="both" position="bottom-right">
+    <UrgencyProvider mockMode={true} displayMode="floating" position="bottom-right">
       <HomeContent />
     </UrgencyProvider>
   )
