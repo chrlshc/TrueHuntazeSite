@@ -4,8 +4,10 @@ import React from 'react'
 import HeroSection from '@/components/sections/HeroSection'
 import FeaturesGrid from '@/components/sections/FeaturesGrid'
 import ROICalculator from '@/components/sections/ROICalculator'
+import EnterpriseSection from '@/components/sections/EnterpriseSection'
+import AIDemo from '@/components/sections/AIDemo'
 import CommandPalette from '@/components/ui/CommandPalette'
-import EnterpriseNav from '@/src/components/enterprise-nav'
+import EnhancedHeader from '@/components/layout/EnhancedHeader'
 
 export default function HomeEnhanced() {
   return (
@@ -13,8 +15,8 @@ export default function HomeEnhanced() {
       {/* Command Palette - Linear Style */}
       <CommandPalette />
       
-      {/* Navigation */}
-      <EnterpriseNav />
+      {/* Enhanced Navigation with Mega Menu */}
+      <EnhancedHeader />
       
       {/* Hero Section with Trust Bar and Metrics */}
       <HeroSection />
@@ -22,17 +24,23 @@ export default function HomeEnhanced() {
       {/* Features Grid */}
       <FeaturesGrid />
       
+      {/* Interactive AI Demo */}
+      <AIDemo />
+      
       {/* ROI Calculator */}
       <ROICalculator />
       
+      {/* Enterprise Section */}
+      <EnterpriseSection />
+      
       {/* Placeholder for additional sections */}
-      <div className="text-center py-20 text-[#9CA3AF]">
+      <div className="text-center py-20 text-[#9CA3AF] bg-[#0F0F10]">
         <p>Additional sections coming soon:</p>
         <ul className="mt-4 space-y-2">
-          <li>" Enterprise Section</li>
-          <li>" Video Testimonials</li>
-          <li>" Interactive AI Demo</li>
-          <li>" Comprehensive Footer</li>
+          <li>• Video Testimonials with Metrics</li>
+          <li>• Urgency Indicators (Live Data)</li>
+          <li>• Comprehensive Footer</li>
+          <li>• Case Studies Section</li>
         </ul>
       </div>
     </>
