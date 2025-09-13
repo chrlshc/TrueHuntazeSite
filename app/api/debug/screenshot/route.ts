@@ -22,6 +22,9 @@ function contentTypeFor(filePath: string): string {
 }
 
 export async function GET(req: NextRequest) {
+  if (process.env.NODE_ENV === 'production') {
+    return NextResponse.json({ error: 'Not available in production' }, { status: 403 });
+  }
   try {
     const url = new URL(req.url);
     const pB64 = url.searchParams.get('p');

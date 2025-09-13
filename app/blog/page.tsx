@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import HeaderImproved from "@/src/components/header-improved";
-import FooterImproved from "@/src/components/footer-improved";
+import EnterpriseNav from "@/src/components/enterprise-nav";
+import EnterpriseFooter from "@/components/sections/EnterpriseFooter";
 import { Calendar, Clock, ArrowRight, TrendingUp, DollarSign, Brain, Zap, Users, Shield } from "lucide-react";
 import Link from "next/link";
 
@@ -88,7 +88,7 @@ const blogPosts = [
 export default function BlogPage() {
   return (
     <>
-      <HeaderImproved />
+      <EnterpriseNav />
       
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-to-b from-purple-50 to-white dark:from-gray-950 dark:to-black">
@@ -274,7 +274,7 @@ export default function BlogPage() {
         </div>
       </section>
 
-      <FooterImproved />
+      <EnterpriseFooter />
     </>
   );
 }

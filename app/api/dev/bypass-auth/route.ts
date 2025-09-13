@@ -3,6 +3,9 @@ import { cookies } from 'next/headers';
 import { generateToken, generateRefreshToken, setAuthCookies } from '@/lib/auth/jwt';
 
 export async function GET(request: NextRequest) {
+  if (process.env.NODE_ENV === 'production') {
+    return NextResponse.json({ error: 'Not available in production' }, { status: 403 });
+  }
   try {
     // Create a mock user for development
     const mockUser = {
@@ -47,6 +50,9 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  if (process.env.NODE_ENV === 'production') {
+    return NextResponse.json({ error: 'Not available in production' }, { status: 403 });
+  }
   try {
     // For POST, allow choosing where to go
     const mockUser = {

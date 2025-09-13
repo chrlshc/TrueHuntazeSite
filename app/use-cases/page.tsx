@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import HeaderImproved from "@/src/components/header-improved";
-import FooterImproved from "@/src/components/footer-improved";
+import EnterpriseNav from "@/src/components/enterprise-nav";
+import EnterpriseFooter from "@/components/sections/EnterpriseFooter";
 import { Instagram, Video, DollarSign, Users, Clock, TrendingUp, MessageSquare, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -119,7 +119,7 @@ const metrics = [
 export default function UseCasesPage() {
   return (
     <>
-      <HeaderImproved />
+      <EnterpriseNav />
       
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-to-b from-purple-50 to-white dark:from-gray-950 dark:to-black">
@@ -269,7 +269,7 @@ export default function UseCasesPage() {
         </div>
       </section>
 
-      <FooterImproved />
+      <EnterpriseFooter />
     </>
   );
 }

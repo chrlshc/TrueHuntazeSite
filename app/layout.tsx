@@ -10,17 +10,21 @@ import "./animations.css";
 // import "../styles/remove-dark-overlay.css";
 // import "../styles/no-dark-filters.css";
 // import "../styles/mockups.css";
-import "../styles/design-system.css"; // DS: colors, base typography, utilities
-import "../styles/shopify-typography.css"; // keep temporarily during transition
+// Shopify Design System - Primary styles
+import "../styles/shopify-design-system.css"; // Unified design system based on Shopify best practices
+
+// Legacy styles - To be migrated progressively
+// import "../styles/design-system.css"; // Replaced by shopify-design-system.css
+// import "../styles/shopify-typography.css"; // Integrated into shopify-design-system.css
 import "../styles/app-visuals.css";
 import "../styles/performance-optimizations.css";
 import "../styles/fix-animations.css"; // MUST BE LAST to fix animations
 // import "../styles/simple-animations.css"; // Simple CSS animations (disabled)
-import "../styles/link-hover.css"; // Link hover effects
+// import "../styles/link-hover.css"; // To be migrated to design system
 // import "../styles/nebula-background.css"; // Purple nebula effects (disabled)
 import "../styles/mobile-standards.css"; // Mobile design standards
 import "../styles/viewport-fixes.css"; // Fix viewport units for mobile
-import "../styles/button-mobile-optimized.css"; // Mobile-optimized buttons
+// import "../styles/button-mobile-optimized.css"; // Integrated into shopify-design-system.css
 import "../styles/spacing-grid-system.css"; // 8px baseline grid system
 import "../styles/safe-zones-dead-areas.css"; // Safe zones and gesture areas
 import "../styles/mobile-responsive-fix.css"; // Mobile responsive fixes
@@ -30,8 +34,8 @@ import "../styles/high-contrast.css"; // High contrast for better readability
 // import "../styles/dark-theme-pro.css"; // Professional dark theme (disabled for now)
 import "../styles/contrast-improvements.css"; // AA compliance contrast fixes
 import "../styles/section-separation.css"; // Section visual separation
-import "../styles/cta-buttons.css"; // Unified CTA button styles
-// import "../styles/typography-fixes.css"; // Merged into design-system.css (disabled)
+// import "../styles/cta-buttons.css"; // Integrated into shopify-design-system.css
+// import "../styles/typography-fixes.css"; // Integrated into shopify-design-system.css
 import "../styles/enterprise.css"; // Enterprise landing page styles
 import "../styles/clean-dark-theme.css"; // Clean dark theme
 // import HeaderShopify from "@/src/components/header-shopify";

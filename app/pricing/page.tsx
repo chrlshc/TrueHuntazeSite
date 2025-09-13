@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import HeaderImproved from "@/src/components/header-improved";
-import FooterImproved from "@/src/components/footer-improved";
+import EnterpriseNav from "@/src/components/enterprise-nav";
+import EnterpriseFooter from "@/components/sections/EnterpriseFooter";
 import { Button } from "@/components/ui/button";
 import { Check, X, Sparkles, Zap, Crown } from "lucide-react";
 import { events } from "@/src/lib/analytics";
@@ -76,7 +76,7 @@ export default function PricingPage() {
 
   return (
     <>
-      <HeaderImproved />
+      <EnterpriseNav />
       
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-950 dark:to-black">
@@ -275,7 +275,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <FooterImproved />
+      <EnterpriseFooter />
     </>
   );
 }

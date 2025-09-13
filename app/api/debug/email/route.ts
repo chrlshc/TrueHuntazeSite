@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { sendMail } from '@/lib/mailer';
 
 export async function GET(req: NextRequest) {
+  if (process.env.NODE_ENV === 'production') {
+    return NextResponse.json({ error: 'Not available in production' }, { status: 403 });
+  }
   // Check email configuration
   const config = {
     hasSES: !!process.env.SES_FROM_EMAIL,
@@ -18,6 +21,9 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  if (process.env.NODE_ENV === 'production') {
+    return NextResponse.json({ error: 'Not available in production' }, { status: 403 });
+  }
   try {
     const { to } = await req.json();
     

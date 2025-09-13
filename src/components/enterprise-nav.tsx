@@ -118,7 +118,7 @@ export default function EnterpriseNav() {
             {/* Solutions Dropdown */}
             <div className="relative">
               <button
-                className="flex items-center gap-1 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium transition-colors"
+                className="flex items-center gap-1 px-3 py-2 text-sm text-neutral-300 hover:text-white transition-colors"
                 onMouseEnter={() => setSolutionsOpen(true)}
                 onMouseLeave={() => setSolutionsOpen(false)}
               >
@@ -165,7 +165,7 @@ export default function EnterpriseNav() {
             {/* Pricing Link */}
             <Link 
               href="/pricing" 
-              className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium transition-colors"
+              className="px-3 py-2 text-sm text-neutral-300 hover:text-white transition-colors"
             >
               Pricing
             </Link>
@@ -173,7 +173,7 @@ export default function EnterpriseNav() {
             {/* Resources Dropdown */}
             <div className="relative">
               <button
-                className="flex items-center gap-1 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium transition-colors"
+                className="flex items-center gap-1 px-3 py-2 text-sm text-neutral-300 hover:text-white transition-colors"
                 onMouseEnter={() => setResourcesOpen(true)}
                 onMouseLeave={() => setResourcesOpen(false)}
               >
@@ -222,7 +222,7 @@ export default function EnterpriseNav() {
           {/* Sign in - Indépendant */}
           <Link
             href="/auth"
-            className="ml-20 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium transition-colors"
+            className="ml-20 inline-flex h-9 items-center rounded-lg px-3 text-sm text-neutral-200 hover:bg-white/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 transition-colors"
           >
             Sign in
           </Link>
@@ -230,7 +230,7 @@ export default function EnterpriseNav() {
           {/* Start for free - Indépendant */}
           <Link
             href="/get-started"
-            className="ml-6 px-6 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
+            className="ml-6 inline-flex h-9 items-center rounded-lg bg-white px-4 text-sm font-medium text-black hover:bg-white/90 transition-colors"
           >
             Start for free
           </Link>
