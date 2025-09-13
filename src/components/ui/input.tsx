@@ -7,13 +7,11 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className
   <input
     ref={ref}
     className={cn(
-      'h-9 w-full rounded-md border border-[#E1E3E5] bg-white px-3 text-sm text-[#111213] outline-none',
-      'placeholder:text-[#6D7175] focus:border-[#2C6ECB] focus:ring-2 focus:ring-[#79A6E8]',
-      'dark:border-[#3A3B3D] dark:bg-[#202223] dark:text-[#E3E3E3] dark:placeholder:text-[#A5A7AB] dark:focus:border-[#2C6ECB] dark:focus:ring-[#3E6FB6]',
+      'h-9 w-full rounded-md border border-border bg-surface px-3 text-sm text-ink outline-none',
+      'placeholder:text-inkSubdued focus:border-accent focus:ring-2 focus:ring-accentRing',
       className,
     )}
     {...props}
   />
 ));
 Input.displayName = 'Input';
-

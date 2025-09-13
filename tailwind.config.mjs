@@ -24,6 +24,16 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Polaris-like tokens exposed to Tailwind
+        page: 'var(--page)',
+        surfaceMuted: 'var(--surface-muted)',
+        surfaceRaised: 'var(--surface-raised)',
+        ink: 'var(--ink)',
+        inkSubdued: 'var(--ink-subdued)',
+        accent: 'var(--accent)',
+        accentHover: 'var(--accent-hover)',
+        accentRing: 'var(--accent-ring)',
+        borderMuted: 'var(--border-muted)',
         // Huntaze Design System Colors
         surface: {
           DEFAULT: 'var(--color-surface)',

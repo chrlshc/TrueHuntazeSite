@@ -48,7 +48,7 @@ export default function RevenueChart() {
               labelStyle={{ color: 'var(--chart-tick)' }}
               formatter={(v: number) => [`$${(v as number).toLocaleString()}`, 'Net']}
             />
-            <Area type="monotone" dataKey="net" stroke="#2C6ECB" fill="url(#fillNet)" strokeWidth={2} activeDot={{ r: 4 }} />
+            <Area type="monotone" dataKey="net" stroke="var(--accent)" fill="url(#fillNet)" strokeWidth={2} activeDot={{ r: 4 }} />
           </AreaChart>
         </ResponsiveContainer>
       </CardContent>

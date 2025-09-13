@@ -23,25 +23,78 @@ html {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Polaris-like base tokens */
-:root{
-  --bg-page:#F6F6F7; /* page très pâle */
-  --bg-surface:#FFFFFF; /* cartes blanches */
-  --bg-surface-dark:#202223; /* cartes dark */
-  --ink:#111213;
-  --ink-subdued:#6D7175;
-  --border:#E1E3E5;
-  --border-dark:#3A3B3D;
-  --accent:#2C6ECB; /* indigo Shopify-like */
-  /* Charts / Tooltip */
-  --chart-grid: rgba(17,18,19,0.06);
-  --chart-tick: #6D7175;
-  --tooltip-bg: #FFFFFF;
-  --tooltip-fg: #111213;
-  --tooltip-border: #E1E3E5;
-}
-html{ font-size:14px; } /* body 14px comme Polaris */
+/* Polaris-like CSS tokens (single source of truth) */
+:root {
+  /* Surfaces & background (light) */
+  --page: #F6F6F7;
+  --surface: #FFFFFF;
+  --surface-muted: #F6F6F7;
+  --surface-raised: #FFFFFF;
 
+  /* Borders */
+  --border: #E1E3E5;
+  --border-muted: #EBEEF0;
+
+  /* Text */
+  --ink: #111213;
+  --ink-subdued: #6D7175;
+
+  /* Accent / focus */
+  --accent: #2C6ECB;
+  --accent-hover: #245CAD;
+  --accent-ring: #79A6E8;
+
+  /* Charts / Tooltip */
+  --chart-grid: rgba(17, 18, 19, 0.06);
+  --chart-tick: var(--ink-subdued);
+  --tooltip-bg: var(--surface);
+  --tooltip-fg: var(--ink);
+  --tooltip-border: var(--border);
+
+  /* Back-compat mapping to existing DS vars (used by Tailwind config) */
+  --color-surface: var(--surface);
+  --color-surface-light: var(--surface);
+  --color-surface-elevated: var(--surface-raised);
+  --color-surface-elevated-light: var(--surface-raised);
+  --color-surface-hover: var(--surface-muted);
+  --color-surface-hover-light: var(--surface-muted);
+  --color-border: var(--border);
+  --color-border-light: var(--border-muted);
+  --color-content-primary: var(--ink);
+  --color-content-secondary: var(--ink-subdued);
+  --color-content-tertiary: var(--ink-subdued);
+}
+html { font-size: 14px; }
+
+.dark {
+  /* Surfaces & background (dark) */
+  --page: #0B0B0D;
+  --surface: #202223;
+  --surface-muted: #2C2D2F;
+  --surface-raised: #202223;
+
+  /* Borders */
+  --border: #3A3B3D;
+  --border-muted: #2F3133;
+
+  /* Text */
+  --ink: #E3E3E3;
+  --ink-subdued: #A5A7AB;
+
+  /* Accent / focus */
+  --accent: #2C6ECB;
+  --accent-hover: #245CAD;
+  --accent-ring: #3E6FB6;
+
+  /* Charts / Tooltip */
+  --chart-grid: rgba(227, 227, 227, 0.06);
+  --chart-tick: var(--ink-subdued);
+  --tooltip-bg: var(--surface);
+  --tooltip-fg: var(--ink);
+  --tooltip-border: var(--border);
+
+  /* Back-compat mapping remains valid in dark */
+}
 .dark{
   /* chart + tooltip overrides in dark */
   --chart-grid: rgba(227,227,227,0.06);
