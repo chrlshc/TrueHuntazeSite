@@ -35,11 +35,12 @@ export function StepShellV2({
   rightRail,
 }: StepShellV2Props) {
   const pct = Math.round((step / total) * 100);
+  const hasRightRail = !!rightRail;
 
   return (
     <div className="min-h-dvh flex flex-col bg-gradient-to-b from-background via-background to-background">
       <header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-background/70 border-b">
-        <div className="mx-auto w-full max-w-screen-2xl px-4">
+        <div className={cn("mx-auto w-full px-4", hasRightRail ? "max-w-screen-2xl" : "max-w-3xl") }>
           <div className="flex items-center gap-3 py-3">
             <div className="text-xs text-muted-foreground">Step {step} of {total}</div>
             <div className="hidden md:flex items-center gap-2 flex-1">
@@ -73,14 +74,17 @@ export function StepShellV2({
       </header>
 
       <main className="flex-1">
-        <div className="mx-auto w-full max-w-screen-2xl grid grid-cols-1 lg:grid-cols-12 gap-6 p-4">
-          <section className="lg:col-span-7 space-y-4">
+        <div className={cn(
+          "mx-auto w-full p-4",
+          hasRightRail ? "max-w-screen-2xl grid grid-cols-1 lg:grid-cols-12 gap-6" : "max-w-3xl"
+        )}>
+          <section className={cn("space-y-4", hasRightRail && "lg:col-span-7") }>
             <Card className="rounded-2xl shadow-sm">
               <CardContent className="p-6">{children}</CardContent>
             </Card>
           </section>
 
-          {rightRail && (
+          {hasRightRail && (
             <aside className="hidden lg:flex lg:col-span-5">
               <div className="w-full space-y-4">{rightRail}</div>
             </aside>
@@ -89,7 +93,7 @@ export function StepShellV2({
       </main>
 
       <footer className="sticky bottom-0 z-40 border-t backdrop-blur supports-[backdrop-filter]:bg-background/70">
-        <div className="mx-auto max-w-screen-2xl px-4 py-3 flex items-center gap-2">
+        <div className={cn("mx-auto px-4 py-3 flex items-center gap-2", hasRightRail ? "max-w-screen-2xl" : "max-w-3xl") }>
           <Button variant="ghost" size="sm" onClick={onBack} type="button">
             <ChevronLeft className="mr-1 h-4 w-4" /> Back
           </Button>
