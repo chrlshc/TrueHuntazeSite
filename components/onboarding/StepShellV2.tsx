@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { getCopy, type Locale } from "@/src/lib/onboarding/copy";
 import { Card, CardContent } from "@/components/ui/card";
 import ProgressBar from "@/components/onboarding/ProgressBar";
+import Stepper from "@/components/onboarding/Stepper";
 
 export type StepShellV2Props = {
   step: number;
@@ -21,6 +22,8 @@ export type StepShellV2Props = {
   continueDisabled?: boolean;
   rightRail?: React.ReactNode;
   locale?: Locale;
+  stepsMeta?: { key: string; label: string }[];
+  onStepClick?: (index: number) => void;
 };
 
 export function StepShellV2({
@@ -36,6 +39,8 @@ export function StepShellV2({
   continueDisabled,
   rightRail,
   locale = 'en',
+  stepsMeta,
+  onStepClick,
 }: StepShellV2Props) {
   const pct = Math.round((step / total) * 100);
   const hasRightRail = !!rightRail;
@@ -46,9 +51,18 @@ export function StepShellV2({
       <main className="flex-1">
         {/* Inline header (no separate black bar), placed at the very top */}
         <div className={cn("mx-auto w-full px-4 pt-0", hasRightRail ? "max-w-screen-2xl" : "max-w-3xl") }>
-          <div className="flex items-center justify-between gap-3">
-            <div className="text-xs text-muted-foreground">{t.shell.stepOf(step, total)}</div>
-            <div className="w-40"><ProgressBar current={step} total={total} /></div>
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            {stepsMeta && (
+              <Stepper
+                steps={stepsMeta}
+                currentIndex={Math.max(0, Math.min(step - 1, total - 1))}
+                onStepClick={onStepClick}
+              />
+            )}
+            <div className="flex items-center gap-3">
+              <div className="text-xs text-muted-foreground">{t.shell.stepOf(step, total)}</div>
+              <div className="w-40"><ProgressBar current={step} total={total} /></div>
+            </div>
           </div>
           <div className="py-3">
             <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">{title}</h1>

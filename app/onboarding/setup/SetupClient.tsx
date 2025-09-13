@@ -367,35 +367,9 @@ export default function OnboardingSetupClient({
         );
       case 'sell-plan':
         return (
-          <StepShell step={2} total={totalSteps} title={C.sellPlan.title} subtitle={C.sellPlan.subtitle} onBack={handlePrevious} onContinue={handleNext}>
-            <div className="mb-3 flex items-center justify-between rounded-lg border border-white/10 bg-[#111214] p-3">
-              <div>
-                <div className="text-sm font-semibold">Recommended setup</div>
-                <div className="text-xs text-content-tertiary">{C.sellPlan.recommendedTip}</div>
-              </div>
-              <button type="button" onClick={() => { setSellPlan(['subs','ppv']); updateOps?.({ sellPlan: ['subs','ppv'] }); handleNext(); }} className="btn-primary px-3 py-2 text-sm">
-                <Check className="w-4 h-4 mr-1 inline-block" /> {C.sellPlan.primaryCta}
-              </button>
-            </div>
-            <div className="form-group">
-              <label className="form-label">Choose what you plan to sell</label>
-              <div className="niche-grid">
-                {C.sellPlan.options.map((o) => {
-                  const selected = sellPlan.includes(o.key as any);
-                  return (
-                    <button key={o.key} type="button" onClick={() => {
-                      const s = new Set(sellPlan || []);
-                      s.has(o.key as any) ? s.delete(o.key as any) : s.add(o.key as any);
-                      const next = Array.from(s) as any;
-                      setSellPlan(next);
-                      updateOps?.({ sellPlan: next });
-                    }} className={`niche-card ${selected ? 'selected' : ''}`}>
-                      <h4 className="niche-title">{o.label}</h4>
-                      {o.caption && <p className="text-xs text-content-tertiary">{o.caption}</p>}
-                    </button>
-                  );
-                })}
-              </div>
+          <StepShell step={2} total={totalSteps} title={t.steps.plan.title} subtitle={t.steps.plan.subtitle} onBack={handlePrevious} onContinue={handleNext} locale={locale}>
+            <div className="mb-3">
+              <PlanStep locale={locale as any} onSkip={handleNext} onChoose={() => handleNext()} />
             </div>
           </StepShell>
         );
@@ -475,6 +449,30 @@ export default function OnboardingSetupClient({
     }
   };
   const t = getCopy((typeof (locale as any) === 'string' ? (locale as any) : 'en'));
+  const stepsMeta = [
+    { key: 'profile',   label: t.steps.profile?.title ?? 'Profile' },
+    { key: 'sell-plan', label: t.steps.plan?.title ?? 'Plan' },
+    { key: 'activity',  label: t.steps.activity?.title ?? 'Activity' },
+    { key: 'platform',  label: t.steps.platforms?.title ?? 'Platforms' },
+    { key: 'ai-config', label: t.steps.ai?.title ?? 'AI' },
+    { key: 'plan',      label: t.steps.plan?.title ?? 'Plan' },
+  ];
+
+  const goToIndex = (i: number) => {
+    if (navMode === 'route') {
+      const map: any = ['profile','sell-plan','niche','platform','ai-config','plan'];
+      const target = map[i] || 'profile';
+      // route to matching path
+      const base = '/onboarding/setup';
+      if (target === 'profile') router.push(`${base}/profile?locale=${locale}`);
+      else if (target === 'niche') router.push(`${base}/activity?locale=${locale}`);
+      else if (target === 'platform') router.push(`${base}/platform?locale=${locale}`);
+      else if (target === 'ai-config') router.push(`${base}/ai?locale=${locale}`);
+      else if (target === 'plan') router.push(`${base}/plan?locale=${locale}`);
+      else if (target === 'sell-plan') router.push(`${base}/sell-plan?locale=${locale}`);
+      return;
+    }
+  };
 
   return renderStep();
 }
