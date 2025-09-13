@@ -10,12 +10,13 @@ import "./animations.css";
 // import "../styles/remove-dark-overlay.css";
 // import "../styles/no-dark-filters.css";
 // import "../styles/mockups.css";
-// Shopify Design System - Primary styles
-import "../styles/shopify-design-system.css"; // Unified design system based on Shopify best practices
+// Hybrid Design System - Shopify Typography + Linear Animations
+import "../styles/shopify-linear-hybrid.css"; // Combined Shopify + Linear design system
 
 // Legacy styles - To be migrated progressively
-// import "../styles/design-system.css"; // Replaced by shopify-design-system.css
-// import "../styles/shopify-typography.css"; // Integrated into shopify-design-system.css
+// import "../styles/shopify-design-system.css"; // Replaced by hybrid system
+// import "../styles/design-system.css"; // Replaced by hybrid system
+// import "../styles/shopify-typography.css"; // Integrated into hybrid system
 import "../styles/app-visuals.css";
 import "../styles/performance-optimizations.css";
 import "../styles/fix-animations.css"; // MUST BE LAST to fix animations

@@ -1,0 +1,555 @@
+/* Shopify + Linear Hybrid Design System
+   Combines Shopify's professional typography with Linear's sophisticated animations
+   and subtle LCH color palette for a modern, professional interface */
+
+/* ===========================
+   CSS Layers Architecture
+   =========================== */
+@layer reset, typography, colors, animations, components, utilities;
+
+/* ===========================
+   1. Typography - Shopify's Inter System
+   =========================== */
+@layer typography {
+  /* Core typography setup */
+  :root {
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, sans-serif;
+    
+    /* Shopify's precise font weights */
+    --weight-regular: 450;
+    --weight-medium: 550;
+    --weight-semibold: 650;
+    --weight-bold: 700;
+    
+    /* Font sizes aligned to 4px grid */
+    --text-xs: 0.75rem;     /* 12px */
+    --text-sm: 0.8125rem;   /* 13px */
+    --text-base: 0.875rem;  /* 14px */
+    --text-lg: 1.25rem;     /* 20px */
+    --text-xl: 1.5rem;      /* 24px */
+    --text-2xl: 1.875rem;   /* 30px */
+    --text-3xl: 2.25rem;    /* 36px */
+    
+    /* Line heights */
+    --leading-tight: 1.2;
+    --leading-snug: 1.4;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.6;
+  }
+  
+  /* Global text rendering optimization */
+  body {
+    font-family: var(--font-primary);
+    font-weight: var(--weight-regular);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-kerning: normal;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  }
+  
+  /* Heading hierarchy */
+  h1, .h1 {
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-tight);
+    letter-spacing: -0.02em;
+  }
+  
+  h2, .h2 {
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-tight);
+    letter-spacing: -0.01em;
+  }
+  
+  h3, .h3 {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-snug);
+  }
+  
+  h4, .h4 {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-snug);
+  }
+  
+  /* Body text variations */
+  .text-body {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-regular);
+    line-height: var(--leading-normal);
+  }
+  
+  .text-caption {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-regular);
+    line-height: var(--leading-normal);
+  }
+  
+  /* Shopify text utilities */
+  .shopify-text {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-kerning: normal;
+  }
+}
+
+/* ===========================
+   2. Colors - Linear's LCH System
+   =========================== */
+@layer colors {
+  :root {
+    /* Linear's 3-variable color system */
+    --color-base-lightness: 98;  /* Background lightness (0-100) */
+    --color-accent-hue: 252;     /* Primary accent (0-360) */
+    --color-contrast: 100;        /* Contrast multiplier */
+    
+    /* Generated colors using LCH */
+    --bg-primary: lch(var(--color-base-lightness) 0 0);
+    --bg-secondary: lch(calc(var(--color-base-lightness) - 5) 0 0);
+    --bg-tertiary: lch(calc(var(--color-base-lightness) - 8) 0 0);
+    
+    /* Primary accent */
+    --accent: lch(60 85 var(--color-accent-hue));
+    --accent-hover: lch(55 90 var(--color-accent-hue));
+    --accent-active: lch(50 95 var(--color-accent-hue));
+    
+    /* Text colors */
+    --text-primary: lch(20 0 0);
+    --text-secondary: lch(40 0 0);
+    --text-tertiary: lch(60 0 0);
+    --text-inverse: lch(98 0 0);
+    
+    /* Subtle blue-gray tones Linear uses */
+    --surface-elevated: lch(96 2 230);
+    --surface-hover: lch(94 3 230);
+    --border-subtle: lch(92 3 230);
+    --border-medium: lch(85 4 230);
+    
+    /* Semantic colors */
+    --color-success: lch(60 60 142);
+    --color-warning: lch(70 60 85);
+    --color-error: lch(60 70 25);
+    --color-info: lch(60 60 252);
+    
+    /* Shadows using rgba for performance */
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.10);
+    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.12);
+    --shadow-2xl: 0 24px 48px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Dark mode using LCH adjustments */
+  [data-theme="dark"] {
+    --color-base-lightness: 10;
+    --color-accent-hue: 252;
+    --color-contrast: 110;
+    
+    /* Inverted text colors */
+    --text-primary: lch(90 0 0);
+    --text-secondary: lch(70 0 0);
+    --text-tertiary: lch(50 0 0);
+    --text-inverse: lch(10 0 0);
+    
+    /* Adjusted surface colors */
+    --surface-elevated: lch(15 2 230);
+    --surface-hover: lch(18 3 230);
+    --border-subtle: lch(20 3 230);
+    --border-medium: lch(25 4 230);
+  }
+}
+
+/* ===========================
+   3. Animations - Linear's Fluid Style
+   =========================== */
+@layer animations {
+  :root {
+    /* Timing functions */
+    --ease-out-cubic: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+    
+    /* Durations */
+    --duration-instant: 100ms;
+    --duration-fast: 150ms;
+    --duration-base: 200ms;
+    --duration-slow: 300ms;
+    --duration-slower: 400ms;
+  }
+  
+  /* Base transition for all interactive elements */
+  * {
+    transition-property: none;
+  }
+  
+  /* Micro-interaction patterns */
+  .hover-lift {
+    transition: transform var(--duration-base) var(--ease-out-cubic),
+                box-shadow var(--duration-base) var(--ease-out-cubic);
+    will-change: transform;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  /* Button interactions */
+  .button-scale {
+    transform: scale(1);
+    transition: all var(--duration-fast) ease-out;
+  }
+  
+  .button-scale:active {
+    transform: scale(0.98);
+  }
+  
+  /* Link hover effect */
+  .link-underline {
+    position: relative;
+    text-decoration: none;
+    transition: color var(--duration-base) ease;
+  }
+  
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: currentColor;
+    transition: width var(--duration-base) var(--ease-out-cubic);
+  }
+  
+  .link-underline:hover::after {
+    width: 100%;
+  }
+  
+  /* Page elements entering animations */
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .animate-in {
+    animation: fadeUp var(--duration-slower) var(--ease-out-cubic) both;
+  }
+  
+  .animate-fade {
+    animation: fadeIn var(--duration-slow) ease-out both;
+  }
+  
+  .animate-slide {
+    animation: slideIn var(--duration-slow) var(--ease-out-cubic) both;
+  }
+  
+  /* Stagger animations */
+  .stagger-1 { animation-delay: 50ms; }
+  .stagger-2 { animation-delay: 100ms; }
+  .stagger-3 { animation-delay: 150ms; }
+  .stagger-4 { animation-delay: 200ms; }
+  .stagger-5 { animation-delay: 250ms; }
+  
+  /* Skeleton loading states */
+  .skeleton {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--bg-secondary);
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        lch(from var(--bg-primary) calc(l + 5) c h) 50%,
+        transparent 100%
+      );
+      animation: shimmer 1.5s infinite;
+    }
+  }
+  
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  
+  /* Focus states */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    transition: outline-offset var(--duration-fast) ease;
+  }
+  
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ===========================
+   4. Components - Hybrid Styles
+   =========================== */
+@layer components {
+  /* Card component with Linear elevation */
+  .card {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 24px;
+    transition: all var(--duration-base) var(--ease-out-cubic);
+  }
+  
+  .card:hover {
+    background-color: var(--surface-hover);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+  
+  /* Button component */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 16px;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    line-height: 1;
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all var(--duration-fast) ease-out;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .btn:hover {
+    background-color: var(--surface-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .btn:active {
+    transform: scale(0.98) translateY(0);
+    box-shadow: none;
+  }
+  
+  .btn-primary {
+    color: var(--text-inverse);
+    background-color: var(--accent);
+    border-color: var(--accent);
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+  }
+  
+  /* Input fields */
+  .input {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-regular);
+    line-height: 20px;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    transition: all var(--duration-fast) ease;
+  }
+  
+  .input:hover {
+    border-color: var(--border-medium);
+  }
+  
+  .input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px lch(from var(--accent) l c h / 0.1);
+  }
+  
+  /* Badge component */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    color: var(--text-secondary);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+  }
+  
+  /* Screenshot container */
+  .screenshot-container {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    box-shadow: var(--shadow-xl);
+  }
+  
+  .screenshot-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* ===========================
+   5. Utilities
+   =========================== */
+@layer utilities {
+  /* Spacing utilities */
+  .p-0 { padding: 0; }
+  .p-1 { padding: 4px; }
+  .p-2 { padding: 8px; }
+  .p-3 { padding: 12px; }
+  .p-4 { padding: 16px; }
+  .p-5 { padding: 20px; }
+  .p-6 { padding: 24px; }
+  .p-8 { padding: 32px; }
+  
+  /* Margin utilities */
+  .m-0 { margin: 0; }
+  .m-1 { margin: 4px; }
+  .m-2 { margin: 8px; }
+  .m-3 { margin: 12px; }
+  .m-4 { margin: 16px; }
+  .m-5 { margin: 20px; }
+  .m-6 { margin: 24px; }
+  .m-8 { margin: 32px; }
+  
+  /* Flexbox utilities */
+  .flex { display: flex; }
+  .inline-flex { display: inline-flex; }
+  .flex-col { flex-direction: column; }
+  .items-center { align-items: center; }
+  .justify-center { justify-content: center; }
+  .justify-between { justify-content: space-between; }
+  .gap-1 { gap: 4px; }
+  .gap-2 { gap: 8px; }
+  .gap-3 { gap: 12px; }
+  .gap-4 { gap: 16px; }
+  
+  /* Grid utilities */
+  .grid { display: grid; }
+  .grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+  .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+  
+  /* Border radius utilities */
+  .rounded-none { border-radius: 0; }
+  .rounded-sm { border-radius: 4px; }
+  .rounded { border-radius: 6px; }
+  .rounded-md { border-radius: 8px; }
+  .rounded-lg { border-radius: 12px; }
+  .rounded-full { border-radius: 9999px; }
+  
+  /* Shadow utilities */
+  .shadow-none { box-shadow: none; }
+  .shadow-xs { box-shadow: var(--shadow-xs); }
+  .shadow-sm { box-shadow: var(--shadow-sm); }
+  .shadow { box-shadow: var(--shadow-md); }
+  .shadow-lg { box-shadow: var(--shadow-lg); }
+  .shadow-xl { box-shadow: var(--shadow-xl); }
+  .shadow-2xl { box-shadow: var(--shadow-2xl); }
+  
+  /* Text alignment */
+  .text-left { text-align: left; }
+  .text-center { text-align: center; }
+  .text-right { text-align: right; }
+  
+  /* Text colors */
+  .text-primary { color: var(--text-primary); }
+  .text-secondary { color: var(--text-secondary); }
+  .text-tertiary { color: var(--text-tertiary); }
+  .text-accent { color: var(--accent); }
+  
+  /* Background colors */
+  .bg-primary { background-color: var(--bg-primary); }
+  .bg-secondary { background-color: var(--bg-secondary); }
+  .bg-tertiary { background-color: var(--bg-tertiary); }
+  .bg-accent { background-color: var(--accent); }
+  
+  /* Performance optimizations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+  
+  .no-select {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  
+  /* Accessibility utilities */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}
