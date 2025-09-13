@@ -39,7 +39,7 @@ export function StepShellV2({
 
   return (
     <div className="min-h-dvh flex flex-col bg-gradient-to-b from-background via-background to-background">
-      <header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-background/70 border-b">
+      <header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-background/70">
         <div className={cn("mx-auto w-full px-4", hasRightRail ? "max-w-screen-2xl" : "max-w-3xl") }>
           <div className="flex items-center gap-3 py-3">
             <div className="text-xs text-muted-foreground">Step {step} of {total}</div>
@@ -92,7 +92,7 @@ export function StepShellV2({
         </div>
       </main>
 
-      <footer className="sticky bottom-0 z-40 border-t backdrop-blur supports-[backdrop-filter]:bg-background/70">
+      <footer className="sticky bottom-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-background/70">
         <div className={cn("mx-auto px-4 py-3 flex items-center gap-2", hasRightRail ? "max-w-screen-2xl" : "max-w-3xl") }>
           <Button variant="ghost" size="sm" onClick={onBack} type="button">
             <ChevronLeft className="mr-1 h-4 w-4" /> Back
