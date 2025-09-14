@@ -7,7 +7,7 @@
 
 /* Fix for gradient text */
 .gradient-text {
-  background: linear-gradient(180deg, #ffffff 0%, #a0a0a0 100%);
+  background: linear-gradient(180deg, var(--color-text-primary) 0%, var(--color-text-tertiary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -19,21 +19,40 @@
 
 /* Linear Design System */
 :root {
-  /* Colors - Linear style */
-  --bg-primary: #000000;
-  --bg-secondary: #0a0b0f;
-  --bg-elevated: #141519;
+  /* Colors - Linear exact dark theme */
+  --color-bg-primary: #08090a;
+  --color-bg-secondary: #1c1c1f;
+  --color-bg-tertiary: #232326;
+  --color-bg-quaternary: #28282c;
+  --color-bg-marketing: #010102;
+  --color-bg-translucent: hsla(0, 0%, 100%, .05);
   
-  --text-primary: #ffffff;
-  --text-secondary: #a8a8a8;
-  --text-tertiary: #6e6e73;
+  --color-text-primary: #f7f8f8;
+  --color-text-secondary: #d0d6e0;
+  --color-text-tertiary: #8a8f98;
+  --color-text-quaternary: #62666d;
   
-  --accent-primary: #5e6ad2;
-  --accent-secondary: #0084ff;
-  --accent-gradient: linear-gradient(135deg, #5e6ad2 0%, #0084ff 100%);
+  --color-brand-bg: #5e6ad2;
+  --color-accent: #7170ff;
+  --color-accent-hover: #828fff;
+  --color-accent-tint: #18182f;
   
-  --border-color: rgba(255, 255, 255, 0.1);
-  --border-color-strong: rgba(255, 255, 255, 0.2);
+  --color-border-primary: #23252a;
+  --color-border-secondary: #34343a;
+  --color-border-tertiary: #3e3e44;
+  --color-border-translucent: hsla(0, 0%, 100%, .05);
+  
+  /* Legacy variables for compatibility */
+  --bg-primary: var(--color-bg-primary);
+  --bg-secondary: var(--color-bg-secondary);
+  --bg-elevated: var(--color-bg-tertiary);
+  --text-primary: var(--color-text-primary);
+  --text-secondary: var(--color-text-secondary);
+  --text-tertiary: var(--color-text-tertiary);
+  --accent-primary: var(--color-brand-bg);
+  --accent-secondary: var(--color-accent);
+  --border-color: var(--color-border-translucent);
+  --border-color-strong: var(--color-border-primary);
   
   /* Typography - Shopify scale */
   --font-size-t1: 6rem;
@@ -44,6 +63,11 @@
   --font-size-b1: 1.25rem;
   --font-size-b2: 1.125rem;
   --font-size-b3: 1rem;
+  
+  /* Linear shadows */
+  --shadow-low: 0px 2px 4px rgba(0, 0, 0, .1);
+  --shadow-medium: 0px 4px 24px rgba(0, 0, 0, .2);
+  --shadow-high: 0px 7px 32px rgba(0, 0, 0, .35);
 }
 
 html {
@@ -54,11 +78,16 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  font-family: 'Inter Variable', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
   line-height: 1.5;
   overflow-x: hidden;
+  font-weight: 400;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  font-feature-settings: "cv01", "ss03";
+  font-variation-settings: "opsz" auto;
 }
 
 /* Container */
@@ -128,9 +157,9 @@ body {
 }
 
 .btn-primary {
-  background: white;
-  color: black;
-  font-weight: 600;
+  background: var(--color-text-primary);
+  color: var(--color-bg-primary);
+  font-weight: 500;
 }
 
 .btn-primary:hover {
@@ -168,9 +197,9 @@ body {
   left: 0;
   right: 0;
   z-index: 1000;
-  backdrop-filter: blur(10px);
-  background: rgba(0, 0, 0, 0.8);
-  border-bottom: 1px solid var(--border-color);
+  backdrop-filter: blur(20px);
+  background: hsla(0, 0%, 4%, .8);
+  border-bottom: 1px solid hsla(0, 0%, 100%, .08);
 }
 
 .nav-container {
@@ -217,11 +246,11 @@ body {
 }
 
 .mockup-inner {
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-color);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-primary);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-high);
   transform: perspective(1000px) rotateX(5deg);
   transition: transform 0.5s;
 }
@@ -237,19 +266,19 @@ body {
 }
 
 .placeholder {
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-color);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-primary);
   border-radius: 12px;
   padding: 40px;
   text-align: center;
-  color: var(--text-tertiary);
+  color: var(--color-text-tertiary);
 }
 
 /* Footer */
 .footer {
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--color-border-primary);
   padding: 40px 0;
-  background: var(--bg-secondary);
+  background: var(--color-bg-secondary);
 }
 
 .footer-content {

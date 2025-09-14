@@ -156,14 +156,14 @@ export default function Home() {
             margin: '0 auto',
             borderRadius: '12px',
             overflow: 'hidden',
-            boxShadow: '0 100px 200px -50px rgba(0, 0, 0, 0.8)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            background: '#0a0b0f'
+            boxShadow: 'var(--shadow-high)',
+            border: '1px solid var(--color-border-translucent)',
+            background: 'var(--color-bg-secondary)'
           }}>
             <div style={{
               padding: '8px 16px',
-              background: 'rgba(255, 255, 255, 0.02)',
-              borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+              background: 'var(--color-bg-translucent)',
+              borderBottom: '1px solid var(--color-border-translucent)',
               display: 'flex',
               gap: '8px',
               alignItems: 'center'
